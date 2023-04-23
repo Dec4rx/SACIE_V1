@@ -1,3 +1,4 @@
+//rafce *les crea la estructura basica
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
