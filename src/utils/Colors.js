@@ -1,6 +1,16 @@
 export default color = { 
-    main: 'Main Screen',
-    screenOption1: 'Screen Option 1',
-    screenOption2: 'Screen Option 2',
-    screenOption3: 'Screen Option 3'
+    Cian : '2BF0D7',
+    White : 'FFFFFF',
+    MainBlue : '67A4F7',
+    Black : '202020',
+    RedBottoms: 'D22525',
+    GreenBottoms: '8CCF4D',
+    YellowBottoms: 'DFC01D',
+    BackgroundPatient: '67A4F7',
+    SugarBlood: '',
+    BloodPressure: '',
+    Temperature: '',
+    HearthRate: '',
+    Oxigen: '',
+    BreathingFrecuency: '',
 };
