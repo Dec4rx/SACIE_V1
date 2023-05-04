@@ -1,4 +1,4 @@
-export default color = { 
+const color = { 
     Cian : '2BF0D7',
     White : 'FFFFFF',
     MainBlue : '67A4F7',
@@ -13,4 +13,8 @@ export default color = {
     HearthRate: '',
     Oxigen: '',
     BreathingFrecuency: '',
+    BackgroundApp: 'white',
+
 };
+
+export default color;
