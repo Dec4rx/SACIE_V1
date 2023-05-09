@@ -9,6 +9,7 @@ import screen from '../utils/ScreenNames';
 // Screens imports
 import Main from '../screens/Details'
 
+
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {

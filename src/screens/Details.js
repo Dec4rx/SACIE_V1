@@ -3,8 +3,13 @@ import { View, useWindowDimensions, Text, Image, Button } from "react-native";
 import { Box, Center, HStack, VStack } from "native-base";
 import { TabView, SceneMap } from "react-native-tab-view";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import color from "../utils/Colors";
 import BackButton from "../utils/components/BackButton";
+
+import MedicalTest from "./MedicalTest";
 
 var user = require("../resources/images/UserExample_1.png");
 
@@ -26,7 +31,7 @@ const Days = (props) => {
 
 const Week = (props) => {
   return (
-    <Center mt={3}>
+    <Center mt={3} w={'100%'}>
       <HStack space={3}>
         <Days day="Mo" />
         <Days day="Tu" />
@@ -57,16 +62,24 @@ const DataResume = (props) => {
   );
 };
 
+const Profile = () => {
+  return (
+    <Center p={3}>
+      <Image source={require("../resources/images/UserExample_1.png")} />
+      <Box borderWidth={1} borderRadius={10} height={"100"} width={"100"}></Box>
+      <Text>Marco Antonio</Text>
+    </Center>
+  );
+};
+
 const MainRoute = () => (
   <View style={{ flex: 1, backgroundColor: color.BackgroundApp }}>
-    <Box>
+    <Box m={3}>
       <BackButton />
     </Box>
     <Box>
-      <Center backgroundColor={"amber.200"}>
-        <Image source={require("../resources/images/UserExample_1.png")} />
-        <Box borderWidth={1} borderRadius={10} height={"50"} width={"50"}></Box>
-        <Text>Marco Antonio</Text>
+      <Center>
+        <Profile />
       </Center>
 
       <Box mt={3} borderWidth={1} borderRadius={10} mx={10} p={2} shadow={"5"}>
@@ -90,7 +103,9 @@ const MainRoute = () => (
           </HStack>
         </Center>
       </Box>
-      <Week />
+      <Center w={"100%"}>
+        <Week />
+      </Center>
       <Center>
         <QR />
       </Center>
@@ -111,26 +126,32 @@ const SecondRoute = () => (
   </View>
 );
 
-const renderScene = SceneMap({
-  first: MainRoute,
-  second: SecondRoute,
-});
+const ThirdRoute = () => (
+  <View style={{ flex: 1, backgroundColor: "#673ab7" }}>
+    <Text>Rip bozzo</Text>
+  </View>
+);
 
-export default function TabViewExample() {
-  const layout = useWindowDimensions();
+const FourthRoute = () => (
+  <View style={{ flex: 1, backgroundColor: "#673ab7" }}>
+    <Text>Rip bozzo</Text>
+  </View>
+);
 
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: "first", title: "First" },
-    { key: "second", title: "Second" },
-  ]);
+const FithRoute = () => <MedicalTest />;
 
+const Tab = createBottomTabNavigator();
+
+const MyTabs = () => {
   return (
-    <TabView 
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
-    />
+    <Tab.Navigator initialRouteName="Home">
+      <Tab.Screen name="Settings" component={SecondRoute} />
+      <Tab.Screen name="Medicine" component={ThirdRoute} />
+      <Tab.Screen name="Home" component={MainRoute} />
+      <Tab.Screen name="XDD" component={FourthRoute} />
+      <Tab.Screen name="champurrado" component={FithRoute} />
+    </Tab.Navigator>
   );
-}
+};
+
+export default MyTabs;
