@@ -10,7 +10,7 @@ const Principal = () => {
           name: 'Mihaela Díaz',
           age: '51',
           bed: '19',
-          image: '../resources/pictures/Mihaela.png'
+          image: '../resources/pictures/Mihaelaa.png'
         },
         {
           id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -18,7 +18,7 @@ const Principal = () => {
           name: 'Marco Ornelas',
           age: '83',
           bed: '4',
-          image: '../resources/pictures/Marco.png'
+          image: '../resources/pictures/Marcoo.png'
         },
         {
           id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -26,7 +26,7 @@ const Principal = () => {
           name: 'Leyre Ramiro',
           age: '48',
           bed: '16',
-          image: '../resources/pictures/Leyre.png'
+          image: '../resources/pictures/Leyree.png'
         },
         {
           id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -34,7 +34,7 @@ const Principal = () => {
           name: 'Mireya Poveda',
           age: '35',
           bed: '8',
-          imagePath: '../resources/pictures/Mireya.png'
+          imagePath: '../resources/pictures/Mireyaa.png'
         },
       ];
       
@@ -47,7 +47,7 @@ const Principal = () => {
       const Item = ({name, color, age, bed, image}) => (
         <TouchableHighlight onPress={onPressHandler}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-            {/* Card info */}
+            {/* Card info  */}
           <View style={styles.item} >
             <View style={{ flexDirection: 'row', alignItems: 'center'}}>
               <Image source={require(image)} style={styles.otherImg} />
