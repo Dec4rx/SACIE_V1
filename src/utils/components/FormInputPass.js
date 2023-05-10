@@ -29,11 +29,10 @@ const styles = StyleSheet.create({
       borderBottomWidth: 1,
       marginTop: 10
     },
-
   });
 //#endregion
 
-const FormInput = ({ label, placeholder, value, onChangeText }) => {
+const FormInputPass = ({ label, placeholder, value, onChangeText }) => {
   return (
     <View style={styles.inputContainer}>
       <Text>
@@ -45,10 +44,11 @@ const FormInput = ({ label, placeholder, value, onChangeText }) => {
         placeholderTextColor={'#828282'}
         value={value}
         onChangeText={onChangeText}
+        secureTextEntry={true}
       />
       <View style={styles.line} />
     </View>
   )
 }
 
-export default FormInput;
+export default FormInputPass;
