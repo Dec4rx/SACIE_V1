@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView, FlatList} from 'react-native';
 import BackButton from '../utils/components/BackButton';
 
-const Notification = () => {
+const Notification = ({navigation}) => {
     //#region Info
     const DATA = [
         {
@@ -27,8 +27,8 @@ const Notification = () => {
     //#endregion
       
     const handleGoBack = () => {
-        // Lógica para manejar la acción de regresar
-      };
+        navigation.goBack();
+    };
 
       const Item = ({title, color, info}) => (
         <View style={styles.item}>

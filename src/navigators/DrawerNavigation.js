@@ -5,11 +5,14 @@ import { createDrawerNavigator, DrawerContentScrollView } from "@react-navigatio
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NativeBaseProvider, Button, Box, HamburgerIcon, Pressable, Heading, VStack,
   Text, Center, HStack, Divider, Icon, Image } from "native-base";
-import ProfilePic from "../resources/img/nurseProfile.png"
+import Principal from '../screens/Principal';
+import Account from '../screens/Account';
+import Notification from '../screens/Notification';
+import Lenguage from '../screens/Lenguage';
+
 global.__reanimatedWorkletInit = () => {};
 
 const Drawer = createDrawerNavigator();
-const drawerBackground = require('../resources/img/menu.png');
 
 function Component(props) {
     return (
@@ -38,12 +41,12 @@ function Component(props) {
   
   function CustomDrawerContent(props) {
     return (
-      <DrawerContentScrollView {...props} safeArea style={styles.drawerContent} >
+      <DrawerContentScrollView {...props} safeArea>
           
         <VStack space="6" my="2" mx="1" backgroundColor={"#ffffff"}>
         
           <Box px="5">
-          <Image source={ProfilePic} alt="Profile img" size={"200px"} width={"100px"}
+          <Image source={require('../resources/pictures/nurseProfile.png')} alt="Profile img" size={"200px"} width={"100px"}
           height={"100px"} alignContent={"center"} resizeMode="contain" />  
             <Text bold color="#000000"> Jose Gordillo</Text>
           </Box>
@@ -73,24 +76,19 @@ function Component(props) {
   function MyDrawer() {
     return (
       <Box safeArea flex={1}>
-        <Drawer.Navigator
-          drawerContent={(props) => <CustomDrawerContent {...props} />}
-        >
-          <ImageBackground source={drawerBackground} style={{ flex: 1 }}>
-          {/* Your drawer content goes here */}
-          </ImageBackground>
-          <Drawer.Screen name="Home" component={Home} />
-          <Drawer.Screen name="Outbox" component={Component} />
-          <Drawer.Screen name="Favorites" component={Component} />
-          <Drawer.Screen name="Archive" component={Component} />
-          <Drawer.Screen name="Trash" component={Component} />
-          <Drawer.Screen name="Setting" component={Setting} />
+        <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+          <Drawer.Screen name="Home" component={Principal} />
+          <Drawer.Screen name="Account" component={Account} />
+          <Drawer.Screen name="Notification" component={Notification} />
+          <Drawer.Screen name="Language" component={Lenguage} />
+          <Drawer.Screen name="Logout" component={Component} />
+          <Drawer.Screen name="Terms and Conditions" component={Component} />
         </Drawer.Navigator>
       </Box>
     );
   }
   
-const DrawerNavigation = () => {
+  export default function DrawerNavigation() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
@@ -99,5 +97,3 @@ const DrawerNavigation = () => {
     </NavigationContainer>
   )
 }
-
-export default DrawerNavigation

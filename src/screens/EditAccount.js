@@ -4,17 +4,17 @@ import FormInput from '../utils/components/FormInput'
 import BackButton from '../utils/components/BackButton'
 import CorrectButton from '../utils/components/CorrectButton'
 
-const EditAccount = () => {
+const EditAccount = ({navigation}) => {
     const [name, onChangeName] = React.useState('');
     const [phone, onChangePhone] = React.useState('');
     const [email, onChangeEmail] = React.useState('');
 
     const handleSaveProfile = () => {
-        // Lógica para manejar la acción de guardar
+      navigation.navigate('Account');
       };
     
       const handleGoBack = () => {
-        // Lógica para manejar la acción de regresar
+        navigation.goBack();
       };
 
   return (
