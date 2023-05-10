@@ -9,21 +9,24 @@ const Principal = () => {
           color: '#D22525',
           name: 'Mihaela Díaz',
           age: '51',
-          bed: '19'
+          bed: '19',
+          image: '../resources/pictures/Mihaela.png'
         },
         {
           id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
           color: '#8CCF4D',
           name: 'Marco Ornelas',
           age: '83',
-          bed: '4'
+          bed: '4',
+          image: '../resources/pictures/Marco.png'
         },
         {
           id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
           color: '#D22525',
           name: 'Leyre Ramiro',
           age: '48',
-          bed: '16'
+          bed: '16',
+          image: '../resources/pictures/Leyre.png'
         },
         {
           id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -31,7 +34,7 @@ const Principal = () => {
           name: 'Mireya Poveda',
           age: '35',
           bed: '8',
-          imagePath: '.'
+          imagePath: '../resources/pictures/Mireya.png'
         },
       ];
       
@@ -41,13 +44,13 @@ const Principal = () => {
 
       const [modalVisible, setModalVisible] = useState(false);
       
-      const Item = ({name, color, age, bed}) => (
+      const Item = ({name, color, age, bed, image}) => (
         <TouchableHighlight onPress={onPressHandler}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
             {/* Card info */}
           <View style={styles.item} >
             <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../resources/pictures/newMedicine.svg')} style={styles.otherImg} />
+              <Image source={require(image)} style={styles.otherImg} />
               <Text style={styles.cardTitle}>{name}</Text>
             </View>
             <View style={{ flexDirection: 'row', marginVertical: 5}}>
@@ -100,7 +103,7 @@ const Principal = () => {
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>x</Text>
             </Pressable>
             <Text style={styles.modalText}>How would you like to register it?</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
