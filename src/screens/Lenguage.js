@@ -2,10 +2,10 @@ import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView, SectionList} from 'react-native';
 import BackButton from '../utils/components/BackButton';
 
-const Lenguage = () => {
+const Lenguage = ({navigation}) => {
     const handleGoBack = () => {
-        // Lógica para manejar la acción de regresar
-      };
+      navigation.goBack();
+    };
 
     const DATA = [{data: ['English (North America)', 'Spanish (Mexico)', 'French (France)'],},];
 

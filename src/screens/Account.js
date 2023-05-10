@@ -2,13 +2,17 @@ import React from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import BackButton from '../utils/components/BackButton';
 
-const Account = () => {
+const Account = ({navigation}) => {
     const handleEditProfile = () => {
-        // Lógica para manejar la acción de editar perfil
-      };
+      navigation.navigate('Edit');
+    };
     
       const handleGoBack = () => {
-        // Lógica para manejar la acción de regresar
+        navigation.goBack();
+      };
+
+      const handleLogout = () => {
+        navigation.navigate('Edit');
       };
       
   return (
@@ -45,9 +49,11 @@ const Account = () => {
       <Text style={styles.text}>Jose Gordillo</Text>
       <View style={styles.line} />
       </View>
+      <TouchableOpacity onPress={handleLogout}>
       <View style={styles.footer}>
       <Text style={styles.logout}>Log Out</Text>
       </View>
+      </TouchableOpacity>
     </SafeAreaView >
   )
 }
