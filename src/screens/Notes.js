@@ -10,6 +10,8 @@ import {
 } from "native-base";
 import { StretchInX } from "react-native-reanimated";
 
+import color from "../utils/Colors";
+
 const Notes = () => {
   return (
     <Box alignItems="center" flex={1}>
@@ -26,14 +28,11 @@ const Notes = () => {
 
 const NotesScreen = () => {
   return (
-    <Box
-      p="2"
+    <Box backgroundColor={color.White}
       m="3"
+      p={1}
+      height={'98%'}
       alignContent={"center"}
-      w="100%"
-      height={"100%"}
-      flex={1}
-      backgroundColor={"white"}
     >
       <Text textAlign={"center"} fontSize={40}>
         NOTES

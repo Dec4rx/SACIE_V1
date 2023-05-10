@@ -9,6 +9,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import color from "../utils/Colors";
 import BackButton from "../utils/components/BackButton";
 
+import Notes from './Notes'
+import Medicine from "./Medicine";
 import MedicalTest from "./MedicalTest";
 
 var user = require("../resources/images/UserExample_1.png");
@@ -121,9 +123,7 @@ const MainRoute = () => (
 );
 
 const SecondRoute = () => (
-  <View style={{ flex: 1, backgroundColor: "#673ab7" }}>
-    <Text>Rip bozzo</Text>
-  </View>
+  <MedicalTest/>
 );
 
 const ThirdRoute = () => (
@@ -133,23 +133,21 @@ const ThirdRoute = () => (
 );
 
 const FourthRoute = () => (
-  <View style={{ flex: 1, backgroundColor: "#673ab7" }}>
-    <Text>Rip bozzo</Text>
-  </View>
+  <Medicine/>
 );
 
-const FithRoute = () => <MedicalTest />;
+const FithRoute = () => <Notes />;
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
   return (
     <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen name="Settings" component={SecondRoute} />
-      <Tab.Screen name="Medicine" component={ThirdRoute} />
+      <Tab.Screen name="Medical Test" component={SecondRoute} />
+      <Tab.Screen name="Vital Signs" component={ThirdRoute} />
       <Tab.Screen name="Home" component={MainRoute} />
-      <Tab.Screen name="XDD" component={FourthRoute} />
-      <Tab.Screen name="champurrado" component={FithRoute} />
+      <Tab.Screen name="Medicine" component={FourthRoute} />
+      <Tab.Screen name="Notes" component={FithRoute} />
     </Tab.Navigator>
   );
 };

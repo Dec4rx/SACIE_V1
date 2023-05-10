@@ -17,6 +17,7 @@ import Icon_2 from "react-native-vector-icons/MaterialIcons";
 import BackButton from "../utils/components/BackButton";
 import MyButton from "../utils/components/MyButton";
 
+
 import color from "../utils/Colors";
 
 const Test = (props) => {
@@ -34,7 +35,7 @@ const Test = (props) => {
         >
           <Modal.Content>
             <Modal.CloseButton />
-            <Modal.Header>{props.testName}</Modal.Header>
+            <Modal.Header color={color.MainBlue}>{props.testName}</Modal.Header>
             <Modal.Body>
               <Text><b>Hecho por: </b> {props.doctorName}</Text> 
               <Text><b>Fecha: </b>{props.date}</Text>
@@ -77,7 +78,7 @@ const Test = (props) => {
                 setModalVisible(!modalVisible);
               }}
               p="1"
-              icon={<Icon_2 name="arrow-drop-down" size={20} />}
+              icon={<Icon name="arrow-drop-down" size={20} />}
             />
           </Box>
         </HStack>

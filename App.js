@@ -24,7 +24,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <MedicalTest/>
+        <Details/>
       </NativeBaseProvider>
     </NavigationContainer>
   );
