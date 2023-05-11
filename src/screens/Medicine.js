@@ -1,6 +1,10 @@
 import React from "react";
 
+<<<<<<< Updated upstream
 import { Box, Center, Text, HStack, VStack, Switch, Modal, IconButton, Button} from "native-base";
+=======
+import { Box, Center, Text, HStack, VStack, Switch, Modal, IconButton, Button, Pressable } from "native-base";
+>>>>>>> Stashed changes
 import BackButton from "../utils/components/BackButton";
 import color from "../utils/Colors";
 import MyButton from "../utils/components/MyButton";

@@ -10,9 +10,15 @@ import color from "../utils/Colors";
 import BackButton from "../utils/components/BackButton";
 
 import MedicalTest from "./MedicalTest";
+<<<<<<< Updated upstream
 import Medicine from "./Medicine";
 import Notes from './Notes'
 import VitalsSigns from './VitalSigns'
+=======
+import Medicine from './Medicine'
+import Notes from './Notes'
+import VitalSigns from './VitalSigns'
+>>>>>>> Stashed changes
 
 var user = require("../resources/images/UserExample_1.png");
 
@@ -149,7 +155,11 @@ const MyTabs = () => {
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen name="MedicalTest" component={MedicalTest} />
+<<<<<<< Updated upstream
       <Tab.Screen name="VitalSings" component={VitalsSigns} />
+=======
+      <Tab.Screen name="VitalSigns" component={VitalSigns} />
+>>>>>>> Stashed changes
       <Tab.Screen name="Home" component={MainRoute} />
       <Tab.Screen name="Medicine" component={Medicine} />
       <Tab.Screen name="Notes" component={Notes} />

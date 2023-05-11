@@ -15,6 +15,7 @@ import Account from '../screens/Account';
 import EditAccount from '../screens/EditAccount';
 import Lenguage from '../screens/Lenguage';
 import Notification from '../screens/Notification';
+<<<<<<< Updated upstream
 
 import BloodPressure from '../screens/BloodPreasure'
 import HearthRate from '../screens/HeartRate'
@@ -26,41 +27,48 @@ import HealtCondition from '../screens/HealtCondition'
 
 import Details from '../screens/Details'
 import { Octicons } from '@expo/vector-icons';
+=======
+import Drawer from './DrawerNavigation'
+
+import Details from '../screens/Details'
+import AddMedicine_noPatient from '../screens/AddMecine_noPatient'
+>>>>>>> Stashed changes
 
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator 
+    <Stack.Navigator
       initialRouteName={screen.Login}
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
     >
-        <Stack.Screen 
-            name={screen.LoginScreen} 
-            component={login} 
-        />
-        <Stack.Screen 
-            name={screen.SignUpScreen} 
-            component={Signup} 
-        />
-        <Stack.Screen 
+      <Stack.Screen
+        name={screen.LoginScreen}
+        component={login}
+      />
+      <Stack.Screen
+        name={screen.SignUpScreen}
+        component={Signup}
+      />
+      <Stack.Screen
         name={screen.ForgotPasswordScreen}
         component={ForgotPass}>
-        </Stack.Screen>
+      </Stack.Screen>
 
-        <Stack.Screen
+      <Stack.Screen
         name={screen.OTPVerificationScreen}
         component={OTPVerification}>
-        </Stack.Screen>
+      </Stack.Screen>
 
-        <Stack.Screen
+      <Stack.Screen
         name={screen.ResetPasswordScreen}
         component={ResetPassword}
-        ></Stack.Screen>
+      ></Stack.Screen>
 
-        <Stack.Screen
+      <Stack.Screen
         name={screen.PasswordChangedScreen}
         component={PasswordChanged}
+<<<<<<< Updated upstream
         ></Stack.Screen>
 
 <Stack.Screen 
@@ -127,6 +135,52 @@ const AppStack = () => {
         </Stack.Screen>
 
         </Stack.Navigator>
+=======
+      ></Stack.Screen>
+
+      <Stack.Screen
+        name={'Principal'}
+        component={Principal}
+      />
+
+      <Stack.Screen
+        name={'Account'}
+        component={Account}
+      />
+      <Stack.Screen
+        name={'Edit'}
+        component={EditAccount}
+      />
+      <Stack.Screen
+        name={'Language'}
+        component={Lenguage}>
+      </Stack.Screen>
+
+      <Stack.Screen
+        name={'Notification'}
+        component={Notification}>
+      </Stack.Screen>
+
+      <Stack.Screen
+        name={'Details'}
+        component={Details}>
+      </Stack.Screen>
+
+      <Stack.Screen
+        name={'AddMedicine_NP'}
+        component={AddMedicine_noPatient}>
+      </Stack.Screen>
+
+      <Stack.Screen
+        name={'Drawer'}
+        component={Drawer}>
+      </Stack.Screen>
+
+
+
+
+    </Stack.Navigator>
+>>>>>>> Stashed changes
   )
 }
 
