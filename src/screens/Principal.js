@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, FlatList, Alert, Modal, Pressable} from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, FlatList, Alert, Modal, Pressable, TouchableHighlight} from 'react-native';
 import ImageButton from '../utils/components/ImageButton'
-const Principal = () => {
+const Principal = ({navigation}) => {
 
     const DATA = [
         {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba1',
           color: '#D22525',
           name: 'Mihaela Díaz',
           age: '51',
@@ -13,7 +13,7 @@ const Principal = () => {
           image: '../resources/pictures/Mihaelaa.png'
         },
         {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba2',
           color: '#8CCF4D',
           name: 'Marco Ornelas',
           age: '83',
@@ -21,7 +21,7 @@ const Principal = () => {
           image: '../resources/pictures/Marcoo.png'
         },
         {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba3',
           color: '#D22525',
           name: 'Leyre Ramiro',
           age: '48',
@@ -29,7 +29,7 @@ const Principal = () => {
           image: '../resources/pictures/Leyree.png'
         },
         {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba4',
           color: '#DFC01D',
           name: 'Mireya Poveda',
           age: '35',
@@ -45,12 +45,12 @@ const Principal = () => {
       const [modalVisible, setModalVisible] = useState(false);
       
       const Item = ({name, color, age, bed, image}) => (
-        <TouchableHighlight onPress={onPressHandler}>
+        <TouchableHighlight onPress={()=> navigation.navigate('Details')}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
             {/* Card info  */}
           <View style={styles.item} >
             <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require(image)} style={styles.otherImg} />
+              <Image />
               <Text style={styles.cardTitle}>{name}</Text>
             </View>
             <View style={{ flexDirection: 'row', marginVertical: 5}}>

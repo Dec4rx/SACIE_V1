@@ -7,6 +7,8 @@ import BackButton from '../utils/components/BackButton';
 import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
 
+import ScreenNames from "../utils/ScreenNames";
+
 const login = ({navigation}) => { 
     return <Center w="100%">
        <Box safeArea p="2" py="8" w="90%" maxW="300" alignContent={"center"}>
@@ -32,8 +34,8 @@ const login = ({navigation}) => {
               </Link>
             
             <BlueButton title={"Log in"}
-            onPress={() => alert("No hay Home")} 
-            mt="2" color="2BF0D7">
+            mt="2" color="2BF0D7"
+              onPress={()=> navigation.navigate('Principal')} >
             </BlueButton>
             <Link _text={{
               fontSize: "m",

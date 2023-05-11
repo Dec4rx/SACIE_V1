@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 
-const VitalSigns = () => {
+const VitalSigns = ({navigation}) => {
     return (
 
         <View style={styles.container}>
@@ -16,15 +16,16 @@ const VitalSigns = () => {
             />
 
             <View style={styles.imageRow}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('SugarBlood')} >
                     <Image
+                    
                         source={require("../resources/pictures/SugarBlood.png")}
                         resizeMode="contain"
                         style={styles.image}
                     ></Image>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('Temperature')}>
                     <Image
                         source={require("../resources/pictures/Temperature.png")}
                         resizeMode="contain"
@@ -35,7 +36,7 @@ const VitalSigns = () => {
 
 
             <View style={styles.image2Row}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('HR')}>
                     <Image
                         source={require("../resources/pictures/HeartRate.png")}
                         resizeMode="contain"
@@ -43,7 +44,7 @@ const VitalSigns = () => {
                     ></Image>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('BloodPressure')}>
                     <Image
                         source={require("../resources/pictures/BloodPreasure.png")}
                         resizeMode="contain"
@@ -54,7 +55,7 @@ const VitalSigns = () => {
 
 
             <View style={styles.image2Row}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('BF')}>
                     <Image
                         source={require("../resources/pictures/BreathingFrequency.png")}
                         resizeMode="contain"
@@ -62,7 +63,7 @@ const VitalSigns = () => {
                     ></Image>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('OX')}>
                     <Image
                         source={require("../resources/pictures/Oxygenation.png")}
                         resizeMode="contain"
@@ -71,7 +72,7 @@ const VitalSigns = () => {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.image2Row}>
+            <TouchableOpacity style={styles.image2Row}>{()=> navigation.navigate('HC')} 
                 <Image
                     source={require("../resources/pictures/HealtCondition.png")}
                     resizeMode="contain"
