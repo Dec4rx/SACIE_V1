@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 //#region Style
 const styles = StyleSheet.create({
@@ -25,9 +26,13 @@ const styles = StyleSheet.create({
   });
   //#endregion
 
-const BackButton = ({ onPress }) => {
+const BackButton = () => {
+  const navigation = useNavigation();
+
+  const handlePress = () => { navigation.goBack(); };
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
+    <TouchableOpacity onPress={handlePress} style={styles.button}>
       <Icon name="chevron-back-outline" size={24} color="#1E232C" />
     </TouchableOpacity>
   )

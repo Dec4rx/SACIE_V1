@@ -12,15 +12,11 @@ const EditAccount = ({navigation}) => {
     const handleSaveProfile = () => {
       navigation.navigate('Account');
       };
-    
-      const handleGoBack = () => {
-        navigation.goBack();
-      };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <BackButton onPress={handleGoBack}/>
+        <BackButton/>
       </View>
       <View style={styles.header}>
       <Text style={styles.mainTitle}>Edit profile</Text>
