@@ -3,16 +3,13 @@ import { View, Text, StyleSheet, SafeAreaView, SectionList} from 'react-native';
 import BackButton from '../utils/components/BackButton';
 
 const Lenguage = ({navigation}) => {
-    const handleGoBack = () => {
-      navigation.goBack();
-    };
-
-    const DATA = [{data: ['English (North America)', 'Spanish (Mexico)', 'French (France)'],},];
+  
+  const DATA = [{data: ['English (North America)', 'Spanish (Mexico)', 'French (France)'],},];
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <BackButton onPress={handleGoBack}/>
+        <BackButton/>
         <Text style={styles.mainTitle}>Lenguage</Text>
       </View>
       <View style={styles.background}>

@@ -26,24 +26,20 @@ const Notification = ({navigation}) => {
       ];
     //#endregion
       
-    const handleGoBack = () => {
-        navigation.goBack();
-    };
-
-      const Item = ({title, color, info}) => (
-        <View style={styles.item}>
+    const Item = ({title, color, info}) => (
+      <View style={styles.item}>
         <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-        <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: color, marginRight: 8}} />
+          <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: color, marginRight: 8}} />
           <Text style={styles.title}>{title}</Text>
-          </View>
-          <Text style={styles.info}>{info}</Text>
         </View>
+        <Text style={styles.info}>{info}</Text>
+      </View>
       );
       
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <BackButton onPress={handleGoBack}/>
+        <BackButton/>
         <Text style={styles.mainTitle}>Notifications</Text>
       </View>
       <View style={styles.profileContainer}>

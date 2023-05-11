@@ -1,30 +1,17 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import BackButton from '../utils/components/BackButton';
+import EditButton from '../utils/components/EditButton'
 
-const Account = ({navigation}) => {
-    const handleEditProfile = () => {
-      navigation.navigate('Edit');
-    };
-    
-      const handleGoBack = () => {
-        navigation.goBack();
-      };
-
-      const handleLogout = () => {
-        navigation.navigate('Edit');
-      };
-      
+const Account = ({navigation}) => {  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <BackButton onPress={handleGoBack}/>
+        <BackButton/>
       </View>
       <View style={styles.header}>
         <Text style={styles.mainTitle}>Profile</Text>
-        <TouchableOpacity>
-          <Text style={styles.headerButton} onPress={handleEditProfile}>Editar</Text>
-        </TouchableOpacity>
+        <EditButton onPress={()=> navigation.navigate('Edit')}/>
       </View>
       <View style={styles.profileContainer}>
         <Image
@@ -49,7 +36,7 @@ const Account = ({navigation}) => {
       <Text style={styles.text}>Jose Gordillo</Text>
       <View style={styles.line} />
       </View>
-      <TouchableOpacity onPress={handleLogout}>
+      <TouchableOpacity onPress={() => navigation.popToTop()}>
       <View style={styles.footer}>
       <Text style={styles.logout}>Log Out</Text>
       </View>

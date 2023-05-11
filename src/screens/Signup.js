@@ -9,8 +9,7 @@ import FormInputPass from "../utils/components/FormInputPass";
 const Signup = ({navigation}) => {
     return <Center w="100%">
         <Box safeArea p="2" w="90%" maxW="300" py="8">
-        <BackButton  onPress={() => navigation.navigate(screen.LoginScreen)}> 
-        </BackButton>
+        <BackButton /> 
         </Box>
       <Image  style={{
       width: 250,
