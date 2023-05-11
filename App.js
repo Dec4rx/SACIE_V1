@@ -19,22 +19,15 @@ import AddMedicine from './src/screens/AddMedicine';
 import ModifyMedicine from './src/screens/ModifyMedicine';
 import AddMedicine_noPatient from './src/screens/AddMecine_noPatient';
 
-<<<<<<< Updated upstream
-import AppStack from "./src/navigators/AppNavigation";
-=======
-import AppNavigation from './src/navigators/AppNavigation'
 
->>>>>>> Stashed changes
+import AppNavigation from "./src/navigators/AppNavigation";
+
 
 export default function App() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-<<<<<<< Updated upstream
-        <AppStack/>
-=======
         <AppNavigation/>
->>>>>>> Stashed changes
       </NativeBaseProvider>
     </NavigationContainer>
   );

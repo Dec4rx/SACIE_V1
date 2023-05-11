@@ -11,6 +11,7 @@ export default screen = {
   ExitScreen: "Exit",
   TermnsAndConditionsCheckBoxScreen: "TermsAndConditions",
   TermnsAndConditionsScreen: "TermsAndConditions",
+
   MainScreen: "Main",
   MenuScreen: "Menu",
   AddPatientsScreen: "AddPatients",
@@ -26,8 +27,12 @@ export default screen = {
   DetailsScreen: "Details",
   MedicineScreen: "Medicine",
   RegisterMedicineScreen: "RegisterMedicine",
+  RegisterMedicalTestNP: 'RegisterMedicalTestNP',
+  RegisterMedicalTest: 'RegisterMedicalTest',
+  RegisterMedicineNPScreen: "RegisterMedicineNP",
   UpdateMedicineScreen: "UpdateMedicine",
   NotesScreen: "Notes",
+
   VitalSignsScreen: "VitalSigns",
   BloodPressureScreen: "BloodPressure",
   HeartRateScreen: "HeartRate",

@@ -112,7 +112,7 @@ const MedicalTest = ({navigation}) => {
       </Box>
       <Box px={3}>
       </Box>
-        <MyButton icon={"add-circle-outline"} title={"Add Test"} onPress={()=>navigation.navigate(ScreenNames.LoginScreen)}/>
+        <MyButton icon={"add-circle-outline"} title={"Add Test"} onPress={()=>navigation.navigate(ScreenNames.RegisterMedicalTestNP)}/>
     </Box>
   );
 };

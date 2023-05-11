@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import screen from '../utils/ScreenNames';
 // Screens imports
 import FirstScreen from '../screens/firstScreen.JS';
-import login from '../screens/login';
+import login from '../screens/Login';
 import Signup from '../screens/Signup';
 import ForgotPass from '../screens/ForgotPass';
 import OTPVerification from '../screens/OTPVerification';
@@ -15,24 +15,11 @@ import Account from '../screens/Account';
 import EditAccount from '../screens/EditAccount';
 import Lenguage from '../screens/Lenguage';
 import Notification from '../screens/Notification';
-<<<<<<< Updated upstream
-
-import BloodPressure from '../screens/BloodPreasure'
-import HearthRate from '../screens/HeartRate'
-import SugarBlood from '../screens/SugarBlood'
-import Temperature from '../screens/Temperature'
-import BreathingFrecuency from '../screens/BreathingFrecuency'
-import Oxygenation from '../screens/Oxygenation'
-import HealtCondition from '../screens/HealtCondition'
-
-import Details from '../screens/Details'
-import { Octicons } from '@expo/vector-icons';
-=======
 import Drawer from './DrawerNavigation'
 
 import Details from '../screens/Details'
-import AddMedicine_noPatient from '../screens/AddMecine_noPatient'
->>>>>>> Stashed changes
+import AddTest_v2 from '../screens/AddTest_v2'
+import AddMedicineNP from '../screens/AddMecine_noPatient'
 
 const Stack = createNativeStackNavigator();
 
@@ -68,74 +55,6 @@ const AppStack = () => {
       <Stack.Screen
         name={screen.PasswordChangedScreen}
         component={PasswordChanged}
-<<<<<<< Updated upstream
-        ></Stack.Screen>
-
-<Stack.Screen 
-            name={'Account'} 
-            component={Account} 
-        />
-        <Stack.Screen 
-            name={'Edit'} 
-            component={EditAccount} 
-        />
-        <Stack.Screen 
-        name={'Language'}
-        component={Lenguage}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'Notification'}
-        component={Notification}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'Principal'}
-        component={Principal}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'Details'}
-        component={Details}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'BloodPressure'}
-        component={BloodPressure}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'HeartRate'}
-        component={HearthRate}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'SugarBlood'}
-        component={SugarBlood}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'Temperature'}
-        component={Temperature}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'BF'}
-        component={BreathingFrecuency}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name={'OX'}
-        component={Oxygenation}>
-        </Stack.Screen>
-        
-        <Stack.Screen
-        name={'HC'}
-        component={HealtCondition}>
-        </Stack.Screen>
-
-        </Stack.Navigator>
-=======
       ></Stack.Screen>
 
       <Stack.Screen
@@ -162,14 +81,21 @@ const AppStack = () => {
       </Stack.Screen>
 
       <Stack.Screen
-        name={'Details'}
+        name={screen.DetailsScreen}
         component={Details}>
       </Stack.Screen>
 
       <Stack.Screen
-        name={'AddMedicine_NP'}
-        component={AddMedicine_noPatient}>
+        name={screen.RegisterMedicineNPScreen}
+        component={AddMedicineNP}>
       </Stack.Screen>
+
+      <Stack.Screen
+        name={screen.RegisterMedicalTestNP}
+        component={AddTest_v2}>
+      </Stack.Screen>
+
+
 
       <Stack.Screen
         name={'Drawer'}
@@ -180,7 +106,6 @@ const AppStack = () => {
 
 
     </Stack.Navigator>
->>>>>>> Stashed changes
   )
 }
 

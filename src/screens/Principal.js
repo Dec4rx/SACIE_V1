@@ -1,64 +1,3 @@
-<<<<<<< Updated upstream
-import React, {useState} from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, FlatList, Alert, Modal, Pressable, TouchableHighlight} from 'react-native';
-import ImageButton from '../utils/components/ImageButton'
-const Principal = ({navigation}) => {
-
-    const DATA = [
-        {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba1',
-          color: '#D22525',
-          name: 'Mihaela Díaz',
-          age: '51',
-          bed: '19',
-          image: '../resources/pictures/Mihaelaa.png'
-        },
-        {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba2',
-          color: '#8CCF4D',
-          name: 'Marco Ornelas',
-          age: '83',
-          bed: '4',
-          image: '../resources/pictures/Marcoo.png'
-        },
-        {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba3',
-          color: '#D22525',
-          name: 'Leyre Ramiro',
-          age: '48',
-          bed: '16',
-          image: '../resources/pictures/Leyree.png'
-        },
-        {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba4',
-          color: '#DFC01D',
-          name: 'Mireya Poveda',
-          age: '35',
-          bed: '8',
-          imagePath: '../resources/pictures/Mireyaa.png'
-        },
-      ];
-      
-      const onPressHandler = () => {
-        console.log('El View fue presionado');
-      };
-
-      const [modalVisible, setModalVisible] = useState(false);
-      
-      const Item = ({name, color, age, bed, image}) => (
-        <TouchableHighlight onPress={()=> navigation.navigate('Details')}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-            {/* Card info  */}
-          <View style={styles.item} >
-            <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-              <Image />
-              <Text style={styles.cardTitle}>{name}</Text>
-            </View>
-            <View style={{ flexDirection: 'row', marginVertical: 5}}>
-              <Text style={{ color: '#62635C', fontSize: 12}}>Age: {age}</Text>
-              <Text style={{ marginLeft: 20, color: '#62635C', fontSize: 12}}>Bed: {bed}</Text>
-            </View>
-=======
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, FlatList, Alert, Modal, Pressable, TouchableHighlight } from 'react-native';
 import ImageButton from '../utils/components/ImageButton'
@@ -112,7 +51,6 @@ const Principal = ({navigation}) => {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image source={require('../resources/pictures/newMedicine.svg')} style={styles.otherImg} />
             <Text style={styles.cardTitle}>{name}</Text>
->>>>>>> Stashed changes
           </View>
           <View style={{ flexDirection: 'row', marginVertical: 5 }}>
             <Text style={{ color: '#62635C', fontSize: 12 }}>Age: {age}</Text>
@@ -152,26 +90,6 @@ const Principal = ({navigation}) => {
         </View>
 
         <Modal
-<<<<<<< Updated upstream
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>x</Text>
-            </Pressable>
-            <Text style={styles.modalText}>How would you like to register it?</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
-              <ImageButton onPress={''} image={require('../resources/pictures/scan.png')} title='Scan'/>
-              <ImageButton onPress={''} image={require('../resources/pictures/manual.png')} title='Manually'/>
-=======
           animationType="slide"
           transparent={true}
           visible={modalVisible}
@@ -191,7 +109,6 @@ const Principal = ({navigation}) => {
                 <ImageButton onPress={''} image={require('../resources/pictures/scan.png')} title='Scan' />
                 <ImageButton onPress={''} image={require('../resources/pictures/manual.png')} title='Manually' />
               </View>
->>>>>>> Stashed changes
             </View>
           </View>
         </Modal>

@@ -1,15 +1,13 @@
 import React from "react";
 
-<<<<<<< Updated upstream
-import { Box, Center, Text, HStack, VStack, Switch, Modal, IconButton, Button} from "native-base";
-=======
 import { Box, Center, Text, HStack, VStack, Switch, Modal, IconButton, Button, Pressable } from "native-base";
->>>>>>> Stashed changes
+
 import BackButton from "../utils/components/BackButton";
 import color from "../utils/Colors";
 import MyButton from "../utils/components/MyButton";
 
 import Icon from "react-native-vector-icons/AntDesign";
+import ScreenNames from "../utils/ScreenNames";
 
 const Medicines = (props) => {
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -107,7 +105,7 @@ const Medicines = (props) => {
   );
 };
 
-const Medicine = () => {
+const Medicine = ({navigation}) => {
   return (
     <Box>
       <Box m={3}>
@@ -131,7 +129,7 @@ const Medicine = () => {
         <Medicines dosage="10gr" MedicineName="Prueba 2" />
       </Box>
       <Box px={3}>
-        <MyButton icon={"add-circle-outline"} title={"Add Medicine"} />
+        <MyButton icon={"add-circle-outline"} title={"Add Medicine"} onPress={()=>navigation.navigate(ScreenNames.RegisterMedicineNPScreen)} />
       </Box>
     </Box>
   );

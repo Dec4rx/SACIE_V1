@@ -24,7 +24,9 @@ import BackButton from "../utils/components/BackButton";
 import CorrectButton from "../utils/components/CorrectButton";
 import MyButton from "../utils/components/MyButton";
 
-const NotesScreen = () => {
+import ScreenNames from "../utils/ScreenNames";
+
+const NotesScreen = ({navigation}) => {
   return (
     <Box
       m="4"
@@ -112,7 +114,7 @@ const NotesScreen = () => {
       </VStack>
       <Center>
         <Box width={"100%"} my={3}>
-          <MyButton icon={"add-circle-outline"} title={"Set Document"} />
+          <MyButton icon={"add-circle-outline"} title={"Set Document"} onPress={()=>navigation.navigate(ScreenNames.DetailsScreen)}/>
         </Box>
       </Center>
     </Box>
