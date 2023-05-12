@@ -12,6 +12,8 @@ import {
 import { Button } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
+import ScreenNames from "../utils/ScreenNames";
+
 import Icon_2 from "react-native-vector-icons/MaterialIcons";
 
 import BackButton from "../utils/components/BackButton";
@@ -86,7 +88,7 @@ const Test = (props) => {
   );
 };
 
-const MedicalTest = () => {
+const MedicalTest = ({navigation}) => {
   return (
     <Box>
       <Box m={3}>
@@ -109,8 +111,8 @@ const MedicalTest = () => {
         <Test testName="Analisis de orina" doctorName='Dr. Rodriguez' date=' 11 de abril 2023' />
       </Box>
       <Box px={3}>
-        <MyButton icon={"add-circle-outline"} title={"Add Test"} />
       </Box>
+        <MyButton icon={"add-circle-outline"} title={"Add Test"} onPress={()=>navigation.navigate(ScreenNames.RegisterMedicalTestNP)}/>
     </Box>
   );
 };

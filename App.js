@@ -20,11 +20,14 @@ import ModifyMedicine from './src/screens/ModifyMedicine';
 import AddMedicine_noPatient from './src/screens/AddMecine_noPatient';
 
 
+import AppNavigation from "./src/navigators/AppNavigation";
+
+
 export default function App() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <MedicalTest/>
+        <AppNavigation/>
       </NativeBaseProvider>
     </NavigationContainer>
   );

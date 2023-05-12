@@ -10,6 +10,9 @@ import color from "../utils/Colors";
 import BackButton from "../utils/components/BackButton";
 
 import MedicalTest from "./MedicalTest";
+import Medicine from './Medicine'
+import Notes from './Notes'
+import VitalSigns from './VitalSigns'
 
 var user = require("../resources/images/UserExample_1.png");
 
@@ -145,11 +148,11 @@ const Tab = createBottomTabNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen name="Settings" component={SecondRoute} />
-      <Tab.Screen name="Medicine" component={ThirdRoute} />
+      <Tab.Screen name="MedicalTest" component={MedicalTest} />
+      <Tab.Screen name="VitalSigns" component={VitalSigns} />
       <Tab.Screen name="Home" component={MainRoute} />
-      <Tab.Screen name="XDD" component={FourthRoute} />
-      <Tab.Screen name="champurrado" component={FithRoute} />
+      <Tab.Screen name="Medicine" component={Medicine} />
+      <Tab.Screen name="Notes" component={Notes} />
     </Tab.Navigator>
   );
 };

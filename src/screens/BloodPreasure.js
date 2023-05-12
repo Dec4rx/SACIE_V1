@@ -5,7 +5,7 @@ import BlueButton from '../utils/components/BlueButton';
 import BackButton from '../utils/components/BackButton';
 import { AntDesign, Feather } from '@expo/vector-icons';
 
-const BloodPreasure = () => {
+const BloodPreasure = ({navigation}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [modalVisible, setModalVisible] = useState(false);
@@ -14,7 +14,7 @@ const BloodPreasure = () => {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 <View style={{ marginStart: 12, marginTop: 12 }}>
-                    <BackButton />
+                    <BackButton onPress={()=> navigation.goBack()} />
                 </View>
 
                 <Text style={styles.mainTitle}>Blood Preasure</Text>
