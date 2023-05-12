@@ -3,7 +3,9 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, ScrollVi
 import FormInput from '../utils/components/FormInput';
 import BackButton from '../utils/components/BackButton';
 
-const RegisterP3 = () => {
+import ScreenNames from '../utils/ScreenNames';
+
+const RegisterP3 = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={{ marginStart: 12, marginTop: 12 }}>
@@ -31,7 +33,7 @@ const RegisterP3 = () => {
 
 
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity style={styles.buttonRegister}>
+                    <TouchableOpacity style={styles.buttonRegister} onPress={()=>navigation.navigate('Drawer')}>
                         <Text style={{ fontSize: 20 }}>Register</Text>
                     </TouchableOpacity>
                 </View>

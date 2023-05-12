@@ -4,7 +4,9 @@ import FormInput from '../utils/components/FormInput';
 import BackButton from '../utils/components/BackButton';
 import { AntDesign } from '@expo/vector-icons';
 
-const RegisterP1 = () => {
+import ScreenNames from '../utils/ScreenNames';
+
+const RegisterP1 = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={{ marginStart: 12, marginTop: 12 }}>
@@ -54,7 +56,7 @@ const RegisterP1 = () => {
                 <FormInput label={'Date of Birth'} placeholder={'July 14, 2001'} />
                 <FormInput label={'Healt Condition'} placeholder={'Good'} />
                 <View style={{ flexDirection: 'row-reverse' }}>
-                    <TouchableOpacity style={styles.buttonNext}>
+                    <TouchableOpacity style={styles.buttonNext} onPress={()=> navigation.navigate(ScreenNames.ManualRegisterPt2Screen)}>
                         <Text style={{fontSize: 20 }}>Next</Text>
                         <AntDesign name="right" size={20} color="black" />
                     </TouchableOpacity>

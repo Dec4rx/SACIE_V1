@@ -14,6 +14,9 @@ import Details from "./src/screens/Details";
 import AddTest_v2 from "./src/screens/AddTest_v2";
 import MedicalTest from './src/screens/MedicalTest';
 import Medicine from './src/screens/Medicine';
+import Notes from  './src/screens/Notes'
+
+import TermsAndConditions from  './src/screens/TermsAndConditionsTxt'
 
 import AddMedicine from './src/screens/AddMedicine';
 import ModifyMedicine from './src/screens/ModifyMedicine';
@@ -27,7 +30,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <AppNavigation/>
+        <TermsAndConditions/>
       </NativeBaseProvider>
     </NavigationContainer>
   );

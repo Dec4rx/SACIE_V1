@@ -6,7 +6,7 @@ const Notification = ({navigation}) => {
     //#region Info
     const DATA = [
         {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba7',
           color: '#7043CF',
           title: 'Taking temperature',
           info: "Takes the patient's temperature in bed 10."

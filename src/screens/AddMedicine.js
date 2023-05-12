@@ -12,8 +12,9 @@ import {
 
 import BackButton from "../utils/components/BackButton";
 import MyButton from "../utils/components/MyButton";
+import ScreenNames from "../utils/ScreenNames";
 
-const AddMedicine = () => {
+const AddMedicine = ({navigation}) => {
   return (
     <Box>
       <Box m={3} id="xd">
@@ -231,7 +232,7 @@ const AddMedicine = () => {
       </Box>
       <Center m={3}>
         <Box w={"70%"}>
-          <MyButton title={"Add"} />
+          <MyButton title={"Add"} onPress={()=>navigation.navigate('Drawer')} />
         </Box>
       </Center>
     </Box>
