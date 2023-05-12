@@ -21,7 +21,7 @@ import MyButton from "../utils/components/MyButton";
 
 import color from "../utils/Colors";
 
-const Test = (props) => {
+const Test = (props) => { 
   const [modalVisible, setModalVisible] = React.useState(false);
   return (
     <>

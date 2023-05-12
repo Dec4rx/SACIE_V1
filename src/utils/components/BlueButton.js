@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
   });
   //#endregion
 
-  const BlueButton = ({ onPress, title }) => {
+  const BlueButton = ({ onPress, title, disabled}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button} >
+    <TouchableOpacity onPress={onPress} style={styles.button} disabled={disabled}> 
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   )
