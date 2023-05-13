@@ -17,21 +17,9 @@ import { useState } from "react";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 
-const Notes = () => {
-  return (
-    <Box alignItems="center" flex={1}>
-      <TextArea
-        h={"full"}
-        borderRadius={20}
-        placeholder="Text Area Placeholder"
-        backgroundColor={"#E6EBEE"}
-        w={"full"}
-      />
-    </Box>
-  );
-};
+import ScreenNames from "../utils/ScreenNames";
 
-const TermsAndConditions = () => {
+const TermsAndConditions = ({navigation}) => {
   const [state, setState] = useState(false);
   return (
     <Box
@@ -74,7 +62,7 @@ const TermsAndConditions = () => {
         </Center>
 
       </Box>
-      <BlueButton title={"Continue"}  disabled={!state}/>
+      <BlueButton title={"Continue"}  onPress={()=>navigation.navigate(ScreenNames.SignUpScreen)} disabled={!state}/>
     </Box>
   );
 };

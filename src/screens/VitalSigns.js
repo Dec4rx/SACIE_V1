@@ -20,7 +20,6 @@ const VitalSigns = ({navigation}) => {
             <View style={styles.imageRow}>
                 <TouchableOpacity onPress={()=> navigation.navigate(ScreenNames.SugarBloodScreen)} >
                     <Image
-                    
                         source={require("../resources/pictures/SugarBlood.png")}
                         resizeMode="contain"
                         style={styles.image}

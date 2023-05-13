@@ -18,21 +18,9 @@ import Icon from "react-native-vector-icons/AntDesign";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 
-const Notes = () => {
-  return (
-    <Box alignItems="center" flex={1}>
-      <TextArea
-        h={"full"}
-        borderRadius={20}
-        placeholder="Text Area Placeholder"
-        backgroundColor={"#E6EBEE"}
-        w={"full"}
-      />
-    </Box>
-  );
-};
 
-const TermsAndConditions = () => {
+
+const TermsAndConditionsTxt = () => {
   return (
     <Box
       p="3"
@@ -75,4 +63,4 @@ const TermsAndConditions = () => {
   );
 };
 
-export default TermsAndConditions;
+export default TermsAndConditionsTxt;

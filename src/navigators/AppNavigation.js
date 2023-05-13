@@ -36,6 +36,11 @@ import Oxygenation from "../screens/Oxygenation";
 import HealthCondition from "../screens/HealtCondition";
 import AddMedicine from "../screens/AddMedicine";
 
+import TnC_Txt from "../screens/TermsAndConditionsTxt";
+import TnC_CB from "../screens/TermnsAndConditionsCheckbox";
+import Exit from "../screens/Exit";
+import TermsAndConditions from "../screens/TermsAndConditionsTxt";
+
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
@@ -153,7 +158,23 @@ const AppStack = () => {
       ></Stack.Screen>
 
       <Stack.Screen name={"Drawer"} component={Drawer}></Stack.Screen>
+
+      <Stack.Screen
+        name={screen.TermnsAndConditionsCheckBoxScreen}
+        component={TnC_CB}
+      ></Stack.Screen>
+
+<Stack.Screen
+        name={screen.TermnsAndConditionsTxtScreen}
+        component={TnC_Txt}
+      ></Stack.Screen>
+
+<Stack.Screen
+        name={screen.ExitScreen}
+        component={Exit}
+      ></Stack.Screen>
     </Stack.Navigator>
+
   );
 };
 

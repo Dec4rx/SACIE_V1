@@ -25,6 +25,8 @@ import Principal from "../screens/Principal";
 import Account from "../screens/Account";
 import Notification from "../screens/Notification";
 import Lenguage from "../screens/Lenguage";
+import TermsAndConditions from "../screens/TermsAndConditionsTxt";
+import Exit from "../screens/Exit";
 
 global.__reanimatedWorkletInit = () => {};
 
@@ -127,8 +129,8 @@ function MyDrawer() {
         <Drawer.Screen name="Account" component={Account} />
         <Drawer.Screen name="Notification" component={Notification} />
         <Drawer.Screen name="Language" component={Lenguage} />
-        <Drawer.Screen name="Logout" component={Component} />
-        <Drawer.Screen name="Terms and Conditions" component={Component} />
+        <Drawer.Screen name="Logout" component={Exit} />
+        <Drawer.Screen name="Terms and Conditions" component={TermsAndConditions} />
       </Drawer.Navigator>
     </Box>
   );

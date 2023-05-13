@@ -9,8 +9,8 @@ export default screen = {
   ResetPasswordScreen: "ResetPassword",
   PasswordChangedScreen: "PasswordChanged",
   ExitScreen: "Exit",
-  TermnsAndConditionsCheckBoxScreen: "TermsAndConditions",
-  TermnsAndConditionsScreen: "TermsAndConditions",
+  TermnsAndConditionsCheckBoxScreen: "TermsAndConditionsCB",
+  TermnsAndConditionsTxtScreen: "TermsAndConditionsTxT",
 
   MainScreen: "Main",
   MenuScreen: "Menu",
