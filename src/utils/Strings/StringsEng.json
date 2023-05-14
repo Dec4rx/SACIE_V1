@@ -1,0 +1,51 @@
+{
+    "Login": {
+        "Login": "Log in",
+        "EmailID": "Email",
+        "Email": "Something@email.com",
+        "Password": "Password",
+        "PasswordF": "Forget Password?",
+        "SignUp": "Sign up"
+    },
+    "SignUp": {
+        "Welcome": "Welcome",
+        "SignUpCon": "Sign up to continue!",
+        "Name": "Name",
+        "LastName": "Last name",
+        "Email": "Email",
+        "Password": "Password",
+        "MinPass": "Minimum Password-lenght 8 Characters",
+        "ConfPass": "Confirm password",
+        "IdentPass": "Password must be identical",
+        "SignUp": "Sign up",
+        "AlreadyAccount": "Already have an account? Login",
+        "Policy": "I've already read the policy of",
+        "TAndC": "Terms and Conditions"
+    },
+    "ForgotPassword":{
+        "ForgotPassword": "Forgot Password?",
+        "DontWorry": "Don't worry! It occurs. Please enter the email address linked with your account.",
+        "EnterEmail": "Enter your email",
+        "SendCode": "Send Code",
+        "RememberPassword": "Remembered password?"
+    },
+    "OTPVerification":{
+        "OTPV": "OTP Verification",
+        "EnterCode": "Enter the verification code we just sent on your email address.",
+        "Verify": "Verify",
+        "DidntCode": "Didn’t received the code?",
+        "Resend": "Resend"
+    },
+    "PasswordChanged":{
+        "CNewPass": "Create new password",
+        "NewPass": "Your new password must be unique from those previously used.",
+        "NPass": "Enter new Password",
+        "MinPass":"Minimum Password-lenght 8 Characters",
+        "ConfPass": "Confirm password",
+        "IdentPass":"Password must be identical",
+        "ResPass": "Reset password"
+    },
+    "Principal":{
+        
+    }
+}
