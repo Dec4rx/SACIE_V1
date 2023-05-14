@@ -5,6 +5,7 @@
         "Email": "algo@email.com",
         "Password": "Contraseña",
         "PasswordF": "¿Olvidaste tu contraseña?",
+        "DontHaveAccount": "¿No tienes una cuenta?",
         "SignUp": "Registrarse"
     },
     "SignUp": {
@@ -19,30 +20,47 @@
         "IdentPass": "La contraseña debe ser idéntica",
         "SignUp": "Registro",
         "AlreadyAccount": "¿Ya tienes una cuenta? Acceso",
+        "Login": "Log in",
         "Policy": "Ya he leído la política de",
         "TAndC": "Términos y Condiciones"
     },
-    "ForgotPassword":{
+    "ForgotPassword": {
         "ForgotPassword": "¿Has olvidado tu contraseña?",
         "DontWorry": "¡No te preocupes! Suele suceder. Ingresa la dirección de correo electrónico vinculada a tu cuenta.",
         "EnterEmail": "Ingresa tu correo electrónico",
+        "PasswordReco": "Recuperación de contraseña",
         "SendCode": "Enviar código",
         "RememberPassword": "¿Recordaste tu contraseña?"
     },
-    "OTPVerification":{
+    "OTPVerification": {
         "OTPV": "Verificación OTP",
         "EnterCode": "Ingrese el código de verificación que acabamos de enviar a su dirección de correo electrónico.",
         "Verify": "Verificar",
         "DidntCode": "¿No recibiste el código?",
         "Resend": "Reenviar"
     },
-    "PasswordChanged":{
+    "PasswordChanged": {
         "CNewPass": "Crear nueva contraseña",
         "NewPass": "Su nueva contraseña debe ser única de las utilizadas anteriormente.",
         "NPass": "Ingrese una nueva contraseña",
-        "MinPass":"Longitud mínima de la contraseña 8 caracteres",
+        "MinPass": "Longitud mínima de la contraseña 8 caracteres",
         "ConfPass": "Confirma tu contraseña",
-        "IdentPass":"La contraseña debe ser idéntica",
+        "IdentPass": "La contraseña debe ser idéntica",
         "ResPass": "Restablecer la contraseña"
-    }
+    },
+    "ResetPassword": {
+        "PasswordChan": "¡Contraseña cambiada!",
+        "PassSuc": "Tu contraseña ha sido cambiada exitosamente.",
+        "BackLogin": "Regresar para iniciar sesión"
+    },
+    "Exit":{
+        "Quitting": "Saliendo",
+        "RSure": "¿Estas seguro?"
+    },
+    "TandC": {
+        "TandC": "Términos y condiciones",
+        "TextTandC": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vulputate felis lectus, id commodo sapien ornare non. Praesent aliquam sodales odio in efficitur. Vestibulum non nunc magna. Mauris aliquam semper pharetra. Mauris malesuada ac felis eu varius. Aliquam erat volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin sit amet varius sem. Maecenas vel velit ac lacus sodales suscipit.",
+        "Agree": "Estoy de acuerdo con los términos y condiciones",
+        "Continue": "Continuar"
+    } 
 }

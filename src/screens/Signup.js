@@ -24,6 +24,8 @@ import FormInputPass from "../utils/components/FormInputPass";
 import ScreenNames from "../utils/ScreenNames";
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const Signup = ({ navigation }) => {
   return (
     <MainContainer>
@@ -40,7 +42,7 @@ const Signup = ({ navigation }) => {
           size="xl"
         />
         <Heading style={{ fontSize: 32 }} fontWeight="semibold">
-          Welcome
+          {data.SignUp.Welcome}
         </Heading>
         <Heading
           mt="1"
@@ -51,29 +53,29 @@ const Signup = ({ navigation }) => {
           fontWeight="medium"
           size="xs"
         >
-          Sign up to continue!
+          {data.SignUp.SignUpCon}
         </Heading>
         <Box safeArea py="8" w={"full"}>
           <VStack space={3} mt="5">
-            <FormInput label="Name"></FormInput>
-            <FormInput label="Last Name"></FormInput>
-            <FormInput label="Email"></FormInput>
+            <FormInput label={data.SignUp.Name}></FormInput>
+            <FormInput label={data.SignUp.LastName}></FormInput>
+            <FormInput label={data.SignUp.Email}></FormInput>
             <FormInputPass
-              label="Password"
-              placeholder={"Minimum Password-lenght 8 Characters"}
+              label={data.SignUp.Password}
+              placeholder={data.SignUp.MinPass}
             ></FormInputPass>
             <FormInputPass
-              label="Confirm Password"
-              placeholder={"Password must be identical"}
+              label={data.SignUp.ConfPass}
+              placeholder={data.SignUp.IdentPass}
             ></FormInputPass>
 
             <BlueButton
-              title={"Sign Up"}
+              title={data.SignUp.SignUp}
               onPress={() => alert("No hay Home")}
             ></BlueButton>
             <Center>
               <Text>
-                Already have an account?{" "}
+                {data.SignUp.AlreadyAccount}
                 <Link
                   _text={{
                     fontSize: "m",
@@ -85,13 +87,13 @@ const Signup = ({ navigation }) => {
                   mt="1"
                   onPress={() => navigation.navigate(screen.LoginScreen)}
                 >
-                  Login
+                  {data.SignUp.Login}
                 </Link>
               </Text>
             </Center>
             <Center>
               <Checkbox fontSize={"md"}>
-                I've already read the policy of 
+                {data.SignUp.Policy}
                 <Link
                   onPress={() =>
                     navigation.navigate(
@@ -101,7 +103,7 @@ const Signup = ({ navigation }) => {
                   my={"auto"}
                   _text={{ fontSize: "m", color: "indigo.500", fontWeight: '500', textDecoration: 'none' }}
                 >
-                  Terms and Conditions
+                  {data.SignUp.TAndC}
                 </Link>
               </Checkbox>
             </Center>

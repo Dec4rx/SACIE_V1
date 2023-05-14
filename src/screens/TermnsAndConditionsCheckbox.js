@@ -21,6 +21,8 @@ import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const TermsAndConditions = ({ navigation }) => {
   const [state, setState] = useState(false);
   return (
@@ -37,7 +39,7 @@ const TermsAndConditions = ({ navigation }) => {
           </Box>
           <Box>
             <Text textAlign={"center"} fontSize={30}>
-              Terms & conditions
+              {data.TandC.TandC}
             </Text>
           </Box>
           <Box
@@ -50,22 +52,16 @@ const TermsAndConditions = ({ navigation }) => {
         <Divider my="2" />
         <Box p={2} my={3}>
           <Text textAlign={"center"} fontSize={"15"}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            vulputate felis lectus, id commodo sapien ornare non. Praesent
-            aliquam sodales odio in efficitur. Vestibulum non nunc magna. Mauris
-            aliquam semper pharetra. Mauris malesuada ac felis eu varius.
-            Aliquam erat volutpat. Pellentesque habitant morbi tristique
-            senectus et netus et malesuada fames ac turpis egestas. Proin sit
-            amet varius sem. Maecenas vel velit ac lacus sodales suscipit.
+            {data.TandC.TextTandC}
           </Text>
           <Center my={2}>
             <Checkbox _checked={state} onChange={(e) => setState(!state)}>
-              I agree with terms and conditions
+              {data.TandC.Agree}
             </Checkbox>
           </Center>
         </Box>
         <BlueButton
-          title={"Continue"}
+          title={data.TandC.Continue}
           onPress={() => navigation.navigate(ScreenNames.SignUpScreen)}
           disabled={!state}
         />

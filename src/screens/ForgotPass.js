@@ -21,6 +21,8 @@ import PasswordImage from "../MarcoImages/PasswordImage.png";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const ForgotPass = ({ navigation }) => {
   return (
     <MainContainer>
@@ -36,7 +38,7 @@ const ForgotPass = ({ navigation }) => {
           }}
           fontWeight="semibold"
         >
-          Forgot Password?
+          {data.ForgotPassword.ForgotPassword}
         </Heading>
         <Box safeArea w={"full"} py="8">
           <Heading
@@ -48,19 +50,18 @@ const ForgotPass = ({ navigation }) => {
             fontWeight="medium"
             size="xs"
           >
-            Don't worry! It occurs. Please enter the email address linked with
-            your account.
+            {data.ForgotPassword.DontWorry}
           </Heading>
-          <FormInput  label={'Password recovery'} placeholder={"Enter your email"}></FormInput>
+          <FormInput  label={data.ForgotPassword.PasswordReco} placeholder={data.ForgotPassword.EnterEmail}></FormInput>
           <BlueButton
-            title={"Send Code"}
+            title={data.ForgotPassword.SendCode}
             onPress={() => navigation.navigate(screen.OTPVerificationScreen)}
           ></BlueButton>
         </Box>
         <Box safeArea w={"full"} py="2">
           <Center>
             <Text>
-              Remember password?{" "}
+              {data.ForgotPassword.RememberPassword}{" "}
               <Link
                 _text={{
                   fontSize: "m",

@@ -22,6 +22,8 @@ import ErrorButton from '../utils/components/ErrorButton';
 
 import ScreenNames from "../utils/ScreenNames";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const Exit = ({navigation}) => {
   const [state, setState] = useState(false);
   return (
@@ -35,7 +37,7 @@ const Exit = ({navigation}) => {
     >
       <Center mt={'30'}>
         <Text textAlign={"center"} fontSize={30}>
-          Quitting
+          {data.Exit.Quitting}
         </Text>
       </Center>
       <Center mb={10}>
@@ -45,7 +47,7 @@ const Exit = ({navigation}) => {
           w={"400"}
           h={"400"}
         ></Image>
-        <Text fontSize={30}>Are you sure?</Text>
+        <Text fontSize={30}>{data.Exit.RSure}</Text>
         <HStack space={10} mt={5}>
             <CorrectButton onPress={()=>navigation.navigate(ScreenNames.LoginScreen)}/>
             <ErrorButton onPress={()=>navigation.goBack()}/>
