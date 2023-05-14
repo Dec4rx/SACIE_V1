@@ -26,9 +26,11 @@ import MyButton from "../utils/components/MyButton";
 
 import ScreenNames from "../utils/ScreenNames";
 
+import MainContainer from "../utils/components/MainContainer";
+
 const NotesScreen = ({navigation}) => {
   return (
-    <Box
+    <MainContainer
       m="4"
       alignContent={"center"}
       w={"95%"}
@@ -45,9 +47,9 @@ const NotesScreen = ({navigation}) => {
           <Text textAlign={"center"} mx={"auto"} fontSize={40}>
             Add Test
           </Text>
-          <Center mx={"auto"} >
+          <Box mx={"auto"} >
             <CorrectButton />
-          </Center>
+          </Box>
         </HStack>
       </Center>
 
@@ -117,7 +119,7 @@ const NotesScreen = ({navigation}) => {
           <MyButton icon={"add-circle-outline"} title={"Set Document"} onPress={()=>navigation.navigate(ScreenNames.DetailsScreen)}/>
         </Box>
       </Center>
-    </Box>
+    </MainContainer>
   );
 };
 

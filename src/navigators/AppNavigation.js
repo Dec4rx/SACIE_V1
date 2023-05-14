@@ -46,7 +46,7 @@ const Stack = createNativeStackNavigator();
 const AppStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName={'Drawer'}
+      initialRouteName={screen.DetailsScreen}
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name={screen.LoginScreen} component={login} />

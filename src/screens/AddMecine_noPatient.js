@@ -13,14 +13,15 @@ import {
 import BackButton from "../utils/components/BackButton";
 import MyButton from "../utils/components/MyButton";
 
+import MainContainer from "../utils/components/MainContainer";
 import ScreenNames from "../utils/ScreenNames";
 
-const AddMedicine = ({navigation}) => {
+const AddMedicine = ({ navigation }) => {
   return (
-    <Box>
-      <Box m={3} id="xd">
+    <MainContainer>
+      <Box>
         <HStack justifyContent={"space-between"}>
-          <Box width={"20%"}>
+          <Box width={"20%"} >
             <BackButton />
           </Box>
           <Center>
@@ -38,14 +39,13 @@ const AddMedicine = ({navigation}) => {
       </Box>
 
       <Box>
-        <Center p={3}>
+        <Center >
+          <Divider  />
 
-          <Divider mx={2} />
-
-          <Box my={2}>
-            <Center>
-              <VStack width="90%" mx="3" maxW="300px">
-                <FormControl isRequired>
+          <Box my={2}  w={'full'} >
+            <Center >
+              <VStack w={'full'} >
+                <FormControl isRequired w={'full'}>
                   <FormControl.Label
                     _text={{
                       bold: true,
@@ -75,14 +75,7 @@ const AddMedicine = ({navigation}) => {
                     Error Name
                   </FormControl.ErrorMessage>
                 </FormControl>
-              </VStack>
-            </Center>
-          </Box>
-          <Divider mx={2} />
 
-          <Box my={2}>
-            <Center>
-              <VStack width="90%" mx="3" maxW="300px">
                 <FormControl isRequired>
                   <FormControl.Label
                     _text={{
@@ -113,14 +106,7 @@ const AddMedicine = ({navigation}) => {
                     Error Name
                   </FormControl.ErrorMessage>
                 </FormControl>
-              </VStack>
-            </Center>
-          </Box>
-          <Divider mx={2} />
 
-          <Box my={2}>
-            <Center>
-              <VStack width="90%" mx="3" maxW="300px">
                 <FormControl isRequired>
                   <FormControl.Label
                     _text={{
@@ -151,14 +137,7 @@ const AddMedicine = ({navigation}) => {
                     Error Name
                   </FormControl.ErrorMessage>
                 </FormControl>
-              </VStack>
-            </Center>
-          </Box>
-          <Divider mx={2} />
 
-          <Box my={2}>
-            <Center>
-              <VStack width="90%" mx="3" maxW="300px">
                 <FormControl isRequired>
                   <FormControl.Label
                     _text={{
@@ -192,14 +171,18 @@ const AddMedicine = ({navigation}) => {
               </VStack>
             </Center>
           </Box>
+          
         </Center>
       </Box>
-      <Center m={3}>
-        <Box w={"70%"}>
-          <MyButton title={"Add"} onPress={()=> navigation.navigate(ScreenNames.DetailsScreen)}/>
+      <Center>
+        <Box w={"full"}>
+          <MyButton
+            title={"Add"}
+            onPress={() => navigation.navigate(ScreenNames.DetailsScreen)}
+          />
         </Box>
       </Center>
-    </Box>
+    </MainContainer>
   );
 };
 

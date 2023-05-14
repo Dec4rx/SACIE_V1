@@ -1,12 +1,10 @@
 import React from "react";
 import { View, StyleSheet, SafeAreaView, Center } from "react-native";
 
-const MainContainer = ({ children }) => {
+const MainContainer = ({ children, height }) => {
   return (
     <SafeAreaView>
-    
         <View style={styles.container}>{children}</View>
-    
     </SafeAreaView>
   );
 };

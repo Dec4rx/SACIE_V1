@@ -1,6 +1,17 @@
 import React from "react";
 
-import { Box, Center, Text, HStack, VStack, Switch, Modal, IconButton, Button, Pressable } from "native-base";
+import {
+  Box,
+  Center,
+  Text,
+  HStack,
+  VStack,
+  Switch,
+  Modal,
+  IconButton,
+  Button,
+  Pressable,
+} from "native-base";
 
 import BackButton from "../utils/components/BackButton";
 import color from "../utils/Colors";
@@ -8,6 +19,8 @@ import MyButton from "../utils/components/MyButton";
 
 import Icon from "react-native-vector-icons/AntDesign";
 import ScreenNames from "../utils/ScreenNames";
+
+import MainContainer from "../utils/components/MainContainer";
 
 const Medicines = (props) => {
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -24,7 +37,9 @@ const Medicines = (props) => {
         >
           <Modal.Content>
             <Modal.CloseButton />
-            <Modal.Header color={color.Black}>{props.MedicineName}</Modal.Header>
+            <Modal.Header color={color.Black}>
+              {props.MedicineName}
+            </Modal.Header>
             <Modal.Body>
               <Text>
                 <b>Dosage: </b>
@@ -45,8 +60,7 @@ const Medicines = (props) => {
             </Modal.Body>
 
             <Modal.Footer w={"100%"}>
-
-              <HStack space={'5'} mx={"auto"} >
+              <HStack space={"5"} mx={"auto"}>
                 <IconButton
                   backgroundColor={"red.400"}
                   p={2}
@@ -105,20 +119,20 @@ const Medicines = (props) => {
   );
 };
 
-const Medicine = ({navigation}) => {
+const Medicine = ({ navigation }) => {
   return (
-    <Box>
-      <Box m={3}>
+    <MainContainer>
+      <Box mb={3}>
         <BackButton />
       </Box>
-      <Box py={5} mx={3} borderRadius={10} backgroundColor={color.MainBlue}>
+      <Box py={5} borderRadius={10} backgroundColor={color.MainBlue}>
         <Center>
           <Text fontSize={"xl"} fontWeight={"bold"}>
             Medicine
           </Text>
         </Center>
       </Box>
-      <Box p={2} backgroundColor={color.Gray} m={3} borderRadius={10}>
+      <Box p={2} backgroundColor={color.Gray} my={3} borderRadius={10}>
         <Medicines
           dosage="30gr"
           MedicineName="Prueba 1"
@@ -127,11 +141,17 @@ const Medicine = ({navigation}) => {
           via="oral"
         />
         <Medicines dosage="10gr" MedicineName="Prueba 2" />
+        <Box w={'full'} my={3}>
+          <MyButton
+            icon={"add-circle-outline"}
+            title={"Add Medicine"}
+            onPress={() =>
+              navigation.navigate(ScreenNames.RegisterMedicineNPScreen)
+            }
+          />
+        </Box>
       </Box>
-      <Box px={3}>
-        <MyButton icon={"add-circle-outline"} title={"Add Medicine"} onPress={()=>navigation.navigate(ScreenNames.RegisterMedicineNPScreen)} />
-      </Box>
-    </Box>
+    </MainContainer>
   );
 };
 

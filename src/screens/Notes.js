@@ -16,6 +16,8 @@ import Icon from "react-native-vector-icons/AntDesign";
 
 import BackButton from "../utils/components/BackButton";
 
+import MainContainer from "../utils/components/MainContainer";
+
 const Notes = () => {
   return (
     <Box alignItems="center" flex={1}>

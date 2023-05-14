@@ -21,7 +21,9 @@ import MyButton from "../utils/components/MyButton";
 
 import color from "../utils/Colors";
 
-const Test = (props) => { 
+import MainContainer from "../utils/components/MainContainer";
+
+const Test = (props) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   return (
     <>
@@ -38,8 +40,13 @@ const Test = (props) => {
             <Modal.CloseButton />
             <Modal.Header>{props.testName}</Modal.Header>
             <Modal.Body>
-              <Text><b>Hecho por: </b> {props.doctorName}</Text> 
-              <Text><b>Fecha: </b>{props.date}</Text>
+              <Text>
+                <b>Hecho por: </b> {props.doctorName}
+              </Text>
+              <Text>
+                <b>Fecha: </b>
+                {props.date}
+              </Text>
             </Modal.Body>
 
             <Modal.Footer w={"100%"}>
@@ -88,13 +95,13 @@ const Test = (props) => {
   );
 };
 
-const MedicalTest = ({navigation}) => {
+const MedicalTest = ({ navigation }) => {
   return (
-    <Box>
-      <Box m={3}>
+    <MainContainer>
+      <Box mb={3}>
         <BackButton />
       </Box>
-      <Box py={5} mx={3} borderRadius={10} backgroundColor={color.MainBlue}>
+      <Box py={5} borderRadius={10} backgroundColor={color.MainBlue}>
         <Center>
           <Text fontSize={"xl"} fontWeight={"bold"}>
             Medical Test
@@ -102,18 +109,27 @@ const MedicalTest = ({navigation}) => {
         </Center>
       </Box>
 
-      <Box p={2} backgroundColor={color.Gray} m={3} borderRadius={10}>
+      <Box p={2} backgroundColor={color.Gray} my={3} borderRadius={10}>
         <Test
           testName="Examen de globulos blancos"
           doctorName="Dra. Aguilera"
           date="10 de abril 2023"
         />
-        <Test testName="Analisis de orina" doctorName='Dr. Rodriguez' date=' 11 de abril 2023' />
+        <Test
+          testName="Analisis de orina"
+          doctorName="Dr. Rodriguez"
+          date=" 11 de abril 2023"
+        />
+        <Box w={'full'} mt={3}>
+        <MyButton
+          icon={"add-circle-outline"}
+          title={"Add Test"}
+          onPress={() => navigation.navigate(ScreenNames.RegisterMedicalTestNP)}
+        />
       </Box>
-      <Box px={3}>
       </Box>
-        <MyButton icon={"add-circle-outline"} title={"Add Test"} onPress={()=>navigation.navigate(ScreenNames.RegisterMedicalTestNP)}/>
-    </Box>
+      
+    </MainContainer>
   );
 };
 
