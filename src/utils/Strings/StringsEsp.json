@@ -53,7 +53,7 @@
         "PassSuc": "Tu contraseña ha sido cambiada exitosamente.",
         "BackLogin": "Regresar para iniciar sesión"
     },
-    "Exit":{
+    "Exit": {
         "Quitting": "Saliendo",
         "RSure": "¿Estas seguro?"
     },
@@ -62,5 +62,36 @@
         "TextTandC": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vulputate felis lectus, id commodo sapien ornare non. Praesent aliquam sodales odio in efficitur. Vestibulum non nunc magna. Mauris aliquam semper pharetra. Mauris malesuada ac felis eu varius. Aliquam erat volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin sit amet varius sem. Maecenas vel velit ac lacus sodales suscipit.",
         "Agree": "Estoy de acuerdo con los términos y condiciones",
         "Continue": "Continuar"
-    } 
+    },
+    "Principal": {
+        "Age": "Edad",
+        "Bed": "Cama",
+        "Welcome": "Bienvenido",
+        "NPatient": "Nuevo Paciente",
+        "NMedicine": "Nueva Medicina",
+        "NTest": "Nuevo Test",
+        "KindRegister": "¿Cómo te gustaría registrarlo?",
+        "Scan": "Scanear",
+        "Manualy": "Manualmente",
+        "Patients": "Pacientes"
+    },
+    "Account": {
+        "Profile": "Perfil",
+        "Name": "Jose Gordillo",
+        "Phone": "+521234567890",
+        "Email": "Something@email.com",
+        "LogOut": "Cerrar sesión"
+    },
+    "EditAccount": {
+        "EditProfile": "Editar perfil",
+        "FullName": "Nombre completo",
+        "FName": "Jose Gordillo",
+        "Phone": "Número de teléfono",
+        "NPhone": "+521234567890",
+        "EmailID": "Correo electrónico",
+        "Email": "Something@email.com"
+    },
+    "Lenguage": {
+        "Lenguage": "Idioma"
+    }
 }

@@ -62,5 +62,36 @@
         "TextTandC": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vulputate felis lectus, id commodo sapien ornare non. Praesent aliquam sodales odio in efficitur. Vestibulum non nunc magna. Mauris aliquam semper pharetra. Mauris malesuada ac felis eu varius. Aliquam erat volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin sit amet varius sem. Maecenas vel velit ac lacus sodales suscipit.",
         "Agree": "I agree with terms and conditions",
         "Continue": "Continue"
-    }    
+    },
+    "Principal": {
+        "Age": "Age",
+        "Bed": "Bed",
+        "Welcome": "Welcome",
+        "NPatient": "New Patient",
+        "NMedicine": "New Medicine",
+        "NTest": "New Test",
+        "KindRegister": "How would you like to register it?",
+        "Scan": "Scan",
+        "Manualy": "Manualy",
+        "Patients": "Patients"
+    },
+    "Account": {
+        "Profile": "Profile",
+        "Name": "Jose Gordillo",
+        "Phone": "+521234567890",
+        "Email": "Something@email.com",
+        "LogOut": "Log out"
+    },
+    "EditAccount": {
+        "EditProfile": "Edit profile",
+        "FullName": "Full name",
+        "FName": "Jose Gordillo",
+        "Phone": "Phone number",
+        "NPhone": "+521234567890",
+        "EmailID": "Email",
+        "Email": "Something@email.com"
+    },
+    "Lenguage": {
+        "Lenguage": "Lenguage"
+    }
 }
