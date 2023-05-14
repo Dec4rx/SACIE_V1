@@ -18,12 +18,13 @@ import BlueButton from "../utils/components/BlueButton";
 import BackButton from "../utils/components/BackButton";
 import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
+import MainContainer from "../utils/components/MainContainer";
 
 const Login = ({ navigation }) => {
   return (
-    <Center w="100%">
-      <Box safeArea p="2" py="8" w="90%" maxW="300" alignContent={"center"}>
-        <Box safeArea p="2" py="8" w="90%" maxW="300" alignContent={"center"}>
+    <MainContainer>
+      <Center safeArea alignContent={"center"}>
+        <Box safeArea alignContent={"center"}>
           <Heading
             style={{ fontSize: 32 }}
             textAlign={"center"}
@@ -40,28 +41,30 @@ const Login = ({ navigation }) => {
           source={Enf_1}
           size="xl"
         />
-        <Box safeArea p="2" py="8" w="90%" maxW="300">
+        <Box safeArea w={"100%"}>
           <VStack space={4} mt="5">
-            <FormInput
-              label="Email"
-              placeholder={"Something@email.com"}
-            ></FormInput>
-            <FormInputPass
-              label="Password"
-              placeholder={"Password"}
-            ></FormInputPass>
-            <Link
-              _text={{
-                fontSize: "m",
-                fontWeight: "500",
-                color: "indigo.500",
-              }}
-              alignSelf="flex-end"
-              mt="1"
-              onPress={() => navigation.navigate(screen.ForgotPasswordScreen)}
-            >
-              Forget Password?
-            </Link>
+            <Box>
+              <FormInput
+                label="Email"
+                placeholder={"Something@email.com"}
+              ></FormInput>
+              <FormInputPass
+                label="Password"
+                placeholder={"Password"}
+              ></FormInputPass>
+              <Link
+                _text={{
+                  fontSize: "m",
+                  fontWeight: "500",
+                  color: "indigo.500",
+                  textDecoration: "none",
+                }}
+                alignSelf="flex-end"
+                onPress={() => navigation.navigate(screen.ForgotPasswordScreen)}
+              >
+                Forget Password?
+              </Link>
+            </Box>
 
             <BlueButton
               title={"Log in"}
@@ -69,22 +72,28 @@ const Login = ({ navigation }) => {
               mt="2"
               color="2BF0D7"
             ></BlueButton>
-            <Link
-              _text={{
-                fontSize: "m",
-                fontWeight: "500",
-                color: "indigo.500",
-              }}
-              alignSelf="flex-end"
-              mt="1"
-              onPress={() => navigation.navigate(screen.SignUpScreen)}
-            >
-              Sign up
-            </Link>
+            <Center>
+              <HStack justifyContent={"center"}>
+                <Text>Already have an account? <Link justifyContent={'center'}
+                  _text={{
+                    fontSize: "m",
+                    fontWeight: "500",
+                    color: "indigo.500",
+                    textDecoration: "none",
+                  }}
+                  alignSelf="flex-end"
+                  mt="1"
+                  onPress={() => navigation.navigate(screen.SignUpScreen)}
+                >
+                  Sign up
+                </Link></Text>
+                
+              </HStack>
+            </Center>
           </VStack>
         </Box>
-      </Box>
-    </Center>
+      </Center>
+    </MainContainer>
   );
 };
 

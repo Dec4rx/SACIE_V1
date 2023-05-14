@@ -94,6 +94,7 @@ const Principal = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.mainTitle}>Welcome</Text>
+
         <View style={styles.headerButton}>
           <TouchableOpacity
             activeOpacity={0.5}
