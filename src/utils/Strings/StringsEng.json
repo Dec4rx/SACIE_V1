@@ -1,0 +1,97 @@
+{
+    "Login": {
+        "Login": "Log in",
+        "EmailID": "Email",
+        "Email": "Something@email.com",
+        "Password": "Password",
+        "PasswordF": "Forget Password?",
+        "DontHaveAccount": "Don’t have an account?",
+        "SignUp": "Sign up"
+    },
+    "SignUp": {
+        "Welcome": "Welcome",
+        "SignUpCon": "Sign up to continue!",
+        "Name": "Name",
+        "LastName": "Last name",
+        "Email": "Email",
+        "Password": "Password",
+        "MinPass": "Minimum Password-lenght 8 Characters",
+        "ConfPass": "Confirm password",
+        "IdentPass": "Password must be identical",
+        "SignUp": "Sign up",
+        "AlreadyAccount": "Already have an account?",
+        "Login": "Log in",
+        "Policy": "I've already read the policy of",
+        "TAndC": "Terms and Conditions"
+    },
+    "ForgotPassword": {
+        "ForgotPassword": "Forgot Password?",
+        "DontWorry": "Don't worry! It occurs. Please enter the email address linked with your account.",
+        "PasswordReco": "Password recovery",
+        "EnterEmail": "Enter your email",
+        "SendCode": "Send Code",
+        "RememberPassword": "Remembered password?"
+    },
+    "OTPVerification": {
+        "OTPV": "OTP Verification",
+        "EnterCode": "Enter the verification code we just sent on your email address.",
+        "Verify": "Verify",
+        "DidntCode": "Didn’t received the code?",
+        "Resend": "Resend"
+    },
+    "PasswordChanged": {
+        "CNewPass": "Create new password",
+        "NewPass": "Your new password must be unique from those previously used.",
+        "NPass": "Enter new Password",
+        "MinPass": "Minimum Password-lenght 8 Characters",
+        "ConfPass": "Confirm password",
+        "IdentPass": "Password must be identical",
+        "ResPass": "Reset password"
+    },
+    "ResetPassword": {
+        "PasswordChan": "Password Changed!",
+        "PassSuc": "Your password has been changed successfully.",
+        "BackLogin": "Back To Login"
+    },
+    "Exit": {
+        "Quitting": "Quitting",
+        "RSure": "Are you sure?"
+    },
+    "TandC": {
+        "TandC": "Terms & conditions",
+        "TextTandC": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vulputate felis lectus, id commodo sapien ornare non. Praesent aliquam sodales odio in efficitur. Vestibulum non nunc magna. Mauris aliquam semper pharetra. Mauris malesuada ac felis eu varius. Aliquam erat volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin sit amet varius sem. Maecenas vel velit ac lacus sodales suscipit.",
+        "Agree": "I agree with terms and conditions",
+        "Continue": "Continue"
+    },
+    "Principal": {
+        "Age": "Age",
+        "Bed": "Bed",
+        "Welcome": "Welcome",
+        "NPatient": "New Patient",
+        "NMedicine": "New Medicine",
+        "NTest": "New Test",
+        "KindRegister": "How would you like to register it?",
+        "Scan": "Scan",
+        "Manualy": "Manualy",
+        "Patients": "Patients"
+    },
+    "Account": {
+        "Profile": "Profile",
+        "Name": "Jose Gordillo",
+        "Phone": "+521234567890",
+        "Email": "Something@email.com",
+        "LogOut": "Log out"
+    },
+    "EditAccount": {
+        "EditProfile": "Edit profile",
+        "FullName": "Full name",
+        "FName": "Jose Gordillo",
+        "Phone": "Phone number",
+        "NPhone": "+521234567890",
+        "EmailID": "Email",
+        "Email": "Something@email.com"
+    },
+    "Lenguage": {
+        "Lenguage": "Lenguage"
+    }
+}

@@ -13,6 +13,8 @@ import CorrectButton from "../utils/components/CorrectButton";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const EditAccount = ({ navigation }) => {
   const [name, onChangeName] = React.useState("");
   const [phone, onChangePhone] = React.useState("");
@@ -26,7 +28,7 @@ const EditAccount = ({ navigation }) => {
     <MainContainer>
       <View style={styles.header}>
         <BackButton />
-        <Text style={styles.mainTitle}>Edit profile</Text>
+        <Text style={styles.mainTitle}>{data.EditAccount.EditProfile}</Text>
         <TouchableOpacity>
           <CorrectButton onPress={handleSaveProfile} />
         </TouchableOpacity>
@@ -37,20 +39,20 @@ const EditAccount = ({ navigation }) => {
           style={styles.profileImage}
         />
         <FormInput
-          label={"Full name"}
-          placeholder={"Jose Gordillo"}
+          label={data.EditAccount.FullName}
+          placeholder={data.EditAccount.FName}
           value={name}
           onChangeText={onChangeName}
         />
         <FormInput
-          label={"Phone number"}
-          placeholder={"449-123-4567"}
+          label={data.EditAccount.Phone}
+          placeholder={data.EditAccount.NPhone}
           value={phone}
           onChangeText={onChangePhone}
         />
         <FormInput
-          label={"Email"}
-          placeholder={"ejemplo@gmxil.com"}
+          label={data.EditAccount.EmailID}
+          placeholder={data.EditAccount.Email}
           value={email}
           onChangeText={onChangeEmail}
         />

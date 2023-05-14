@@ -22,12 +22,14 @@ import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const OTPVerification = ({ navigation }) => {
   return (
     <MainContainer>
         <Center safeArea pt="8">
           <Heading style={{ fontSize: 32 }} fontWeight="semibold" >
-            OTP Verification
+            {data.OTPVerification.OTPV}
           </Heading>
           <Center w={'full'} pt="8">
             <Heading
@@ -40,7 +42,7 @@ const OTPVerification = ({ navigation }) => {
               fontWeight="medium"
               size="s"
             >
-              Enter the verification code we just sent on your email address.
+             {data.OTPVerification.EnterCode}
             </Heading>
           </Center>
           <HStack justifyContent={'center'} w={'full'} pt="8">
@@ -51,7 +53,7 @@ const OTPVerification = ({ navigation }) => {
           </HStack>
           <Box w={'full'} pt="16">
             <BlueButton
-              title={"Verify"}
+              title={data.OTPVerification.Verify}
               onPress={() => navigation.navigate(ScreenNames.PasswordChangedScreen)}
             ></BlueButton>
           </Box>
@@ -66,7 +68,7 @@ const OTPVerification = ({ navigation }) => {
                 fontWeight="medium"
                 size="s"
               >
-                Didn’t received the code? <Link
+                {data.OTPVerification.DidntCode} <Link
                 _text={{
                   fontSize: "m",
                   fontWeight: "500",
@@ -76,7 +78,7 @@ const OTPVerification = ({ navigation }) => {
                 alignSelf="flex-end"
                 mt="1"
               >
-                Resend
+                {data.OTPVerification.Resend}
               </Link>
               </Text>
             </Center>

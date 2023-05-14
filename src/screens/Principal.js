@@ -19,6 +19,9 @@ import { HStack } from "native-base";
 import MainContainer from "../utils/components/MainContainer";
 
 import ScreenNames from "../utils/ScreenNames";
+
+import data from "../utils/Strings/StringsEng.json";
+
 const Principal = ({ navigation }) => {
   const DATA = [
     {
@@ -72,9 +75,9 @@ const Principal = ({ navigation }) => {
             <Text style={styles.cardTitle}>{name}</Text>
           </View>
           <View style={{ flexDirection: "row", marginVertical: 5 }}>
-            <Text style={{ color: "#62635C", fontSize: 12 }}>Age: {age}</Text>
+            <Text style={{ color: "#62635C", fontSize: 12 }}>{data.Principal.Age}: {age}</Text>
             <Text style={{ marginLeft: 20, color: "#62635C", fontSize: 12 }}>
-              Bed: {bed}
+              {data.Principal.Bed}: {bed}
             </Text>
           </View>
         </View>
@@ -97,7 +100,7 @@ const Principal = ({ navigation }) => {
   return (
     <MainContainer >
       <View style={styles.header}>
-        <Text style={styles.mainTitle}>Welcome</Text>
+        <Text style={styles.mainTitle}>{data.Principal.Welcome}</Text>
 
         <View style={styles.headerButton}>
           <TouchableOpacity
@@ -131,9 +134,9 @@ const Principal = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.headerButton}>
-          <Text>New Patient</Text>
-          <Text>New Medicine </Text>
-          <Text>New Test </Text>
+          <Text>{data.Principal.NPatient} </Text>
+          <Text>{data.Principal.NMedicine} </Text>
+          <Text>{data.Principal.NTest}</Text>
         </View>
 
         <Modal
@@ -154,18 +157,18 @@ const Principal = ({ navigation }) => {
                 <Text style={styles.textStyle}>X</Text>
               </Pressable>
               <Text style={styles.modalText}>
-                How would you like to register it?
+                {data.Principal.KindRegister}
               </Text>
               <HStack space={5}>
                 <ImageButton
                   onPress={""}
                   image={require("../resources/pictures/scan.png")}
-                  title="Scan"
+                  title={data.Principal.Scan}
                 />
                 <ImageButton
                   onPress={() =>onPressHandler()}
                   image={require("../resources/pictures/manual.png")}
-                  title="Manually"
+                  title={data.Principal.Manualy}
                 />
               </HStack>
             </View>
@@ -182,7 +185,7 @@ const Principal = ({ navigation }) => {
             marginVertical: 10,
           }}
         >
-          Patients
+          {data.Principal.Patients}
         </Text>
         <FlatList
           data={DATA}

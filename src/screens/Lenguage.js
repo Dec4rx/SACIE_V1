@@ -10,6 +10,8 @@ import BackButton from "../utils/components/BackButton";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const Lenguage = ({ navigation }) => {
   const DATA = [
     {
@@ -17,11 +19,13 @@ const Lenguage = ({ navigation }) => {
     },
   ];
 
+  const da = data.Lenguage.d
+
   return (
     <MainContainer>
       <View style={styles.header}>
         <BackButton />
-        <Text style={styles.mainTitle}>Lenguage</Text>
+        <Text style={styles.mainTitle}>{data.Lenguage.Lenguage}</Text>
       </View>
       <View>
         <View style={styles.profileContainer}>

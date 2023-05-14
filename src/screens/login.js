@@ -20,6 +20,8 @@ import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const Login = ({ navigation }) => {
   return (
     <MainContainer>
@@ -30,7 +32,7 @@ const Login = ({ navigation }) => {
             textAlign={"center"}
             fontWeight="semibold"
           >
-            Login
+            {data.Login.Login}
           </Heading>
         </Box>
         <Image
@@ -45,12 +47,12 @@ const Login = ({ navigation }) => {
           <VStack space={4} mt="5">
             <Box>
               <FormInput
-                label="Email"
-                placeholder={"Something@email.com"}
+                label={data.Login.EmailID}
+                placeholder={data.Login.Email}
               ></FormInput>
               <FormInputPass
-                label="Password"
-                placeholder={"Password"}
+                label={data.Login.Password}
+                placeholder={data.Login.Password}
               ></FormInputPass>
               <Link
                 _text={{
@@ -62,19 +64,19 @@ const Login = ({ navigation }) => {
                 alignSelf="flex-end"
                 onPress={() => navigation.navigate(screen.ForgotPasswordScreen)}
               >
-                Forget Password?
+                {data.Login.PasswordF}
               </Link>
             </Box>
 
             <BlueButton
-              title={"Log in"}
+              title={data.Login.Login}
               onPress={() => navigation.navigate("Drawer")}
               mt="2"
               color="2BF0D7"
             ></BlueButton>
             <Center>
               <HStack justifyContent={"center"}>
-                <Text>Already have an account? <Link justifyContent={'center'}
+                <Text>{data.Login.DontHaveAccount} <Link justifyContent={'center'}
                   _text={{
                     fontSize: "m",
                     fontWeight: "500",
@@ -85,7 +87,7 @@ const Login = ({ navigation }) => {
                   mt="1"
                   onPress={() => navigation.navigate(screen.SignUpScreen)}
                 >
-                  Sign up
+                  {data.Login.SignUp}
                 </Link></Text>
                 
               </HStack>

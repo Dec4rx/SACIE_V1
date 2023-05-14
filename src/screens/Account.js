@@ -12,12 +12,14 @@ import EditButton from "../utils/components/EditButton";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json"
+
 const Account = ({ navigation }) => {
   return (
     <MainContainer>
       <View style={styles.header}>
         <BackButton />
-        <Text style={styles.mainTitle}>Profile</Text>
+        <Text style={styles.mainTitle}>{data.Account.Profile}</Text>
         <EditButton onPress={() => navigation.navigate("Edit")} />
       </View>
       <View style={styles.profileContainer}>
@@ -25,14 +27,14 @@ const Account = ({ navigation }) => {
           source={require("../resources/pictures/nurseProfile.png")}
           style={styles.profileImage}
         />
-        <Text style={styles.title}>Jose Gordillo</Text>
+        <Text style={styles.title}>{data.Account.Name}</Text>
       </View>
       <View style={styles.info}>
         <Image
           source={require("../resources/pictures/phone.svg")}
           style={styles.otherImg}
         />
-        <Text style={styles.text}>Jose Gordillo</Text>
+        <Text style={styles.text}>{data.Account.Phone}</Text>
         <View style={styles.line} />
       </View>
       <View style={styles.info}>
@@ -40,12 +42,12 @@ const Account = ({ navigation }) => {
           source={require("../resources/pictures/mail.svg")}
           style={styles.otherImg}
         />
-        <Text style={styles.text}>Jose Gordillo</Text>
+        <Text style={styles.text}>{data.Account.Email}</Text>
         <View style={styles.line} />
       </View>
       <TouchableOpacity onPress={() => navigation.popToTop()}>
         <View style={styles.footer}>
-          <Text style={styles.logout}>Log Out</Text>
+          <Text style={styles.logout}>{data.Account.LogOut}</Text>
         </View>
       </TouchableOpacity>
     </MainContainer>

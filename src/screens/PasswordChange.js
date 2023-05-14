@@ -23,6 +23,8 @@ import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import data from "../utils/Strings/StringsEng.json";
+
 const PasswordChanged = ({ navigation }) => {
   return (
     <MainContainer>
@@ -37,7 +39,7 @@ const PasswordChanged = ({ navigation }) => {
           size="xl"
         />
         <Heading style={{ fontSize: 28 }} fontWeight="semibold">
-          Create New Password
+          {data.PasswordChanged.CNewPass}
         </Heading>
         <Heading
           mt="1"
@@ -49,21 +51,21 @@ const PasswordChanged = ({ navigation }) => {
           fontSize={16}
           textAlign={"left"}
         >
-          Your new password must be unique from those previously used.{" "}
+          {data.PasswordChanged.NewPass}{" "}
         </Heading>
         </Center>
 
         <FormInputPass
-          label={"Enter new Password"}
-          placeholder={"Min Password-lenght 8 Characters"}
+          label={data.PasswordChanged.NPass}
+          placeholder={data.PasswordChanged.MinPass}
         ></FormInputPass>
         <FormInputPass
-          label={"Confirm Password"}
-          placeholder={"Passwords must be identical"}
+          label={data.PasswordChanged.ConfPass}
+          placeholder={data.PasswordChanged.IdentPass}
         ></FormInputPass>
 
         <BlueButton
-          title={"Reset Password"}
+          title={data.PasswordChanged.ResPass}
           onPress={() => navigation.navigate(ScreenNames.ResetPasswordScreen)}
         ></BlueButton>
       </Box>
