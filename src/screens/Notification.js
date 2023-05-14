@@ -2,6 +2,8 @@ import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView, FlatList} from 'react-native';
 import BackButton from '../utils/components/BackButton';
 
+import MainContainer from '../utils/components/MainContainer';
+
 const Notification = ({navigation}) => {
     //#region Info
     const DATA = [
@@ -37,7 +39,7 @@ const Notification = ({navigation}) => {
       );
       
   return (
-    <SafeAreaView style={styles.container}>
+    <MainContainer>
       <View style={styles.header}>
         <BackButton/>
         <Text style={styles.mainTitle}>Notifications</Text>
@@ -49,7 +51,7 @@ const Notification = ({navigation}) => {
         keyExtractor={item => item.id}
       />
       </View>
-    </SafeAreaView >
+    </MainContainer >
   )
 }
 
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     },
     header: {
       flexDirection: 'row',
-      padding: 10,
+      padding: 0,
     },
     headerButton: {
       color: 'blue',
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     profileContainer: {
       alignItems: 'left',
       marginVertical: 5,
-      marginHorizontal:20,
+      marginHorizontal:0,
     },
     title: {
       fontSize: 16,
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
       justifyContent:'space-evenly'
     },
     mainTitle: {
+      marginVertical: 'auto',
       fontSize: 30,
       marginVertical: 5,
       marginHorizontal: 20,

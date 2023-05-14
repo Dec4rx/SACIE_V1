@@ -1,49 +1,56 @@
-import React from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
-import BackButton from '../utils/components/BackButton';
-import EditButton from '../utils/components/EditButton'
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
+import BackButton from "../utils/components/BackButton";
+import EditButton from "../utils/components/EditButton";
 
-const Account = ({navigation}) => {  
+import MainContainer from "../utils/components/MainContainer";
+
+const Account = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <MainContainer>
       <View style={styles.header}>
-        <BackButton/>
-      </View>
-      <View style={styles.header}>
+        <BackButton />
         <Text style={styles.mainTitle}>Profile</Text>
-        <EditButton onPress={()=> navigation.navigate('Edit')}/>
+        <EditButton onPress={() => navigation.navigate("Edit")} />
       </View>
       <View style={styles.profileContainer}>
         <Image
-          source={require('../resources/pictures/nurseProfile.png')}
+          source={require("../resources/pictures/nurseProfile.png")}
           style={styles.profileImage}
         />
         <Text style={styles.title}>Jose Gordillo</Text>
       </View>
       <View style={styles.info}>
-      <Image
-          source={require('../resources/pictures/phone.svg')}
+        <Image
+          source={require("../resources/pictures/phone.svg")}
           style={styles.otherImg}
         />
-      <Text style={styles.text}>Jose Gordillo</Text>
-      <View style={styles.line} />
+        <Text style={styles.text}>Jose Gordillo</Text>
+        <View style={styles.line} />
       </View>
       <View style={styles.info}>
-      <Image
-          source={require('../resources/pictures/mail.svg')}
+        <Image
+          source={require("../resources/pictures/mail.svg")}
           style={styles.otherImg}
         />
-      <Text style={styles.text}>Jose Gordillo</Text>
-      <View style={styles.line} />
+        <Text style={styles.text}>Jose Gordillo</Text>
+        <View style={styles.line} />
       </View>
       <TouchableOpacity onPress={() => navigation.popToTop()}>
-      <View style={styles.footer}>
-      <Text style={styles.logout}>Log Out</Text>
-      </View>
+        <View style={styles.footer}>
+          <Text style={styles.logout}>Log Out</Text>
+        </View>
       </TouchableOpacity>
-    </SafeAreaView >
-  )
-}
+    </MainContainer>
+  );
+};
 
 //#region Styles
 const styles = StyleSheet.create({
@@ -51,14 +58,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   profileContainer: {
-    alignItems: 'left',
+    alignItems: "left",
     marginVertical: 20,
-    marginHorizontal:30,
+    marginHorizontal: 0,
   },
   profileImage: {
     width: 90,
@@ -72,42 +78,42 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 5,
   },
   mainTitle: {
     fontSize: 36,
     marginVertical: 5,
-    marginHorizontal: 20,
-    color: '#67A4F7',
-    fontWeight: 'bold',
+    marginHorizontal: 0,
+    color: "#67A4F7",
+    fontWeight: "bold",
   },
   info: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    marginHorizontal: 10,
-    marginTop:10,
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 0,
+    marginHorizontal: 0,
+    marginTop: 10,
   },
   text: {
     fontSize: 20,
     marginLeft: 10,
   },
   line: {
-    borderBottomColor: '#FF103E',
+    borderBottomColor: "#FF103E",
     borderBottomWidth: 5,
   },
-  footer:{
-    alignItems: 'center',
-    marginHorizontal: 10,
-    marginVertical:70,
+  footer: {
+    alignItems: "center",
+    marginHorizontal: 0,
+    marginVertical: 70,
   },
   logout: {
     fontSize: 20,
-    color: '#FF103E',
-    textDecoration: 'underline',
+    color: "#FF103E",
+    textDecoration: "underline",
   },
-  });
+});
 //#endregion
 
-export default Account
+export default Account;

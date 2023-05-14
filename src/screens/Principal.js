@@ -14,6 +14,10 @@ import {
 } from "react-native";
 import ImageButton from "../utils/components/ImageButton";
 
+import { HStack } from "native-base";
+
+import MainContainer from "../utils/components/MainContainer";
+
 import ScreenNames from "../utils/ScreenNames";
 const Principal = ({ navigation }) => {
   const DATA = [
@@ -56,7 +60,7 @@ const Principal = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const Item = ({ name, color, age, bed }) => (
-    <TouchableHighlight onPress={() => navigation.navigate("Details")}>
+    <TouchableHighlight  onPress={() => navigation.navigate("Details")}>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {/* Card info */}
         <View style={styles.item}>
@@ -91,7 +95,7 @@ const Principal = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <MainContainer >
       <View style={styles.header}>
         <Text style={styles.mainTitle}>Welcome</Text>
 
@@ -147,17 +151,12 @@ const Principal = ({ navigation }) => {
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                <Text style={styles.textStyle}>X</Text>
               </Pressable>
               <Text style={styles.modalText}>
                 How would you like to register it?
               </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
+              <HStack space={5}>
                 <ImageButton
                   onPress={""}
                   image={require("../resources/pictures/scan.png")}
@@ -168,7 +167,7 @@ const Principal = ({ navigation }) => {
                   image={require("../resources/pictures/manual.png")}
                   title="Manually"
                 />
-              </View>
+              </HStack>
             </View>
           </View>
         </Modal>
@@ -179,7 +178,7 @@ const Principal = ({ navigation }) => {
           style={{
             fontSize: 30,
             fontWeight: "bold",
-            marginHorizontal: 10,
+            marginHorizontal: 0,
             marginVertical: 10,
           }}
         >
@@ -198,7 +197,7 @@ const Principal = ({ navigation }) => {
           keyExtractor={(item) => item.id}
         />
       </View>
-    </SafeAreaView>
+    </MainContainer>
   );
 };
 
@@ -210,7 +209,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "coloum",
     justifyContent: "space-between",
-    padding: 10,
+    padding: 0,
     marginVertical: 10,
   },
   headerButton: {
@@ -220,7 +219,7 @@ const styles = StyleSheet.create({
   mainTitle: {
     fontSize: 36,
     marginVertical: 5,
-    marginHorizontal: 20,
+    marginHorizontal: 0,
     marginBottom: 25,
     fontWeight: "bold",
   },
@@ -264,7 +263,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderColor: "#2BF0D7",
     borderWidth: 2,
-    padding: 30,
+    padding: 20,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -277,11 +276,14 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+    padding: 15,
     elevation: 2,
   },
   buttonClose: {
     backgroundColor: "#2196F3",
+    width: '20',
+    height: '20',
+    marginStart: 'auto'
   },
   textStyle: {
     color: "white",
