@@ -1,10 +1,18 @@
 import * as React from "react";
 import { View, useWindowDimensions, Text, Button } from "react-native";
 import { Box, Center, HStack, VStack, Image } from "native-base";
-import { TabView, SceneMap } from "react-native-tab-view";
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { useState } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import color from "../utils/Colors";
 import BackButton from "../utils/components/BackButton";
@@ -85,69 +93,124 @@ const Profile = () => {
 };
 
 const MainRoute = () => (
-    <Center backgroundColor={'white'} style={{padding: '5%', }}>
-      <Box w={"full"} mb={3}>
-        <BackButton />
-      </Box>
-      <Box>
+  <Center backgroundColor={"white"} style={{ padding: "5%" }}>
+    <Box w={"full"} mb={3}>
+      <BackButton />
+    </Box>
+    <Box>
+      <Center>
+        <Profile />
+      </Center>
+
+      <Box
+        backgroundColor={"white"}
+        mt={3}
+        borderRadius={10}
+        mx={10}
+        p={2}
+        shadow={"5"}
+      >
         <Center>
-          <Profile />
-        </Center>
+          <Text>Information</Text>
+          <HStack space={2}>
+            <VStack justifyContent={"space-between"}>
+              <DataResume data="21" type="Age" />
+              <DataResume data="4" type={"Health\nCondition"} />
+            </VStack>
 
-        <Box
-          backgroundColor={"white"}
-          mt={3}
-          borderRadius={10}
-          mx={10}
-          p={2}
-          shadow={"5"}
-        >
-          <Center>
-            <Text>Information</Text>
-            <HStack space={2}>
-              <VStack justifyContent={"space-between"}>
-                <DataResume data="21" type="Age" />
-                <DataResume data="4" type={"Health\nCondition"} />
-              </VStack>
+            <VStack justifyContent={"space-between"}>
+              <DataResume data="38°" type="Temperature" />
+              <DataResume data="140" type="Glucose" />
+            </VStack>
 
-              <VStack justifyContent={"space-between"}>
-                <DataResume data="38°" type="Temperature" />
-                <DataResume data="140" type="Glucose" />
-              </VStack>
-
-              <VStack justifyContent={"space-between"}>
-                <DataResume data="120/80" type="Pressure" />
-                <DataResume data="3" type="Bed" />
-              </VStack>
-            </HStack>
-          </Center>
-        </Box>
-        <Center w={"100%"}>
-          <Week />
-        </Center>
-        <Center>
-          <QR />
-        </Center>
-        <Center mt={5} justifyContent={"space-around"}>
-          <VStack space={2}>
-            <ImageButton title={"Print QR"} />
-            <ImageButton image={'../resources/pictures/Impression.png'} title={'Print full patient information'}/>
-          </VStack>
+            <VStack justifyContent={"space-between"}>
+              <DataResume data="120/80" type="Pressure" />
+              <DataResume data="3" type="Bed" />
+            </VStack>
+          </HStack>
         </Center>
       </Box>
-    </Center>
+      <Center w={"100%"}>
+        <Week />
+      </Center>
+      <Center>
+        <QR />
+      </Center>
+      <Center mt={5} justifyContent={"space-around"}>
+        <VStack space={2}>
+          <ImageButton title={"Print QR"} />
+          <ImageButton
+            image={"../resources/pictures/Impression.png"}
+            title={"Print full patient information"}
+          />
+        </VStack>
+      </Center>
+    </Box>
+  </Center>
 );
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const MyTabs = () => {
+  const [icon, setIcon] = React.useState("");
+
   return (
-    <Tab.Navigator initialRouteName="VitalSigns">
-      <Tab.Screen name="MedicalTest" component={MedicalTest} />
-      <Tab.Screen name="VitalSigns" component={VitalSigns} />
-      <Tab.Screen name="Home" component={MainRoute} />
-      <Tab.Screen name="Medicine" component={Medicine} />
-      <Tab.Screen name="Notes" component={Notes} />
+    <Tab.Navigator
+    labeled={false}
+      initialRouteName="MainRoute"
+      activeColor="#67A4F7"
+
+      style={{ padding: 0}}
+    >
+      <Tab.Screen
+        name="MedicalTest"
+        component={MedicalTest}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="test-tube" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="VitalSigns"
+        component={VitalSigns}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="heart-pulse"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={MainRoute}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Medicine"
+        component={Medicine}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="pill" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Notes"
+        component={Notes}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="text" color={color} size={26} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
