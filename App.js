@@ -28,7 +28,7 @@ import AppNavigation from "./src/navigators/AppNavigation";
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer >
       <NativeBaseProvider>
         <AppNavigation/>
       </NativeBaseProvider>

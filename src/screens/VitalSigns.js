@@ -119,13 +119,7 @@ const VitalSigns = ({ navigation }) => {
               ></Image>
             </TouchableOpacity>
           
-        </View>
-
-        <View style={styles.imageRow}></View>
-
-        <View style={styles.imageRow}></View>
-
-        <View style={styles.imageRow}></View>
+        </View> 
       </Center>
     </MainContainer>
   );
