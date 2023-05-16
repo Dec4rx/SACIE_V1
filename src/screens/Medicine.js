@@ -13,7 +13,7 @@ import {
   Pressable,
 } from "native-base";
 
-import BackButton from "../utils/components/BackButton";
+import BackButton from "../utils/components/BackButton_Especial";
 import color from "../utils/Colors";
 import MyButton from "../utils/components/MyButton";
 

@@ -52,6 +52,10 @@ const getIcon = (screenName) => {
       return "google-translate";
     case "Logout":
       return "logout";
+    case "Home":
+      return "home";
+    case "Terms and Conditions":
+      return "text-box";
     default:
       return undefined;
   }
@@ -130,7 +134,10 @@ function MyDrawer() {
         <Drawer.Screen name="Notification" component={Notification} />
         <Drawer.Screen name="Language" component={Lenguage} />
         <Drawer.Screen name="Logout" component={Exit} />
-        <Drawer.Screen name="Terms and Conditions" component={TermsAndConditions} />
+        <Drawer.Screen
+          name="Terms and Conditions"
+          component={TermsAndConditions}
+        />
       </Drawer.Navigator>
     </Box>
   );

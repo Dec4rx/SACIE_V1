@@ -16,7 +16,7 @@ import ScreenNames from "../utils/ScreenNames";
 
 import Icon_2 from "react-native-vector-icons/MaterialIcons";
 
-import BackButton from "../utils/components/BackButton";
+import BackButton from "../utils/components/BackButton_Especial";
 import MyButton from "../utils/components/MyButton";
 
 import color from "../utils/Colors";

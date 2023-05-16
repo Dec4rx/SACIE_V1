@@ -14,7 +14,7 @@ import { StretchInX } from "react-native-reanimated";
 
 import Icon from "react-native-vector-icons/AntDesign";
 
-import BackButton from "../utils/components/BackButton";
+import BackButton from "../utils/components/BackButton_Especial";
 
 import MainContainer from "../utils/components/MainContainer";
 

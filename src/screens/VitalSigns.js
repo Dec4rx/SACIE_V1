@@ -1,17 +1,22 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-import { Center, HStack} from "native-base";
+import { Center, HStack } from "native-base";
 
 import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import BackButton from "../utils/components/BackButton_Especial";
+
 const VitalSigns = ({ navigation }) => {
   return (
     <MainContainer>
       <Center>
-        <Text style={styles.mainTitle}>Vital Signs</Text>
+        <HStack>
+          <BackButton />
+          <Text style={styles.mainTitle}>Vital Signs</Text>
+        </HStack>
         <View
           style={{
             borderBottomColor: "#F5F5F5",
@@ -23,103 +28,87 @@ const VitalSigns = ({ navigation }) => {
         {/* Division */}
 
         <View style={styles.imageRow}>
-        
-            <TouchableOpacity
-              style={styles.icons}
-              onPress={() => navigation.navigate(ScreenNames.SugarBloodScreen)}
-            >
-     <Image
-                source={require("../resources/pictures/SugarBlood.png")}
-                resizeMode="contain"
-                style={styles.image}
-              ></Image>
-            </TouchableOpacity>
-          
+          <TouchableOpacity
+            style={styles.icons}
+            onPress={() => navigation.navigate(ScreenNames.SugarBloodScreen)}
+          >
+            <Image
+              source={require("../resources/pictures/SugarBlood.png")}
+              resizeMode="contain"
+              style={styles.image}
+            ></Image>
+          </TouchableOpacity>
 
-        
-            <TouchableOpacity
-              style={styles.icons}
-              onPress={() => navigation.navigate(ScreenNames.TemperatureScreen)}
-            >
-              <Image
-                source={require("../resources/pictures/Temperature.png")}
-                resizeMode="contain"
-                style={styles.image}
-              ></Image>
-            </TouchableOpacity>
-          
+          <TouchableOpacity
+            style={styles.icons}
+            onPress={() => navigation.navigate(ScreenNames.TemperatureScreen)}
+          >
+            <Image
+              source={require("../resources/pictures/Temperature.png")}
+              resizeMode="contain"
+              style={styles.image}
+            ></Image>
+          </TouchableOpacity>
 
-        
-            <TouchableOpacity
-              style={styles.icons}
-              onPress={() => navigation.navigate(ScreenNames.HeartRateScreen)}
-            >
-              <Image
-                source={require("../resources/pictures/HeartRate.png")}
-                resizeMode="contain"
-                style={styles.image}
-              ></Image>
-            </TouchableOpacity>
-          
+          <TouchableOpacity
+            style={styles.icons}
+            onPress={() => navigation.navigate(ScreenNames.HeartRateScreen)}
+          >
+            <Image
+              source={require("../resources/pictures/HeartRate.png")}
+              resizeMode="contain"
+              style={styles.image}
+            ></Image>
+          </TouchableOpacity>
 
-        
-            <TouchableOpacity
-              style={styles.icons}
-              onPress={() =>
-                navigation.navigate(ScreenNames.BloodPressureScreen)
-              }
-            >
-              <Image
-                source={require("../resources/pictures/BloodPreasure.png")}
-                resizeMode="contain"
-                style={styles.image}
-              ></Image>
-            </TouchableOpacity>
-          
+          <TouchableOpacity
+            style={styles.icons}
+            onPress={() => navigation.navigate(ScreenNames.BloodPressureScreen)}
+          >
+            <Image
+              source={require("../resources/pictures/BloodPreasure.png")}
+              resizeMode="contain"
+              style={styles.image}
+            ></Image>
+          </TouchableOpacity>
 
-        
-            <TouchableOpacity
-              style={styles.icons}
-              onPress={() =>
-                navigation.navigate(ScreenNames.BreathingFrequencyScreen)
-              }
-            >
-              <Image
-                source={require("../resources/pictures/BreathingFrequency.png")}
-                resizeMode="contain"
-                style={styles.image}
-              ></Image>
-            </TouchableOpacity>
-          
+          <TouchableOpacity
+            style={styles.icons}
+            onPress={() =>
+              navigation.navigate(ScreenNames.BreathingFrequencyScreen)
+            }
+          >
+            <Image
+              source={require("../resources/pictures/BreathingFrequency.png")}
+              resizeMode="contain"
+              style={styles.image}
+            ></Image>
+          </TouchableOpacity>
 
-        
-            <TouchableOpacity
-              style={styles.icons}
-              onPress={() => navigation.navigate(ScreenNames.OxigenScreen)}
-            >
-              <Image
-                source={require("../resources/pictures/Oxygenation.png")}
-                resizeMode="contain"
-                style={styles.image}
-              ></Image>
-            </TouchableOpacity>
-          
+          <TouchableOpacity
+            style={styles.icons}
+            onPress={() => navigation.navigate(ScreenNames.OxigenScreen)}
+          >
+            <Image
+              source={require("../resources/pictures/Oxygenation.png")}
+              resizeMode="contain"
+              style={styles.image}
+            ></Image>
+          </TouchableOpacity>
 
-        
-            <TouchableOpacity
-              style={styles.icons}
-              onPress={() =>
-                navigation.navigate(ScreenNames.HealthConditionScreen)
-              }
-            >
-              <Image
-                source={require("../resources/pictures/HealtCondition.png")}
-                resizeMode="contain"
-                style={styles.image}
-              ></Image>
-            </TouchableOpacity>
-          
-        </View> 
+          <TouchableOpacity
+            style={styles.icons}
+            onPress={() =>
+              navigation.navigate(ScreenNames.HealthConditionScreen)
+            }
+          >
+            <Image
+              source={require("../resources/pictures/HealtCondition.png")}
+              resizeMode="contain"
+              style={styles.image}
+            ></Image>
+          </TouchableOpacity>
+        </View>
       </Center>
     </MainContainer>
   );
@@ -129,7 +118,7 @@ const styles = StyleSheet.create({
   icons: {
     width: "50%",
     padding: 5,
-    marginHorizontal: 'auto'
+    marginHorizontal: "auto",
   },
 
   mainTitle: {
@@ -145,7 +134,7 @@ const styles = StyleSheet.create({
     //ok
     width: 150,
     height: 150,
-    marginHorizontal: 'auto',
+    marginHorizontal: "auto",
   },
   imageRow: {
     // //ok

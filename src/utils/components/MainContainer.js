@@ -1,10 +1,10 @@
 import React from "react";
-import { View, StyleSheet, SafeAreaView, Center } from "react-native";
+import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 
 const MainContainer = ({ children, height }) => {
   return (
     <SafeAreaView>
-        <View style={styles.container}>{children}</View>
+      <View style={styles.container}>{children}</View>
     </SafeAreaView>
   );
 };
@@ -12,9 +12,9 @@ const MainContainer = ({ children, height }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: '5%',
+    padding: "5%",
     // backgroundColor: '#F2F2F2'
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
 });
 

@@ -1,7 +1,8 @@
 import * as React from "react";
-import { View, useWindowDimensions, Text, Button } from "react-native";
+import { View, useWindowDimensions, Text, Button, ScrollView } from "react-native";
 import { Box, Center, HStack, VStack, Image } from "native-base";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -15,7 +16,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import color from "../utils/Colors";
-import BackButton from "../utils/components/BackButton";
+import BackButton from "../utils/components/BackButton_Especial";
 import ImageButton from "../utils/components/ImageButton";
 
 import MedicalTest from "./MedicalTest";
@@ -93,7 +94,8 @@ const Profile = () => {
 };
 
 const MainRoute = () => (
-  <Center backgroundColor={"white"} style={{ padding: "5%" }}>
+  <ScrollView>
+    <Center backgroundColor={"white"} style={{ padding: "5%" }}>
     <Box w={"full"} mb={3}>
       <BackButton />
     </Box>
@@ -136,28 +138,28 @@ const MainRoute = () => (
       <Center>
         <QR />
       </Center>
-      <Center mt={5} justifyContent={"space-around"}>
-        <VStack space={2}>
-          <ImageButton title={"Print QR"} />
+      <Center mt={5} justifyContent={"space-around"} >
+        <VStack w={'60%'} space={2}>
+          <ImageButton image={require("../resources/pictures/Qr_icon.png")} title={ "Print QR"} />
           <ImageButton
-            image={"../resources/pictures/Impression.png"}
-            title={"Print full patient information"}
+            image={require("../resources/pictures/Impression.png")}
+            title={"Print full patient\ninformation"}
           />
         </VStack>
       </Center>
     </Box>
   </Center>
+  </ScrollView>
 );
 
 const Tab = createMaterialBottomTabNavigator();
 
 const MyTabs = () => {
-  const [icon, setIcon] = React.useState("");
 
   return (
     <Tab.Navigator
     labeled={false}
-      initialRouteName="MainRoute"
+      initialRouteName="Home"
       activeColor="#67A4F7"
 
       style={{ padding: 0}}
