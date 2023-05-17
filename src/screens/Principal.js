@@ -5,7 +5,6 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   FlatList,
   Alert,
   Modal,
@@ -15,12 +14,10 @@ import {
 import ImageButton from "../utils/components/ImageButton";
 
 import { HStack } from "native-base";
-
 import MainContainer from "../utils/components/MainContainer";
-
 import ScreenNames from "../utils/ScreenNames";
-
-import data from "../utils/Strings/StringsEng.json";
+import data from "../utils/Strings/StringsEsp.json";
+import { FontAwesome } from '@expo/vector-icons'; 
 
 const Principal = ({ navigation }) => {
   const DATA = [
@@ -30,6 +27,7 @@ const Principal = ({ navigation }) => {
       name: "Mihaela Díaz",
       age: "51",
       bed: "19",
+      image: '../resources/pictures/Mihaelaa.png'
     },
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba2",
@@ -37,6 +35,7 @@ const Principal = ({ navigation }) => {
       name: "Marco Ornelas",
       age: "83",
       bed: "4",
+      image: '../resources/pictures/Marcoo.png'
     },
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba4",
@@ -44,6 +43,7 @@ const Principal = ({ navigation }) => {
       name: "Leyre Ramiro",
       age: "48",
       bed: "16",
+      image: '../resources/pictures/Leyree.png'
     },
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bal",
@@ -51,7 +51,7 @@ const Principal = ({ navigation }) => {
       name: "Mireya Poveda",
       age: "35",
       bed: "8",
-      imagePath: ".",
+      image: '../resources/pictures/Mireyaa.png'
     },
   ];
 
@@ -62,16 +62,13 @@ const Principal = ({ navigation }) => {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const Item = ({ name, color, age, bed }) => (
+  const Item = ({ name, color, age, bed, image }) => (
     <TouchableHighlight  onPress={() => navigation.navigate("Details")}>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {/* Card info */}
         <View style={styles.item}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Image
-              source={require("../resources/pictures/newMedicine.svg")}
-              style={styles.otherImg}
-            />
+          <Image source={require("../resources/pictures/Leyree.png")} style={styles.otherImg} />
             <Text style={styles.cardTitle}>{name}</Text>
           </View>
           <View style={{ flexDirection: "row", marginVertical: 5 }}>
@@ -108,7 +105,7 @@ const Principal = ({ navigation }) => {
             onPress={() => setModalVisible(true)}
           >
             <Image
-              source={require("../resources/pictures/newPatient.svg")}
+              source={require("../resources/pictures/newPatient.png")}
               style={styles.buttonImageIconStyle}
             />
           </TouchableOpacity>
@@ -119,7 +116,7 @@ const Principal = ({ navigation }) => {
             }
           >
             <Image
-              source={require("../resources/pictures/newMedicine.svg")}
+              source={require("../resources/pictures/newMedicine.png")}
               style={styles.buttonImageIconStyle}
             />
           </TouchableOpacity>
@@ -154,7 +151,7 @@ const Principal = ({ navigation }) => {
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Text style={styles.textStyle}>X</Text>
+                <FontAwesome name="close" size={24} color="black" />
               </Pressable>
               <Text style={styles.modalText}>
                 {data.Principal.KindRegister}
@@ -229,7 +226,7 @@ const styles = StyleSheet.create({
   buttonImageIconStyle: {
     width: 80,
     height: 80,
-    borderRadius: 40,
+    borderRadius: 16,
   },
   otherImg: {
     width: 50,
@@ -262,7 +259,7 @@ const styles = StyleSheet.create({
 
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
     borderRadius: 16,
     borderColor: "#2BF0D7",
     borderWidth: 2,
@@ -278,18 +275,19 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
+    backgroundColor: "#FFFFFF",
     borderRadius: 20,
     padding: 15,
     elevation: 2,
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#FFFFFF",
     width: '20',
     height: '20',
     marginStart: 'auto'
   },
   textStyle: {
-    color: "white",
+    color: "#FFFFFF",
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -299,6 +297,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 36,
     wordSpacing: -1,
+  },
+  centeredView:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

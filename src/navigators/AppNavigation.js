@@ -2,8 +2,8 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import screen from "../utils/ScreenNames";
 // Screens imports
-import FirstScreen from "../screens/firstScreen.JS";
-import login from "../screens/Login";
+import Splash from "../screens/Splash";
+import Login from "../screens/Login";
 import Signup from "../screens/Signup";
 import ForgotPass from "../screens/ForgotPass";
 import OTPVerification from "../screens/OTPVerification";
@@ -47,13 +47,11 @@ const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator  
-
-      initialRouteName={screen.ResetPasswordScreen}
+    <Stack.Navigator initialRouteName="Splash"
       screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
-
     >
-      <Stack.Screen name={screen.LoginScreen} component={login} />
+      <Stack.Screen name={'Splash'} component={Splash} />
+      <Stack.Screen name={screen.LoginScreen} component={Login} />
       <Stack.Screen name={screen.SignUpScreen} component={Signup} />
       <Stack.Screen
         name={screen.ForgotPasswordScreen}
