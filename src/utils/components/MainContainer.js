@@ -1,6 +1,8 @@
 import React from "react";
 import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 
+import color from "../Colors";
+
 const MainContainer = ({ children, height }) => {
   return (
     <SafeAreaView>
@@ -13,8 +15,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: "5%",
-    // backgroundColor: '#F2F2F2'
-    backgroundColor: "#FFFFFF",
+    backgroundColor: color.BackgroundApp,
+    height: 'full'
   },
 });
 

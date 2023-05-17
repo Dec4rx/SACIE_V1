@@ -1,8 +1,13 @@
 import * as React from "react";
-import { View, useWindowDimensions, Text, Button, ScrollView } from "react-native";
+import {
+  View,
+  useWindowDimensions,
+  Text,
+  Button,
+  ScrollView,
+} from "react-native";
 import { Box, Center, HStack, VStack, Image } from "native-base";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -88,7 +93,7 @@ const Profile = () => {
           style={{ width: 100, height: 100, margin: 10 }}
         />
       </Box>
-      <Text>Marco Antonio</Text>
+      <Text style={{marginVertical: 10}}>Marco Antonio</Text>
     </Center>
   );
 };
@@ -96,73 +101,74 @@ const Profile = () => {
 const MainRoute = () => (
   <ScrollView>
     <Center backgroundColor={"white"} style={{ padding: "5%" }}>
-    <Box w={"full"} mb={3}>
-      <BackButton />
-    </Box>
-    <Box>
-      <Center>
-        <Profile />
-      </Center>
-
-      <Box
-        backgroundColor={"white"}
-        mt={3}
-        borderRadius={10}
-        mx={10}
-        p={2}
-        shadow={"5"}
-      >
+      <Box w={"full"} mb={3}>
+        <BackButton />
+      </Box>
+      <Box>
         <Center>
-          <Text>Information</Text>
-          <HStack space={2}>
-            <VStack justifyContent={"space-between"}>
-              <DataResume data="21" type="Age" />
-              <DataResume data="4" type={"Health\nCondition"} />
-            </VStack>
+          <Profile />
+        </Center>
 
-            <VStack justifyContent={"space-between"}>
-              <DataResume data="38°" type="Temperature" />
-              <DataResume data="140" type="Glucose" />
-            </VStack>
+        <Box
+          backgroundColor={"white"}
+          mt={3}
+          borderRadius={10}
+          mx={10}
+          p={2}
+          shadow={"5"}
+        >
+          <Center>
+            <Text>Information</Text>
+            <HStack space={2}>
+              <VStack justifyContent={"space-between"}>
+                <DataResume data="21" type="Age" />
+                <DataResume data="4" type={"Health\nCondition"} />
+              </VStack>
 
-            <VStack justifyContent={"space-between"}>
-              <DataResume data="120/80" type="Pressure" />
-              <DataResume data="3" type="Bed" />
-            </VStack>
-          </HStack>
+              <VStack justifyContent={"space-between"}>
+                <DataResume data="38°" type="Temperature" />
+                <DataResume data="140" type="Glucose" />
+              </VStack>
+
+              <VStack justifyContent={"space-between"}>
+                <DataResume data="120/80" type="Pressure" />
+                <DataResume data="3" type="Bed" />
+              </VStack>
+            </HStack>
+          </Center>
+        </Box>
+        <Center w={"100%"}>
+          <Week />
+        </Center>
+        <Center>
+          <QR />
+        </Center>
+        <Center mt={5} justifyContent={"space-around"}>
+          <VStack w={"60%"} space={2}>
+            <ImageButton
+              image={require("../resources/pictures/Qr_icon.png")}
+              title={"Print QR"}
+            />
+            <ImageButton
+              image={require("../resources/pictures/Impression.png")}
+              title={"Print full patient\ninformation"}
+            />
+          </VStack>
         </Center>
       </Box>
-      <Center w={"100%"}>
-        <Week />
-      </Center>
-      <Center>
-        <QR />
-      </Center>
-      <Center mt={5} justifyContent={"space-around"} >
-        <VStack w={'60%'} space={2}>
-          <ImageButton image={require("../resources/pictures/Qr_icon.png")} title={ "Print QR"} />
-          <ImageButton
-            image={require("../resources/pictures/Impression.png")}
-            title={"Print full patient\ninformation"}
-          />
-        </VStack>
-      </Center>
-    </Box>
-  </Center>
+    </Center>
   </ScrollView>
 );
 
 const Tab = createMaterialBottomTabNavigator();
 
 const MyTabs = () => {
-
   return (
     <Tab.Navigator
-    labeled={false}
+      labeled={false}
       initialRouteName="Home"
       activeColor="#67A4F7"
-
-      style={{ padding: 0}}
+      style={{ padding: 0 }}
     >
       <Tab.Screen
         name="MedicalTest"

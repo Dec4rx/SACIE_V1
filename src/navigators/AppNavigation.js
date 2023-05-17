@@ -41,14 +41,17 @@ import TnC_CB from "../screens/TermnsAndConditionsCheckbox";
 import Exit from "../screens/Exit";
 import TermsAndConditions from "../screens/TermsAndConditionsTxt";
 
+import color from "../utils/Colors";
+
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
   return (
     <Stack.Navigator  
 
-      initialRouteName={screen.LoginScreen}
-      screenOptions={{ headerShown: false }}
+      initialRouteName={screen.ResetPasswordScreen}
+      screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
+
     >
       <Stack.Screen name={screen.LoginScreen} component={login} />
       <Stack.Screen name={screen.SignUpScreen} component={Signup} />

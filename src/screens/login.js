@@ -20,17 +20,22 @@ import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
 import MainContainer from "../utils/components/MainContainer";
 
-import data from "../utils/Strings/StringsEng.json"
+import data from "../utils/Strings/StringsEng.json";
+
+import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
 
 const Login = ({ navigation }) => {
+  const [fontsLoaded] = useFonts({
+    Lato_400Regular,
+  });
   return (
     <MainContainer>
       <Center safeArea alignContent={"center"}>
         <Box safeArea alignContent={"center"}>
           <Heading
-            style={{ fontSize: 32 }}
+            style={{ fontSize: 32, fontFamily: "Lato_400Regular", marginVertical: 20, fontWeight:"bold" }}
             textAlign={"center"}
-            fontWeight="semibold"
+            
           >
             {data.Login.Login}
           </Heading>
@@ -76,20 +81,23 @@ const Login = ({ navigation }) => {
             ></BlueButton>
             <Center>
               <HStack justifyContent={"center"}>
-                <Text>{data.Login.DontHaveAccount} <Link justifyContent={'center'}
-                  _text={{
-                    fontSize: "m",
-                    fontWeight: "500",
-                    color: "indigo.500",
-                    textDecoration: "none",
-                  }}
-                  alignSelf="flex-end"
-                  mt="1"
-                  onPress={() => navigation.navigate(screen.SignUpScreen)}
-                >
-                  {data.Login.SignUp}
-                </Link></Text>
-                
+                <Text>
+                  {data.Login.DontHaveAccount}{" "}
+                  <Link
+                    justifyContent={"center"}
+                    _text={{
+                      fontSize: "m",
+                      fontWeight: "500",
+                      color: "indigo.500",
+                      textDecoration: "none",
+                    }}
+                    alignSelf="flex-end"
+                    mt="1"
+                    onPress={() => navigation.navigate(screen.SignUpScreen)}
+                  >
+                    {data.Login.SignUp}
+                  </Link>
+                </Text>
               </HStack>
             </Center>
           </VStack>

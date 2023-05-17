@@ -13,7 +13,7 @@ const color = {
     HearthRate: '#',
     Oxigen: '#',
     BreathingFrecuency: '#',
-    BackgroundApp: '#white',
+    BackgroundApp: '#FFFFFF',
     Gray : '#B8CAE4',
 
 };

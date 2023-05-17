@@ -120,15 +120,16 @@ const MedicalTest = ({ navigation }) => {
           doctorName="Dr. Rodriguez"
           date=" 11 de abril 2023"
         />
-        <Box w={'full'} mt={3}>
-        <MyButton
-          icon={"add-circle-outline"}
-          title={"Add Test"}
-          onPress={() => navigation.navigate(ScreenNames.RegisterMedicalTestNP)}
-        />
+        <Box w={"full"} mt={3}>
+          <MyButton
+            icon={"add-circle-outline"}
+            title={"Add Test"}
+            onPress={() =>
+              navigation.navigate(ScreenNames.RegisterMedicalTestNP)
+            }
+          />
+        </Box>
       </Box>
-      </Box>
-      
     </MainContainer>
   );
 };

@@ -17,7 +17,7 @@ import React from "react";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 import FormInputPass from "../utils/components/FormInputPass";
-import Likeimage from "../MarcoImages/Likeimage.png";
+
 
 import ScreenNames from "../utils/ScreenNames";
 
@@ -30,16 +30,9 @@ const PasswordChanged = ({ navigation }) => {
     <MainContainer>
       <Box safeArea py={5} w={'full'}>
         <Center mb={2}>
-        <Image mb={2}
-          style={{
-            width: 250,
-            height: 250,
-          }}
-          source={Likeimage}
-          size="xl"
-        />
+        
         <Heading style={{ fontSize: 28 }} fontWeight="semibold">
-          {data.PasswordChanged.CNewPass}
+          {data.PasswordChanged.CNewPass} 
         </Heading>
         <Heading
           mt="1"
