@@ -11,6 +11,7 @@ import {
   IconButton,
   Button,
   Pressable,
+  Divider,
 } from "native-base";
 
 import BackButton from "../utils/components/BackButton_Especial";
@@ -19,10 +20,38 @@ import MyButton from "../utils/components/MyButton";
 
 import Icon from "react-native-vector-icons/AntDesign";
 import ScreenNames from "../utils/ScreenNames";
-
 import MainContainer from "../utils/components/MainContainer";
 
-const Medicines = (props) => {
+import { FlatList } from "react-native";
+
+const DATA = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    MedicineName: "Clombuterol",
+    dosage: "30mg",
+    intervals: "6hrs",
+    time: "7:00 am",
+    via: "oral",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    MedicineName: "Paracetamol",
+    dosage: "20mg",
+    intervals: "si",
+    time: "7:00 am",
+    via: "oral",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    MedicineName: "Metamizol",
+    dosage: "1mg",
+    intervals: "12hrs",
+    time: "7:00 am",
+    via: "intravenosa",
+  },
+];
+
+const Medicines = ({ MedicineName, dosage, intervals, time, via }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   return (
     <>
@@ -37,25 +66,23 @@ const Medicines = (props) => {
         >
           <Modal.Content>
             <Modal.CloseButton />
-            <Modal.Header color={color.Black}>
-              {props.MedicineName}
-            </Modal.Header>
+            <Modal.Header color={color.Black}>{MedicineName}</Modal.Header>
             <Modal.Body>
               <Text>
                 <b>Dosage: </b>
-                {props.dosage}
+                {dosage}
               </Text>
               <Text>
                 <b>Time: </b>
-                {props.time}
+                {time}
               </Text>
               <Text>
                 <b>Intervals: </b>
-                {props.intervals}
+                {intervals}
               </Text>
               <Text>
                 <b>Via: </b>
-                {props.via}
+                {via}
               </Text>
             </Modal.Body>
 
@@ -92,14 +119,15 @@ const Medicines = (props) => {
         p={3}
         shadow={"5"}
         mt={2}
+        w={"full"}
       >
         <HStack>
           <VStack justifyContent={"space-between"}>
             <Text fontWeight={"bold"} color={color.MainBlue}>
-              {props.MedicineName}
+              {MedicineName}
             </Text>
             <Text fontSize={"11"} color={"gray.500"}>
-              {props.dosage}
+              {dosage}
             </Text>
           </VStack>
           <VStack marginLeft={"auto"} justifyContent={"center"}>
@@ -133,15 +161,22 @@ const Medicine = ({ navigation }) => {
         </Center>
       </Box>
       <Box p={2} backgroundColor={color.Gray} my={3} borderRadius={10}>
-        <Medicines
-          dosage="30gr"
-          MedicineName="Prueba 1"
-          intervals="6 hrs"
-          time="ahorita"
-          via="oral"
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => (
+            <Medicines
+              MedicineName={item.MedicineName}
+              dosage={item.dosage}
+              via={item.via}
+              intervals={item.intervals}
+              time={item.time}
+
+            />
+          )}
+          keyExtractor={(item) => item.id}
         />
-        <Medicines dosage="10gr" MedicineName="Prueba 2" />
-        <Box w={'full'} my={3}>
+
+        <Box w={"full"} my={3}>
           <MyButton
             icon={"add-circle-outline"}
             title={"Add Medicine"}

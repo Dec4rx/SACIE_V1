@@ -49,7 +49,7 @@ const AppStack = () => {
   return (
     <Stack.Navigator  
 
-      initialRouteName={screen.ResetPasswordScreen}
+      initialRouteName={screen.DetailsScreen}
       screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
 
     >
