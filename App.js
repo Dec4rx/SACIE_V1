@@ -4,8 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { NativeBaseProvider } from "native-base";
 
-
-
 // React navigation
   import { NavigationContainer } from '@react-navigation/native';
 
@@ -27,6 +25,7 @@ import AppNavigation from "./src/navigators/AppNavigation";
 
 
 export default function App() {
+  
   return (
     <NavigationContainer >
       <NativeBaseProvider>

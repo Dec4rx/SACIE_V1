@@ -11,7 +11,7 @@ import {
   VStack,
   Drawer,
 } from "native-base";
-import React from "react";
+import React, { useState } from "react";
 import { Image, NativeBaseProvider } from "native-base";
 import Enf_1 from "../MarcoImages/Enf_1.png";
 import BlueButton from "../utils/components/BlueButton";
@@ -19,6 +19,9 @@ import BackButton from "../utils/components/BackButton";
 import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
 import MainContainer from "../utils/components/MainContainer";
+
+import { firebase } from "../config.js";
+
 
 import data from "../utils/Strings/StringsEng.json";
 
@@ -28,6 +31,16 @@ const Login = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     Lato_400Regular,
   });
+  const [email, setEmail]= useState('');
+  const [password, setPassword]= useState('');
+  
+  loginUser= async(email,password)=>{
+    try{
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+    }catch(error){
+      alert(error.message)
+    }
+  }
   return (
     <MainContainer>
       <Center safeArea alignContent={"center"}>
@@ -35,7 +48,6 @@ const Login = ({ navigation }) => {
           <Heading
             style={{ fontSize: 32, fontFamily: "Lato_400Regular", marginVertical: 20, fontWeight:"bold" }}
             textAlign={"center"}
-            
           >
             {data.Login.Login}
           </Heading>
@@ -54,10 +66,13 @@ const Login = ({ navigation }) => {
               <FormInput
                 label={data.Login.EmailID}
                 placeholder={data.Login.Email}
+                onChangeText={(email)=> setEmail(email)}
+                
               ></FormInput>
               <FormInputPass
                 label={data.Login.Password}
                 placeholder={data.Login.Password}
+                onChangeText={(password)=> setPassword(password)}
               ></FormInputPass>
               <Link
                 _text={{
@@ -75,7 +90,7 @@ const Login = ({ navigation }) => {
 
             <BlueButton
               title={data.Login.Login}
-              onPress={() => navigation.navigate("Drawer")}
+              onPress={() => loginUser(email,password)}
               mt="2"
               color="2BF0D7"
             ></BlueButton>

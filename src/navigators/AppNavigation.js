@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import screen from "../utils/ScreenNames";
+
+//Firebase imports
+import firebase from "../config";
+
 // Screens imports
 import Splash from "../screens/Splash";
-import Login from "../screens/Login";
+import Login from "../screens/login";
 import Signup from "../screens/Signup";
 import ForgotPass from "../screens/ForgotPass";
 import OTPVerification from "../screens/OTPVerification";
@@ -46,8 +50,28 @@ import color from "../utils/Colors";
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
+  const [initializing, setInitializing]= useState(true);
+  const [user, setUser]=useState();
+  function onAuthStateChanged(user){
+  if (initializing) setInitializing(false);
+  }
+  useEffect(()=>{
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
+  if (initializing) return null;
+
+  if (!user){
+    return(
+      <Stack.Navigator initialRouteName="Splash"
+      screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}>
+        </Stack.Navigator>
+    ) 
+  }
+  else if(user){
   return (
-    <Stack.Navigator initialRouteName="Splash"
+    <Stack.Navigator initialRouteName="home"
       screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
     >
       <Stack.Screen name={'Splash'} component={Splash} />
@@ -178,6 +202,7 @@ const AppStack = () => {
     </Stack.Navigator>
 
   );
+  }
 };
 
 export default AppStack;
