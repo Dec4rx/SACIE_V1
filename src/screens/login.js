@@ -40,12 +40,12 @@ const Login = ({ navigation }) => {
    const auth = getAuth(app)
   
   const loginUser= async(email,password)=>{
-    try{
-      await signInWithEmailAndPassword(auth,email, password)
-    }catch(error){
-       alert(error.message)
+      
+    signInWithEmailAndPassword(auth,email, password).then((userCredential)=>{
+      console.log('usuarioLogeado')
+      navigation.navigate(screen.)
+    })
   }
-   }
   return (
     <MainContainer>
       <Center safeArea alignContent={"center"}>
