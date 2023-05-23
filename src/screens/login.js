@@ -43,8 +43,8 @@ const Login = ({ navigation }) => {
       
     signInWithEmailAndPassword(auth,email, password).then((userCredential)=>{
       console.log('usuarioLogeado')
-      navigation.navigate(screen.)
     })
+    navigation.navigate("Drawer")
   }
   return (
     <MainContainer>
