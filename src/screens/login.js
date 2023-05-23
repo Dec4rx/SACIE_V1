@@ -20,27 +20,32 @@ import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
 import MainContainer from "../utils/components/MainContainer";
 
-import { firebase } from "../config.js";
+//import { firebase } from "../config.js";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {initializeApp} from "firebase/app";
 
 
 import data from "../utils/Strings/StringsEng.json";
 
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
+import { firebaseConfig } from "../config";
 
 const Login = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     Lato_400Regular,
   });
-  const [email, setEmail]= useState('');
-  const [password, setPassword]= useState('');
+   const [email, setEmail]= useState('');
+   const [password, setPassword]= useState('');
+   const app = initializeApp(firebaseConfig)
+   const auth = getAuth(app)
   
-  loginUser= async(email,password)=>{
+  const loginUser= async(email,password)=>{
     try{
-      await firebase.auth().signInWithEmailAndPassword(email, password)
+      await signInWithEmailAndPassword(auth,email, password)
     }catch(error){
-      alert(error.message)
-    }
+       alert(error.message)
   }
+   }
   return (
     <MainContainer>
       <Center safeArea alignContent={"center"}>

@@ -3,7 +3,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import screen from "../utils/ScreenNames";
 
 //Firebase imports
-import firebase from "../config";
+import firebaseConfig from "../config";
+import { FirebaseApp } from "firebase/app";
+import { Auth } from "firebase/auth";
 
 // Screens imports
 import Splash from "../screens/Splash";
@@ -55,21 +57,21 @@ const AppStack = () => {
   function onAuthStateChanged(user){
   if (initializing) setInitializing(false);
   }
-  useEffect(()=>{
-    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber;
-  }, []);
+  // useEffect(()=>{
+  //   const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber;
+  // }, []);
 
-  if (initializing) return null;
+  // if (initializing) return null;
 
-  if (!user){
-    return(
-      <Stack.Navigator initialRouteName="Splash"
-      screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}>
-        </Stack.Navigator>
-    ) 
-  }
-  else if(user){
+  // if (!user){
+  //   return(
+  //     <Stack.Navigator initialRouteName="Splash"
+  //     screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}>
+  //       </Stack.Navigator>
+  //   ) 
+  // }
+  // else if(user){
   return (
     <Stack.Navigator initialRouteName="home"
       screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
@@ -203,6 +205,6 @@ const AppStack = () => {
 
   );
   }
-};
+//};
 
 export default AppStack;
