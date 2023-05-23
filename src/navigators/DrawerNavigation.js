@@ -25,7 +25,7 @@ import Principal from "../screens/Principal";
 import Account from "../screens/Account";
 import Notification from "../screens/Notification";
 import Lenguage from "../screens/Lenguage";
-import TermsAndConditions from "../screens/TermsAndConditionsTxt";
+import TermsAndConditions from "../screens/TermnsAndConditionsCheckbox";
 import Exit from "../screens/Exit";
 
 global.__reanimatedWorkletInit = () => {};
@@ -44,17 +44,17 @@ function Component(props) {
 
 const getIcon = (screenName) => {
   switch (screenName) {
-    case "Account":
+    case "Perfil":
       return "account";
-    case "Notification":
+    case "Notificaciones":
       return "bell";
-    case "Language":
+    case "Idioma":
       return "google-translate";
-    case "Logout":
+    case "Salir":
       return "logout";
-    case "Home":
+    case "Inicio":
       return "home";
-    case "Terms and Conditions":
+    case "Terminos y condiciones":
       return "text-box";
     default:
       return undefined;
@@ -129,13 +129,13 @@ function MyDrawer() {
       <Drawer.Navigator
         drawerContent={(props) => <CustomDrawerContent {...props} />}
       >
-        <Drawer.Screen name="Home" component={Principal} />
-        <Drawer.Screen name="Account" component={Account} />
-        <Drawer.Screen name="Notification" component={Notification} />
-        <Drawer.Screen name="Language" component={Lenguage} />
-        <Drawer.Screen name="Logout" component={Exit} />
+        <Drawer.Screen name="Inicio" component={Principal} />
+        <Drawer.Screen name="Perfil" component={Account} />
+        <Drawer.Screen name="Notificaciones" component={Notification} />
+        <Drawer.Screen name="Idioma" component={Lenguage} />
+        <Drawer.Screen name="Salir" component={Exit} />
         <Drawer.Screen
-          name="Terms and Conditions"
+          name="Terminos y condiciones"
           component={TermsAndConditions}
         />
       </Drawer.Navigator>
