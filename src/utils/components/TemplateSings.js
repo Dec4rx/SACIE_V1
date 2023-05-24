@@ -11,14 +11,18 @@ import MainContainer from "./MainContainer";
 
 import { translations } from "../Strings/Lenguage"
 import { I18nContext } from '../components/I18nProvider';
+import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
+import { Dimensions } from 'react-native';
 
-const Signs = ({ title, data }) => {
+const Signs = ({ title, dataC, strokeColor, gradientColor }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const [modalVisible, setModalVisible] = useState(false);
 
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+
+  const lastValue = dataC[dataC.length - 1].y;
 
   return (
     <MainContainer>
@@ -36,11 +40,22 @@ const Signs = ({ title, data }) => {
           }}
         />
         <Text style={styles.secondaryTitle}>{title}</Text>
-        <Text style={styles.dataTitle}>{data}</Text>
-        <Image
-          source={require("../../resources/pictures/G1.png")}
-          style={styles.image}
-        ></Image>
+        <Text style={styles.dataTitle}>{lastValue}</Text>
+        <View style={styles.centeredView}>
+          <Chart
+            style={{ height: 400, width: '100%'}}
+            data={dataC}
+            padding={{ left: 40, bottom: 20, right: 20, top: 20 }}
+            xDomain={{ min: -2, max: 10 }}
+            yDomain={{ min: 0, max: 20 }}
+          >
+            <VerticalAxis tickCount={11} theme={{ labels: { formatter: (v) => v.toFixed(2) } }} />
+            <HorizontalAxis tickCount={5} />
+            <Area theme={{ gradient: { from: { color: gradientColor }, to: { color: gradientColor, opacity: 0.4 } } }} />
+            <Line theme={{ stroke: { color: strokeColor, width: 5 }, scatter: { default: { width: 4, height: 4, rx: 2 } } }} />
+          </Chart>
+        </View>
+
 
         <View style={styles.setvalues}>
           <FormInput
@@ -174,7 +189,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 18,
     fontWeight: "normal",
-    
+
   },
   redText: {
     color: "#D22525",
