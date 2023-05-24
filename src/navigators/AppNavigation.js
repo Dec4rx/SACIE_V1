@@ -1,8 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import screen from "../utils/ScreenNames";
+
+//Firebase imports
+import firebaseConfig from "../config";
+import { FirebaseApp } from "firebase/app";
+import { Auth } from "firebase/auth";
+
 // Screens imports
 import Splash from "../screens/Splash";
-import Login from "../screens/Login";
+import Login from "../screens/login";
 import Signup from "../screens/Signup";
 import ForgotPass from "../screens/ForgotPass";
 import OTPVerification from "../screens/OTPVerification";
@@ -53,8 +60,28 @@ const AppStack = () => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
   
+  const [initializing, setInitializing]= useState(true);
+  const [user, setUser]=useState();
+  function onAuthStateChanged(user){
+  if (initializing) setInitializing(false);
+  }
+  // useEffect(()=>{
+  //   const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber;
+  // }, []);
+
+  // if (initializing) return null;
+
+  // if (!user){
+  //   return(
+  //     <Stack.Navigator initialRouteName="Splash"
+  //     screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}>
+  //       </Stack.Navigator>
+  //   ) 
+  // }
+  // else if(user){
   return (
-    <Stack.Navigator initialRouteName="Splash"
+    <Stack.Navigator initialRouteName="home"
       screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
     >
       <Stack.Screen name={translationObject.SplashScreen} component={Splash} />
@@ -192,6 +219,7 @@ const AppStack = () => {
     </Stack.Navigator>
 
   );
-};
+  }
+//};
 
 export default AppStack;

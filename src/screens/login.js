@@ -1,5 +1,5 @@
 import {Box, Center, Heading, Link, Text, HStack, VStack} from "native-base";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Image } from "native-base";
 import Enf_1 from "../MarcoImages/Enf_1.png";
 import BlueButton from "../utils/components/BlueButton";
@@ -10,8 +10,13 @@ import MainContainer from "../utils/components/MainContainer";
 
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
+//import { firebase } from "../config.js";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {initializeApp} from "firebase/app";
+
 
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
+import { firebaseConfig } from "../config";
 
 const Login = ({ navigation }) => {
   const [fontsLoaded] = useFonts({Lato_400Regular});
@@ -19,6 +24,18 @@ const Login = ({ navigation }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
+   const [email, setEmail]= useState('');
+   const [password, setPassword]= useState('');
+   const app = initializeApp(firebaseConfig)
+   const auth = getAuth(app)
+  
+  const loginUser= async(email,password)=>{
+      
+    signInWithEmailAndPassword(auth,email, password).then((userCredential)=>{
+      console.log('usuarioLogeado')
+    })
+    navigation.navigate("Drawer")
+  }
   return (
     <MainContainer>
       <Center safeArea alignContent={"center"}>
@@ -26,7 +43,6 @@ const Login = ({ navigation }) => {
           <Heading
             style={{ fontSize: 32, fontFamily: "Lato_400Regular", marginVertical: 20, fontWeight:"bold" }}
             textAlign={"center"}
-            
           >
             {translationObject.login}
           </Heading>
@@ -45,10 +61,13 @@ const Login = ({ navigation }) => {
               <FormInput
                 label={translationObject.email}
                 placeholder="Something@email.com"
+                onChangeText={(email)=> setEmail(email)}
+                
               ></FormInput>
               <FormInputPass
                 label={translationObject.password}
                 placeholder={translationObject.password}
+                onChangeText={(password)=> setPassword(password)}
               ></FormInputPass>
               <Link
                 _text={{
@@ -66,7 +85,7 @@ const Login = ({ navigation }) => {
 
             <BlueButton
               title={translationObject.login}
-              onPress={() => navigation.navigate(translationObject.MenuScreen)}
+              onPress={() => loginUser(email,password)}
               mt="2"
               color="2BF0D7"
             ></BlueButton>
