@@ -1,30 +1,24 @@
-import React from "react";
-import {
-  TextArea,
-  Box,
-  Center,
-  NativeBaseProvider,
-  Text,
-  Divider,
-  View,
-  IconButton,
-  HStack,
-} from "native-base";
-import { StretchInX } from "react-native-reanimated";
+import React, { useContext } from "react";
+import { TextArea, Box, Text, Divider, IconButton, HStack } from "native-base";
 
 import Icon from "react-native-vector-icons/AntDesign";
 
 import BackButton from "../utils/components/BackButton_Especial";
 
 import MainContainer from "../utils/components/MainContainer";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const Notes = () => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <Box alignItems="center" flex={1}>
       <TextArea
         h={"full"}
         borderRadius={20}
-        placeholder="Text Area Placeholder"
+        placeholder={translationObject.notes}
         backgroundColor={"#E6EBEE"}
         w={"full"}
       />
@@ -33,6 +27,9 @@ const Notes = () => {
 };
 
 const NotesScreen = () => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+  
   return (
     <Box
       p="3"
@@ -48,7 +45,7 @@ const NotesScreen = () => {
         </Box>
         <Box>
           <Text textAlign={"center"} fontSize={40}>
-            NOTES
+          {translationObject.notes}
           </Text>
         </Box>
         <Box justifyContent={"center"} backgroundColor={'#2BF0D7'} borderRadius={'full'}>

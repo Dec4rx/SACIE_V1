@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, TextInput, Switch, Modal, Alert, Button } from 'react-native';
 import FormInput from '../utils/components/FormInput';
 import BackButton from '../utils/components/BackButton';
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 import ScreenNames from '../utils/ScreenNames';
 
 const RegisterP3 = ({navigation}) => {
+    const { currentLanguage } = useContext(I18nContext);
+    const translationObject = translations[currentLanguage];
+
     return (
         <View style={styles.container}>
             <View style={{ marginStart: 12, marginTop: 12 }}>
                 <BackButton />
             </View>
 
-            <Text style={styles.mainTitle}>Register</Text>
+            <Text style={styles.mainTitle}>{translationObject.register}</Text>
             <View
                 style={{
                     borderBottomColor: '#F5F5F5',
@@ -22,19 +27,19 @@ const RegisterP3 = ({navigation}) => {
             />
 
             <View style={{ marginTop: 15, padding: 10 }}>
-                <FormInput label={'Blood Type'} placeholder={'O+'} />
+                <FormInput label={translationObject.bloodType} placeholder={'O+'} />
 
-                <FormInput label={'Income Orientation'} placeholder={'Yes'} />
+                <FormInput label={translationObject.incomeOr} placeholder={'Si'} />
 
 
-                <FormInput label={'Medical Record Number'} placeholder={'No-123456'} />
+                <FormInput label={translationObject.medRecNum} placeholder={'No-123456'} />
 
-                <FormInput label={'Medical Diagnostic'} placeholder={'Cancer'} />
+                <FormInput label={translationObject.medDiag} placeholder={'Cáncer'} />
 
 
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity style={styles.buttonRegister} onPress={()=>navigation.navigate('Drawer')}>
-                        <Text style={{ fontSize: 20 }}>Register</Text>
+                    <TouchableOpacity style={styles.buttonRegister} onPress={()=>navigation.navigate(translationObject.MenuScreen)}>
+                        <Text style={{ fontSize: 20 }}>{translationObject.register}</Text>
                     </TouchableOpacity>
                 </View>
 

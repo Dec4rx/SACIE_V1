@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
-import ScreenNames from '../ScreenNames';
+import { translations } from "../Strings/Lenguage"
+import { I18nContext } from '../components/I18nProvider';
 
 //#region Style
 const styles = StyleSheet.create({
@@ -30,8 +31,10 @@ const styles = StyleSheet.create({
 
 const BackButton = () => {
   const navigation = useNavigation();
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
 
-  const handlePress = () => { navigation.navigate('Drawer'); };
+  const handlePress = () => { navigation.navigate(translationObject.MenuScreen); };
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.button}>

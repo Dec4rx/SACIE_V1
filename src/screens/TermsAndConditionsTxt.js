@@ -18,7 +18,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 
-import data from "../utils/Strings/StringsEng.json";
+import data from "../utils/Strings/StringsEsp.json";
 
 
 

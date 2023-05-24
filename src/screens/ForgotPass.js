@@ -1,19 +1,5 @@
-import {
-  NativeBaseProvider,
-  Image,
-  Box,
-  Center,
-  Heading,
-  FormControl,
-  Input,
-  Button,
-  Link,
-  Text,
-  HStack,
-  VStack,
-  Row,
-} from "native-base";
-import React from "react";
+import {Image, Box, Center, Heading, Link, Text} from "native-base";
+import React, { useContext } from "react";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 import FormInput from "../utils/components/FormInput";
@@ -21,9 +7,13 @@ import PasswordImage from "../MarcoImages/PasswordImage.png";
 
 import MainContainer from "../utils/components/MainContainer";
 
-import data from "../utils/Strings/StringsEng.json"
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const ForgotPass = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <MainContainer>
       <Center w={"full"}>
@@ -38,7 +28,7 @@ const ForgotPass = ({ navigation }) => {
           }}
           fontWeight="semibold"
         >
-          {data.ForgotPassword.ForgotPassword}
+          {translationObject.forgetPass}
         </Heading>
         <Box safeArea w={"full"} py="8">
           <Heading
@@ -50,18 +40,18 @@ const ForgotPass = ({ navigation }) => {
             fontWeight="medium"
             size="xs"
           >
-            {data.ForgotPassword.DontWorry}
+            {translationObject.dontWorry}
           </Heading>
-          <FormInput  label={data.ForgotPassword.PasswordReco} placeholder={data.ForgotPassword.EnterEmail}></FormInput>
+          <FormInput  label={translationObject.passRecovery} placeholder={translationObject.enterEmail}></FormInput>
           <BlueButton
-            title={data.ForgotPassword.SendCode}
-            onPress={() => navigation.navigate(screen.OTPVerificationScreen)}
+            title={translationObject.sendCode} 
+            onPress={() => navigation.navigate(translationObject.OTPVerificationScreen)}
           ></BlueButton>
         </Box>
         <Box safeArea w={"full"} py="2">
           <Center>
             <Text>
-              {data.ForgotPassword.RememberPassword}{" "}
+              {translationObject.rememberPass}{" "}
               <Link
                 _text={{
                   fontSize: "m",
@@ -71,9 +61,9 @@ const ForgotPass = ({ navigation }) => {
                 }}
                 alignSelf="flex-end"
                 mt="1"
-                onPress={() => navigation.navigate(screen.LoginScreen)}
+                onPress={() => navigation.navigate(translationObject.LoginScreen)}
               >
-                Login
+                {translationObject.login}
               </Link>
             </Text>
           </Center>

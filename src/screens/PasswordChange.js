@@ -1,38 +1,27 @@
-import {
-  NativeBaseProvider,
-  Image,
-  Box,
-  Center,
-  Heading,
-  FormControl,
-  Input,
-  Button,
-  Link,
-  Text,
-  HStack,
-  VStack,
-  Row,
-} from "native-base";
-import React from "react";
-import BackButton from "../utils/components/BackButton";
+import { Box, Center, Heading } from "native-base";
+import React, {useContext} from "react";
 import BlueButton from "../utils/components/BlueButton";
 import FormInputPass from "../utils/components/FormInputPass";
-
 
 import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
-import data from "../utils/Strings/StringsEng.json";
+import data from "../utils/Strings/StringsEsp.json";
 
 const PasswordChanged = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <MainContainer>
       <Box safeArea py={5} w={'full'}>
         <Center mb={2}>
         
         <Heading style={{ fontSize: 28 }} fontWeight="semibold">
-          {data.PasswordChanged.CNewPass} 
+          {translationObject.createPass} 
         </Heading>
         <Heading
           mt="1"
@@ -44,22 +33,22 @@ const PasswordChanged = ({ navigation }) => {
           fontSize={16}
           textAlign={"left"}
         >
-          {data.PasswordChanged.NewPass}{" "}
+          {translationObject.newPass}{" "}
         </Heading>
         </Center>
 
         <FormInputPass
-          label={data.PasswordChanged.NPass}
-          placeholder={data.PasswordChanged.MinPass}
+          label={translationObject.newPassPH}
+          placeholder={translationObject.minPass}
         ></FormInputPass>
         <FormInputPass
-          label={data.PasswordChanged.ConfPass}
-          placeholder={data.PasswordChanged.IdentPass}
+          label={translationObject.confirmPass}
+          placeholder={translationObject.identPass}
         ></FormInputPass>
 
         <BlueButton
-          title={data.PasswordChanged.ResPass}
-          onPress={() => navigation.navigate(ScreenNames.ResetPasswordScreen)}
+          title={translationObject.resetPass}
+          onPress={() => navigation.navigate(translationObject.ResetPasswordScreen)}
         ></BlueButton>
       </Box>
     </MainContainer>

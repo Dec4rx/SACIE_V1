@@ -1,18 +1,6 @@
-import {
-  Box,
-  Center,
-  Heading,
-  FormControl,
-  Input,
-  Button,
-  Link,
-  Text,
-  HStack,
-  VStack,
-  Drawer,
-} from "native-base";
-import React, { useState } from "react";
-import { Image, NativeBaseProvider } from "native-base";
+import {Box, Center, Heading, Link, Text, HStack, VStack} from "native-base";
+import React, { useContext, useState } from "react";
+import { Image } from "native-base";
 import Enf_1 from "../MarcoImages/Enf_1.png";
 import BlueButton from "../utils/components/BlueButton";
 import BackButton from "../utils/components/BackButton";
@@ -20,20 +8,22 @@ import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
 import MainContainer from "../utils/components/MainContainer";
 
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 //import { firebase } from "../config.js";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {initializeApp} from "firebase/app";
 
 
-import data from "../utils/Strings/StringsEng.json";
-
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
 import { firebaseConfig } from "../config";
 
 const Login = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    Lato_400Regular,
-  });
+  const [fontsLoaded] = useFonts({Lato_400Regular});
+
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
    const [email, setEmail]= useState('');
    const [password, setPassword]= useState('');
    const app = initializeApp(firebaseConfig)
@@ -54,7 +44,7 @@ const Login = ({ navigation }) => {
             style={{ fontSize: 32, fontFamily: "Lato_400Regular", marginVertical: 20, fontWeight:"bold" }}
             textAlign={"center"}
           >
-            {data.Login.Login}
+            {translationObject.login}
           </Heading>
         </Box>
         <Image
@@ -69,14 +59,14 @@ const Login = ({ navigation }) => {
           <VStack space={4} mt="5">
             <Box>
               <FormInput
-                label={data.Login.EmailID}
-                placeholder={data.Login.Email}
+                label={translationObject.email}
+                placeholder="Something@email.com"
                 onChangeText={(email)=> setEmail(email)}
                 
               ></FormInput>
               <FormInputPass
-                label={data.Login.Password}
-                placeholder={data.Login.Password}
+                label={translationObject.password}
+                placeholder={translationObject.password}
                 onChangeText={(password)=> setPassword(password)}
               ></FormInputPass>
               <Link
@@ -87,14 +77,14 @@ const Login = ({ navigation }) => {
                   textDecoration: "none",
                 }}
                 alignSelf="flex-end"
-                onPress={() => navigation.navigate(screen.ForgotPasswordScreen)}
+                onPress={() => navigation.navigate(translationObject.ForgotPasswordScreen)}
               >
-                {data.Login.PasswordF}
+                {translationObject.forgetPass}
               </Link>
             </Box>
 
             <BlueButton
-              title={data.Login.Login}
+              title={translationObject.login}
               onPress={() => loginUser(email,password)}
               mt="2"
               color="2BF0D7"
@@ -102,7 +92,7 @@ const Login = ({ navigation }) => {
             <Center>
               <HStack justifyContent={"center"}>
                 <Text>
-                  {data.Login.DontHaveAccount}{" "}
+                {translationObject.noAccount}{" "}
                   <Link
                     justifyContent={"center"}
                     _text={{
@@ -113,9 +103,9 @@ const Login = ({ navigation }) => {
                     }}
                     alignSelf="flex-end"
                     mt="1"
-                    onPress={() => navigation.navigate(screen.SignUpScreen)}
+                    onPress={() => navigation.navigate(translationObject.SignUpScreen)}
                   >
-                    {data.Login.SignUp}
+                    {translationObject.signup}
                   </Link>
                 </Text>
               </HStack>
