@@ -142,7 +142,7 @@ const AddMedicine = ({ navigation }) => {
                       bold: true,
                     }}
                   >
-                    Vía
+                    {translationObject.via}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
@@ -175,8 +175,8 @@ const AddMedicine = ({ navigation }) => {
       <Center>
         <Box w={"full"}>
           <MyButton
-            title={"Agregar"}
-            onPress={() => navigation.navigate(ScreenNames.DetailsScreen)}
+            title={translationObject.add}
+            onPress={() => navigation.navigate(translationObject.DetailsScreen)}
           />
         </Box>
       </Center>

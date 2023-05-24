@@ -1,26 +1,11 @@
-import * as React from "react";
-import {
-  View,
-  useWindowDimensions,
-  Text,
-  Button,
-  ScrollView,
-} from "react-native";
+import React, { useContext } from "react";
+import { Text, ScrollView } from "react-native";
 import { Box, Center, HStack, VStack, Image } from "native-base";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { useState } from "react";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-import color from "../utils/Colors";
 import BackButton from "../utils/components/BackButton_Especial";
 import ImageButton from "../utils/components/ImageButton";
 
@@ -29,8 +14,8 @@ import Medicine from "./Medicine";
 import Notes from "./Notes";
 import VitalSigns from "./VitalSigns";
 
-import MainContainer from "../utils/components/MainContainer";
-var user = require("../resources/images/UserExample_1.png");
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const Days = (props) => {
   return (
@@ -49,16 +34,19 @@ const Days = (props) => {
 };
 
 const Week = (props) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <Center mt={5} w={"100%"}>
       <HStack space={3}>
-        <Days day="Mo" />
-        <Days day="Tu" />
-        <Days day="We" />
-        <Days day="Th" />
-        <Days day="Fr" />
-        <Days day="Sa" />
-        <Days day="Su" />
+        <Days day={translationObject.mo} />
+        <Days day={translationObject.tu} />
+        <Days day={translationObject.we} />
+        <Days day={translationObject.th} />
+        <Days day={translationObject.fr} />
+        <Days day={translationObject.sa} />
+        <Days day={translationObject.su} />
       </HStack>
     </Center>
   );
@@ -98,7 +86,11 @@ const Profile = () => {
   );
 };
 
-const MainRoute = () => (
+const MainRoute = () => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
+  return(
   <ScrollView>
     <Center backgroundColor={"white"} style={{ padding: "5%" }}>
       <Box w={"full"} mb={3}>
@@ -118,21 +110,20 @@ const MainRoute = () => (
           shadow={"5"}
         >
           <Center>
-            <Text>Information</Text>
             <HStack space={2}>
               <VStack justifyContent={"space-between"}>
-                <DataResume data="21" type="Age" />
-                <DataResume data="4" type={"Health\nCondition"} />
+                <DataResume data="21" type={translationObject.age} />
+                <DataResume data="O+" type={translationObject.bloodTypeSpace} />
               </VStack>
 
               <VStack justifyContent={"space-between"}>
-                <DataResume data="38°" type="Temperature" />
-                <DataResume data="140" type="Glucose" />
+                <DataResume data="38°" type={translationObject.temperature} />
+                <DataResume data="140" type={translationObject.glucose} />
               </VStack>
 
               <VStack justifyContent={"space-between"}>
-                <DataResume data="120/80" type="Pressure" />
-                <DataResume data="3" type="Bed" />
+                <DataResume data="120/80" type={translationObject.pressure}/>
+                <DataResume data="3" type={translationObject.bed} />
               </VStack>
             </HStack>
           </Center>
@@ -147,22 +138,25 @@ const MainRoute = () => (
           <VStack w={"60%"} space={2}>
             <ImageButton
               image={require("../resources/pictures/Qr_icon.png")}
-              title={"Print QR"}
+              title={translationObject.printQr}
             />
             <ImageButton
               image={require("../resources/pictures/Impression.png")}
-              title={"Print full patient\ninformation"}
+              title={translationObject.printFull}
             />
           </VStack>
         </Center>
       </Box>
     </Center>
   </ScrollView>
-);
+);}
 
 const Tab = createMaterialBottomTabNavigator();
 
 const MyTabs = () => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+  
   return (
     <Tab.Navigator
       labeled={false}
@@ -171,7 +165,7 @@ const MyTabs = () => {
       style={{ padding: 0 }}
     >
       <Tab.Screen
-        name="MedicalTest"
+        name={translationObject.RegisterMedicalTest}
         component={MedicalTest}
         options={{
           tabBarIcon: ({ color }) => (
@@ -180,7 +174,7 @@ const MyTabs = () => {
         }}
       />
       <Tab.Screen
-        name="VitalSigns"
+        name={translationObject.VitalSignsScreen}
         component={VitalSigns}
         options={{
           tabBarIcon: ({ color }) => (
@@ -202,7 +196,7 @@ const MyTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Medicine"
+        name={translationObject.MedicineScreen}
         component={Medicine}
         options={{
           tabBarIcon: ({ color }) => (
@@ -211,7 +205,7 @@ const MyTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Notes"
+        name={translationObject.NotesScreen}
         component={Notes}
         options={{
           tabBarIcon: ({ color }) => (

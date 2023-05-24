@@ -1,16 +1,5 @@
-import React from "react";
-import {
-  Box,
-  Center,
-  Text,
-  HStack,
-  VStack,
-  IconButton,
-  Modal,
-} from "native-base";
-
-import { Button } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+import React, { useContext } from "react";
+import { Box, Center, Text, HStack, IconButton, Modal} from "native-base";
 
 import ScreenNames from "../utils/ScreenNames";
 
@@ -22,8 +11,12 @@ import MyButton from "../utils/components/MyButton";
 import color from "../utils/Colors";
 
 import MainContainer from "../utils/components/MainContainer";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const Test = (props) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
   const [modalVisible, setModalVisible] = React.useState(false);
   return (
     <>
@@ -41,10 +34,10 @@ const Test = (props) => {
             <Modal.Header>{props.testName}</Modal.Header>
             <Modal.Body>
               <Text>
-                <b>Hecho por: </b> {props.doctorName}
+                <b>{translationObject.doneBy}: </b> {props.doctorName}
               </Text>
               <Text>
-                <b>Fecha: </b>
+                <b>{translationObject.date}: </b>
                 {props.date}
               </Text>
             </Modal.Body>
@@ -52,14 +45,13 @@ const Test = (props) => {
             <Modal.Footer w={"100%"}>
               <Box mx={"auto"}>
                 <MyButton
-                  title={"Download File"}
+                  title={translationObject.downloadFull}
                   icon={"download"}
                   flex="1"
                   onPress={() => {
                     setModalVisible(false);
                   }}
                 >
-                  Entendido
                 </MyButton>
               </Box>
             </Modal.Footer>
@@ -96,6 +88,9 @@ const Test = (props) => {
 };
 
 const MedicalTest = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+  
   return (
     <MainContainer>
       <Box mb={3}>
@@ -104,7 +99,7 @@ const MedicalTest = ({ navigation }) => {
       <Box py={5} borderRadius={10} backgroundColor={color.MainBlue}>
         <Center>
           <Text fontSize={"xl"} fontWeight={"bold"}>
-            Medical Test
+            {translationObject.medicalTest}
           </Text>
         </Center>
       </Box>
@@ -123,9 +118,9 @@ const MedicalTest = ({ navigation }) => {
         <Box w={"full"} mt={3}>
           <MyButton
             icon={"add-circle-outline"}
-            title={"Add Test"}
+            title={translationObject.addTest}
             onPress={() =>
-              navigation.navigate(ScreenNames.RegisterMedicalTestNP)
+              navigation.navigate(translationObject.RegisterMedicalTestNP)
             }
           />
         </Box>

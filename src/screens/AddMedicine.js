@@ -229,7 +229,7 @@ const AddMedicine = ({navigation}) => {
       </Box>
       <Center m={3}>
         <Box w={"70%"}>
-          <MyButton title={translationObject.add} onPress={()=>navigation.navigate('Drawer')} />
+          <MyButton title={translationObject.add} onPress={()=>navigation.navigate(translationObject.MenuScreen)} />
         </Box>
       </Center>
     </Box>

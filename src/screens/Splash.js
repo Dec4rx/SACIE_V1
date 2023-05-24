@@ -1,13 +1,18 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import { Animated, Dimensions, View, StyleSheet, Image, Text } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Logo from '../resources/pictures/LogoGota.png';
 import BlueButton from '../utils/components/BlueButton';
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const SplashScreen = ({ navigation }) => {
     const edges = useSafeAreaInsets();
 
     const startAnimation = useRef(new Animated.Value(0)).current;
+
+    const { currentLanguage } = useContext(I18nContext);
+    const translationObject = translations[currentLanguage];
 
     const scaleLogo = useRef(new Animated.Value(1)).current;
     const scaleTitle = useRef(new Animated.Value(1)).current;
@@ -119,7 +124,7 @@ const SplashScreen = ({ navigation }) => {
                 zIndex: 0,
             }}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>Welcome to</Text>
+                    <Text style={styles.title}>{translationObject.welcome2}</Text>
                     <Text style={styles.sacie}>SACIE</Text>
                     <Image
                         source={require('../resources/pictures/main.png')}
@@ -127,7 +132,7 @@ const SplashScreen = ({ navigation }) => {
                     />
                     <View style={{ alignItems: 'stretch', width: '90%' }}>
                         <View style={{ marginBottom: 15 }}>
-                            <BlueButton onPress={() => navigation.navigate(screen.LoginScreen)} title='Empezar' />
+                            <BlueButton onPress={() => navigation.navigate(translationObject.LoginScreen)} title={translationObject.start} />
                         </View>
                     </View>
                 </View>

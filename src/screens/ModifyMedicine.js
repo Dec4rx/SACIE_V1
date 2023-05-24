@@ -1,19 +1,16 @@
-import React from "react";
-import {
-  Box,
-  Text,
-  HStack,
-  Center,
-  Divider,
-  Input,
-  FormControl,
-  VStack,
-} from "native-base";
+import React, { useContext } from "react";
+import { Box, Text, HStack, Center, Divider, Input, FormControl, VStack } from "native-base";
 
 import BackButton from "../utils/components/BackButton";
 import MyButton from "../utils/components/MyButton";
 
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
+
 const ModifyMedicine = () => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <Box>
       <Box m={3}>
@@ -28,7 +25,7 @@ const ModifyMedicine = () => {
               fontSize={"30"}
               fontWeight={"bold"}
             >
-              {"Modify\nMedicine"}
+              {translationObject.editMed}
             </Text>
           </Center>
           <Box width={'20%'} ></Box>
@@ -48,11 +45,11 @@ const ModifyMedicine = () => {
                       bold: true,
                     }}
                   >
-                    Medicine Name
+                    {translationObject.medName}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
-                    placeholder="Penisiline"
+                    placeholder={translationObject.medNamePH}
                     onChangeText={(value) =>
                       setData({ ...formData, name: value })
                     }
@@ -62,14 +59,14 @@ const ModifyMedicine = () => {
                       fontSize: "xs",
                     }}
                   >
-                    Name should contain atleast 3 character.
+                    {translationObject.errorMsg}
                   </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
                     }}
                   >
-                    Error Name
+                    Error
                   </FormControl.ErrorMessage>
                 </FormControl>
               </VStack>
@@ -86,7 +83,7 @@ const ModifyMedicine = () => {
                       bold: true,
                     }}
                   >
-                    Dosage
+                    {translationObject.dosage}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
@@ -100,14 +97,14 @@ const ModifyMedicine = () => {
                       fontSize: "xs",
                     }}
                   >
-                    Name should contain atleast 3 character.
+                    {translationObject.errorMsg}
                   </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
                     }}
                   >
-                    Error Name
+                    Error
                   </FormControl.ErrorMessage>
                 </FormControl>
               </VStack>
@@ -124,7 +121,7 @@ const ModifyMedicine = () => {
                       bold: true,
                     }}
                   >
-                    Intervals between
+                    {translationObject.intervals}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
@@ -138,14 +135,14 @@ const ModifyMedicine = () => {
                       fontSize: "xs",
                     }}
                   >
-                    Name should contain atleast 3 character.
+                    {translationObject.errorMsg}
                   </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
                     }}
                   >
-                    Error Name
+                    Error
                   </FormControl.ErrorMessage>
                 </FormControl>
               </VStack>
@@ -162,7 +159,7 @@ const ModifyMedicine = () => {
                       bold: true,
                     }}
                   >
-                    VIA
+                    {translationObject.via}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
@@ -176,14 +173,14 @@ const ModifyMedicine = () => {
                       fontSize: "xs",
                     }}
                   >
-                    Name should contain atleast 3 character.
+                    {translationObject.errorMsg}
                   </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
                     }}
                   >
-                    Error Name
+                    Error
                   </FormControl.ErrorMessage>
                 </FormControl>
               </VStack>
@@ -193,7 +190,7 @@ const ModifyMedicine = () => {
       </Box>
       <Center m={3}>
         <Box w={"70%"}>
-          <MyButton title={"Modify"} />
+          <MyButton title={translationObject.update}/>
         </Box>
       </Center>
     </Box>

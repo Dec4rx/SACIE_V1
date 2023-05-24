@@ -1,17 +1,5 @@
-import React from "react";
-
-import {
-  Box,
-  Center,
-  Text,
-  HStack,
-  VStack,
-  Switch,
-  Modal,
-  IconButton,
-  Button,
-  Pressable,
-} from "native-base";
+import React, { useContext } from "react";
+import { Box, Center, Text, HStack, VStack, Switch, Modal, IconButton } from "native-base";
 
 import BackButton from "../utils/components/BackButton_Especial";
 import color from "../utils/Colors";
@@ -21,9 +9,14 @@ import Icon from "react-native-vector-icons/AntDesign";
 import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const Medicines = (props) => {
   const [modalVisible, setModalVisible] = React.useState(false);
+  
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
   return (
     <>
       <Center>
@@ -42,19 +35,19 @@ const Medicines = (props) => {
             </Modal.Header>
             <Modal.Body>
               <Text>
-                <b>Dosage: </b>
+                <b>{translationObject.dosage}: </b>
                 {props.dosage}
               </Text>
               <Text>
-                <b>Time: </b>
+                <b>{translationObject.time}: </b>
                 {props.time}
               </Text>
               <Text>
-                <b>Intervals: </b>
+                <b>{translationObject.intervals}: </b>
                 {props.intervals}
               </Text>
               <Text>
-                <b>Via: </b>
+                <b>{translationObject.via}: </b>
                 {props.via}
               </Text>
             </Modal.Body>
@@ -120,6 +113,9 @@ const Medicines = (props) => {
 };
 
 const Medicine = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+  
   return (
     <MainContainer>
       <Box mb={3}>
@@ -128,7 +124,7 @@ const Medicine = ({ navigation }) => {
       <Box py={5} borderRadius={10} backgroundColor={color.MainBlue}>
         <Center>
           <Text fontSize={"xl"} fontWeight={"bold"}>
-            Medicine
+            {translationObject.med}
           </Text>
         </Center>
       </Box>
@@ -137,16 +133,16 @@ const Medicine = ({ navigation }) => {
           dosage="30gr"
           MedicineName="Prueba 1"
           intervals="6 hrs"
-          time="ahorita"
-          via="oral"
+          time="Ahorita"
+          via="Oral"
         />
         <Medicines dosage="10gr" MedicineName="Prueba 2" />
         <Box w={'full'} my={3}>
           <MyButton
             icon={"add-circle-outline"}
-            title={"Add Medicine"}
+            title={translationObject.addMed}
             onPress={() =>
-              navigation.navigate(ScreenNames.RegisterMedicineNPScreen)
+              navigation.navigate(translationObject.RegisterMedicineNPScreen)
             }
           />
         </Box>

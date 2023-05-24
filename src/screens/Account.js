@@ -16,7 +16,7 @@ const Account = ({ navigation }) => {
       <View style={styles.header}>
         <BackButton />
         <Text style={styles.mainTitle}>{translationObject.profile}</Text>
-        <EditButton onPress={() => navigation.navigate("Edit")} />
+        <EditButton onPress={() => navigation.navigate(translationObject.EditAccountScreen)} />
       </View>
       <View style={styles.profileContainer}>
         <Image

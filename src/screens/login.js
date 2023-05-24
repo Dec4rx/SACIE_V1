@@ -1,18 +1,6 @@
-import {
-  Box,
-  Center,
-  Heading,
-  FormControl,
-  Input,
-  Button,
-  Link,
-  Text,
-  HStack,
-  VStack,
-  Drawer,
-} from "native-base";
-import React from "react";
-import { Image, NativeBaseProvider } from "native-base";
+import {Box, Center, Heading, Link, Text, HStack, VStack} from "native-base";
+import React, { useContext } from "react";
+import { Image } from "native-base";
 import Enf_1 from "../MarcoImages/Enf_1.png";
 import BlueButton from "../utils/components/BlueButton";
 import BackButton from "../utils/components/BackButton";
@@ -20,14 +8,17 @@ import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
 import MainContainer from "../utils/components/MainContainer";
 
-import data from "../utils/Strings/StringsEng.json";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
 
 const Login = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    Lato_400Regular,
-  });
+  const [fontsLoaded] = useFonts({Lato_400Regular});
+
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <MainContainer>
       <Center safeArea alignContent={"center"}>
@@ -37,7 +28,7 @@ const Login = ({ navigation }) => {
             textAlign={"center"}
             
           >
-            {data.Login.Login}
+            {translationObject.login}
           </Heading>
         </Box>
         <Image
@@ -52,12 +43,12 @@ const Login = ({ navigation }) => {
           <VStack space={4} mt="5">
             <Box>
               <FormInput
-                label={data.Login.EmailID}
-                placeholder={data.Login.Email}
+                label={translationObject.email}
+                placeholder="Something@email.com"
               ></FormInput>
               <FormInputPass
-                label={data.Login.Password}
-                placeholder={data.Login.Password}
+                label={translationObject.password}
+                placeholder={translationObject.password}
               ></FormInputPass>
               <Link
                 _text={{
@@ -67,22 +58,22 @@ const Login = ({ navigation }) => {
                   textDecoration: "none",
                 }}
                 alignSelf="flex-end"
-                onPress={() => navigation.navigate(screen.ForgotPasswordScreen)}
+                onPress={() => navigation.navigate(translationObject.ForgotPasswordScreen)}
               >
-                {data.Login.PasswordF}
+                {translationObject.forgetPass}
               </Link>
             </Box>
 
             <BlueButton
-              title={data.Login.Login}
-              onPress={() => navigation.navigate("Drawer")}
+              title={translationObject.login}
+              onPress={() => navigation.navigate(translationObject.MenuScreen)}
               mt="2"
               color="2BF0D7"
             ></BlueButton>
             <Center>
               <HStack justifyContent={"center"}>
                 <Text>
-                  {data.Login.DontHaveAccount}{" "}
+                {translationObject.noAccount}{" "}
                   <Link
                     justifyContent={"center"}
                     _text={{
@@ -93,9 +84,9 @@ const Login = ({ navigation }) => {
                     }}
                     alignSelf="flex-end"
                     mt="1"
-                    onPress={() => navigation.navigate(screen.SignUpScreen)}
+                    onPress={() => navigation.navigate(translationObject.SignUpScreen)}
                   >
-                    {data.Login.SignUp}
+                    {translationObject.signup}
                   </Link>
                 </Text>
               </HStack>

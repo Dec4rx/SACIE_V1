@@ -1,48 +1,71 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  SectionList,
-} from "react-native";
+// import React, { useState } from "react";
+import React, { useContext } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import BackButton from "../utils/components/BackButton";
-
 import MainContainer from "../utils/components/MainContainer";
+import { I18nContext } from '../utils/components/I18nProvider';
 
-import data from "../utils/Strings/StringsEng.json"
+// import { translations } from "../utils/Strings/Lenguage"
+// import * as Localization from 'expo-localization';
+// import { I18n } from 'i18n-js';
 
 const Lenguage = ({ navigation }) => {
-  const DATA = [
-    {
-      data: ["English (North America)", "Spanish (Mexico)", "French (France)"],
-    },
-  ];
 
-  const da = data.Lenguage.d
+  // const i18n = new I18n(translations);
+
+  const { currentLanguage, changeLanguage } = useContext(I18nContext);
+  const handleLanguageChange = (language) => {
+    changeLanguage(language);
+  };
+  // const [locale, setLocale] = useState(Localization.locale);
+  // i18n.locale = locale;
+  // i18n.enableFallback = true;
 
   return (
     <MainContainer>
-      <View style={styles.header}>
-        <BackButton />
-        <Text style={styles.mainTitle}>{data.Lenguage.Lenguage}</Text>
-      </View>
-      <View>
+      <TouchableOpacity onPress={() => handleLanguageChange('en')}>
         <View style={styles.profileContainer}>
-          <SectionList
-            sections={DATA}
-            keyExtractor={(item, index) => item + index}
-            renderItem={({ item }) => (
-              <View style={styles.item}>
-                <Text style={styles.title}>{item}</Text>
-              </View>
-            )}
-          />
+          <View style={styles.item}>
+            <Text style={styles.title}>{currentLanguage === 'en' ? 'English (Selected)' : 'English'}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => handleLanguageChange('esp')}>
+        <View style={styles.profileContainer}>
+          <View style={styles.item}>
+            <Text style={styles.title}>{currentLanguage === 'esp' ? 'Español (Seleccionado)' : 'Español'}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
     </MainContainer>
   );
 };
+
+// return (
+//   <MainContainer>
+//     <View style={styles.header}>
+//       <BackButton />
+//       <Text style={styles.mainTitle}>{i18n.t('language')}</Text>
+//     </View>
+//     {locale !== "en" ?
+//     <TouchableOpacity onPress={()=> setLocale("en")}>
+//       <View style={styles.profileContainer}>
+//         <View style={styles.item}>
+//           <Text style={styles.title}>{i18n.t('eng')}</Text>
+//         </View>
+//       </View>
+//     </TouchableOpacity> : undefined}
+//     {locale !== "esp" ?
+//     <TouchableOpacity onPress={()=> setLocale("esp")}>
+//       <View style={styles.profileContainer}>
+//         <View style={styles.item}>
+//           <Text style={styles.title}>{i18n.t('spa')}</Text>
+//         </View>
+//       </View>
+//     </TouchableOpacity> : undefined}
+//   </MainContainer>
+// );
+// };
 
 //#region Styles
 const styles = StyleSheet.create({

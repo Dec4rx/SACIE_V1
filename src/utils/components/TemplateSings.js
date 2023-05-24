@@ -1,18 +1,5 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-  TextInput,
-  Switch,
-  Modal,
-  Alert,
-  Button,
-} from "react-native";
+import React, { useState, useContext } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput, Switch, Modal, Alert } from "react-native";
 import FormInput from "./FormInput";
 import BlueButton from "./BlueButton";
 import BackButton from "./BackButton";
@@ -22,10 +9,16 @@ import { HStack, VStack } from "native-base";
 
 import MainContainer from "./MainContainer";
 
+import { translations } from "../Strings/Lenguage"
+import { I18nContext } from '../components/I18nProvider';
+
 const Signs = ({ title, data }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
 
   return (
     <MainContainer>
@@ -51,17 +44,17 @@ const Signs = ({ title, data }) => {
 
         <View style={styles.setvalues}>
           <FormInput
-            label={"Time"}
+            label={translationObject.time}
             placeholder={"7:00a.m."}
             value={"7:00 a.m."}
           ></FormInput>
-          <FormInput label={"Value"} placeholder={0} value={1} />
-          <BlueButton title={"Add"} onPress={() => setModalVisible(true)} />
+          <FormInput label={translationObject.value} placeholder={0} value={1} />
+          <BlueButton title={translationObject.add} onPress={() => setModalVisible(true)} />
         </View>
 
         <VStack mt={3} style={styles.inputContainer}>
           <HStack justifyContent={'center'}>
-            <Text style={styles.text}>Set Alarm In Intervals Of:</Text>
+            <Text style={styles.text}>{translationObject.setAlarmInt}</Text>
             <Switch
               style={{ marginStart: 'auto' }}
               trackColor={{ false: "#B8CAE4", true: "#60E532" }}
@@ -93,16 +86,16 @@ const Signs = ({ title, data }) => {
               </TouchableOpacity>
 
               <Text style={styles.modalTitle}>
-                Are you sure about the data?
+                {translationObject.rUSureData}
               </Text>
 
               <Text style={styles.modalText}>
                 {" "}
-                <b>Time:</b> <Text>7:00 a.m.</Text>
+                <b>{translationObject.time}:</b> <Text>7:00 a.m.</Text>
               </Text>
               <Text style={styles.modalText}>
                 {" "}
-                <b>Value:</b> <Text>1</Text>
+                <b>{translationObject.value}:</b> <Text>1</Text>
               </Text>
 
               <View

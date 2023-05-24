@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  FlatList,
-  Alert,
-  Modal,
-  Pressable,
-  TouchableHighlight,
-} from "react-native";
+import React, { useState, useContext } from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, Alert, Modal, Pressable, TouchableHighlight } from "react-native";
 import ImageButton from "../utils/components/ImageButton";
 
 import { HStack } from "native-base";
 import MainContainer from "../utils/components/MainContainer";
 import ScreenNames from "../utils/ScreenNames";
 import data from "../utils/Strings/StringsEsp.json";
-import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
+
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider'; 
 
 const Principal = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
+  //#region Data
   const DATA = [
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba5",
@@ -57,13 +53,15 @@ const Principal = ({ navigation }) => {
 
   const onPressHandler = () => {
     setModalVisible(!modalVisible)
-    navigation.navigate(ScreenNames.ManualRegisterPt1Screen)
+    navigation.navigate(translationObject.ManualRegisterPt1Screen)
   };
+
+  //#endregion
 
   const [modalVisible, setModalVisible] = useState(false);
 
   const Item = ({ name, color, age, bed, image }) => (
-    <TouchableHighlight  onPress={() => navigation.navigate("Details")}>
+    <TouchableHighlight  onPress={() => navigation.navigate(translationObject.DetailsScreen)}>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {/* Card info */}
         <View style={styles.item}>
@@ -72,9 +70,9 @@ const Principal = ({ navigation }) => {
             <Text style={styles.cardTitle}>{name}</Text>
           </View>
           <View style={{ flexDirection: "row", marginVertical: 5 }}>
-            <Text style={{ color: "#62635C", fontSize: 12 }}>{data.Principal.Age}: {age}</Text>
+            <Text style={{ color: "#62635C", fontSize: 12 }}>{translationObject.age}: {age}</Text>
             <Text style={{ marginLeft: 20, color: "#62635C", fontSize: 12 }}>
-              {data.Principal.Bed}: {bed}
+              {translationObject.bed}: {bed}
             </Text>
           </View>
         </View>
@@ -97,7 +95,7 @@ const Principal = ({ navigation }) => {
   return (
     <MainContainer >
       <View style={styles.header}>
-        <Text style={styles.mainTitle}>{data.Principal.Welcome}</Text>
+        <Text style={styles.mainTitle}>{translationObject.welcome}</Text>
 
         <View style={styles.headerButton}>
           <TouchableOpacity
@@ -112,7 +110,7 @@ const Principal = ({ navigation }) => {
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() =>
-              navigation.navigate(ScreenNames.RegisterMedicineScreen)
+              navigation.navigate(translationObject.RegisterMedicineScreen)
             }
           >
             <Image
@@ -122,7 +120,7 @@ const Principal = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate(ScreenNames.RegisterMedicalTest)}
+            onPress={() => navigation.navigate(translationObject.RegisterMedicalTest)}
           >
             <Image
               source={require("../resources/pictures/newTest.svg")}
@@ -131,9 +129,9 @@ const Principal = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.headerButton}>
-          <Text>{data.Principal.NPatient} </Text>
-          <Text>{data.Principal.NMedicine} </Text>
-          <Text>{data.Principal.NTest}</Text>
+          <Text>{translationObject.newPatient}</Text>
+          <Text>{translationObject.newMed}</Text>
+          <Text>{translationObject.newTest}</Text>
         </View>
 
         <Modal
@@ -154,18 +152,18 @@ const Principal = ({ navigation }) => {
                 <FontAwesome name="close" size={24} color="black" />
               </Pressable>
               <Text style={styles.modalText}>
-                {data.Principal.KindRegister}
+                {translationObject.howRegister}
               </Text>
               <HStack space={5}>
                 <ImageButton
                   onPress={""}
                   image={require("../resources/pictures/scan.png")}
-                  title={data.Principal.Scan}
+                  title={translationObject.scan}
                 />
                 <ImageButton
                   onPress={() =>onPressHandler()}
                   image={require("../resources/pictures/manual.png")}
-                  title={data.Principal.Manualy}
+                  title={translationObject.manually}
                 />
               </HStack>
             </View>
@@ -182,7 +180,7 @@ const Principal = ({ navigation }) => {
             marginVertical: 10,
           }}
         >
-          {data.Principal.Patients}
+          {translationObject.patients}
         </Text>
         <FlatList
           data={DATA}
