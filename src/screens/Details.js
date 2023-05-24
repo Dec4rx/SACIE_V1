@@ -160,7 +160,7 @@ const MyTabs = () => {
   return (
     <Tab.Navigator
       labeled={false}
-      initialRouteName="Home"
+      initialRouteName="MedicalTest"
       activeColor="#67A4F7"
       style={{ padding: 0 }}
     >

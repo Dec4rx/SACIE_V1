@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { Box, Center, Text, HStack, IconButton, Modal} from "native-base";
 
+import { FlatList } from "react-native";
 import ScreenNames from "../utils/ScreenNames";
-
 import Icon_2 from "react-native-vector-icons/MaterialIcons";
-
 import BackButton from "../utils/components/BackButton_Especial";
 import MyButton from "../utils/components/MyButton";
 
@@ -14,9 +13,37 @@ import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
-const Test = (props) => {
+const DATA = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    testName: "Analisis de globulos rojos",
+    doctorName: "Dra. Guadalupe",
+    date: "hoy",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    testName: "Conteo de plaquetas",
+    doctorName: "Dr. House",
+    date: "hoy",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    testName: "Colonoscopia",
+    doctorName: "Dr. Foreman",
+    date: "hoy",
+  },
+];
+
+const Item = ({ title }) => (
+  <Box>
+    <Text>{title}</Text>
+  </Box>
+);
+
+const Test = ({ testName, doctorName, date }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+
   const [modalVisible, setModalVisible] = React.useState(false);
   return (
     <>
@@ -31,14 +58,14 @@ const Test = (props) => {
         >
           <Modal.Content>
             <Modal.CloseButton />
-            <Modal.Header>{props.testName}</Modal.Header>
+            <Modal.Header fontWeight={"bold"}>{testName}</Modal.Header>
             <Modal.Body>
               <Text>
-                <b>{translationObject.doneBy}: </b> {props.doctorName}
+                <b>{translationObject.doneBy}: </b> {doctorName}
               </Text>
               <Text>
                 <b>{translationObject.date}: </b>
-                {props.date}
+                {date}
               </Text>
             </Modal.Body>
 
@@ -69,7 +96,7 @@ const Test = (props) => {
         <HStack>
           <Box justifyContent={"center"}>
             <Text fontWeight={"bold"} color={color.MainBlue}>
-              {props.testName}
+              {testName}
             </Text>
           </Box>
           <Box marginLeft={"auto"}>
@@ -90,7 +117,7 @@ const Test = (props) => {
 const MedicalTest = ({ navigation }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
-  
+
   return (
     <MainContainer>
       <Box mb={3}>
@@ -105,16 +132,18 @@ const MedicalTest = ({ navigation }) => {
       </Box>
 
       <Box p={2} backgroundColor={color.Gray} my={3} borderRadius={10}>
-        <Test
-          testName="Examen de globulos blancos"
-          doctorName="Dra. Aguilera"
-          date="10 de abril 2023"
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => (
+            <Test
+              testName={item.testName}
+              doctorName={item.doctorName}
+              date={item.date}
+            />
+          )}
+          keyExtractor={(item) => item.id}
         />
-        <Test
-          testName="Analisis de orina"
-          doctorName="Dr. Rodriguez"
-          date=" 11 de abril 2023"
-        />
+
         <Box w={"full"} mt={3}>
           <MyButton
             icon={"add-circle-outline"}
