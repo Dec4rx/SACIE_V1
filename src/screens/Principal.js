@@ -156,7 +156,7 @@ const Principal = ({ navigation }) => {
               </Text>
               <HStack space={5}>
                 <ImageButton
-                  onPress={""}
+                  onPress={() => navigation.navigate(translationObject.QRScanScreen)}
                   image={require("../resources/pictures/scan.png")}
                   title={translationObject.scan}
                 />

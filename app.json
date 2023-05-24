@@ -26,8 +26,12 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-localization"
-    ]
+    "plugins": {
+      "expo-localization":"",
+      "expo-barcode-scanner":
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
+        }
+      }
   }
 }

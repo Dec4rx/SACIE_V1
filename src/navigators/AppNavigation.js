@@ -38,6 +38,7 @@ import AddMedicine from "../screens/AddMedicine";
 import TnC_Txt from "../screens/TermsAndConditionsTxt";
 import TnC_CB from "../screens/TermnsAndConditionsCheckbox";
 import Exit from "../screens/Exit";
+import QRScanner from "../screens/QRScanner";
 import TermsAndConditions from "../screens/TermsAndConditionsTxt";
 
 import { translations } from "../utils/Strings/Lenguage"
@@ -182,6 +183,11 @@ const AppStack = () => {
 <Stack.Screen
         name={translationObject.ExitScreen}
         component={Exit}
+      ></Stack.Screen>
+
+<Stack.Screen
+        name={translationObject.QRScanScreen}
+        component={QRScanner}
       ></Stack.Screen>
     </Stack.Navigator>
 

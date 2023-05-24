@@ -119,6 +119,9 @@ const translations = {
         errorMsg: "Must be at least 3 characters.",
         patiName: "Patient's name",
         docName: "Doctor's name",
+        camPermission:"Requesting camera permission...",
+        noPermission:"No permission has been granted for camera",
+        scanned: "Scanned",
         //Screen name
         SplashScreen: "Splash",
         LoginScreen: "Login",
@@ -158,6 +161,7 @@ const translations = {
         ManualRegisterPt1Screen: "Manual register pt1",
         ManualRegisterPt2Screen: "Manual register pt2",
         ManualRegisterPt3Screen: "Manual register pt3",
+        QRScanScreen: "QR Scanner",
     },
     esp: {
         welcome: "Bienvenido",
@@ -277,6 +281,9 @@ const translations = {
         errorMsg: "Debe tener al menos 3 carácteres.",
         patiName: "Nombre del paciente",
         docName: "Nombre del doctor",
+        camPermission:"Solicitando permiso de cámara...",
+        noPermission:"No se ha otorgado permiso para la cámara",
+        scanned: "Escaneado",
         //Screen name
         SplashScreen: "Splash",
         LoginScreen: "Inicio de sesión",
@@ -316,6 +323,7 @@ const translations = {
         ManualRegisterPt1Screen: "Registro manual pt1",
         ManualRegisterPt2Screen: "Registro manual pt2",
         ManualRegisterPt3Screen: "Registro manual pt3",
+        QRScanScreen: "Escaner QR",
     }
 };
 
