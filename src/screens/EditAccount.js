@@ -1,34 +1,31 @@
-import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
-} from "react-native";
+import React, { useContext } from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import FormInput from "../utils/components/FormInput";
 import BackButton from "../utils/components/BackButton";
 import CorrectButton from "../utils/components/CorrectButton";
 
 import MainContainer from "../utils/components/MainContainer";
 
-import data from "../utils/Strings/StringsEng.json"
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const EditAccount = ({ navigation }) => {
   const [name, onChangeName] = React.useState("");
   const [phone, onChangePhone] = React.useState("");
   const [email, onChangeEmail] = React.useState("");
 
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   const handleSaveProfile = () => {
-    navigation.navigate("Account");
+    navigation.navigate(translationObject.AccountScreen);
   };
 
   return (
     <MainContainer>
       <View style={styles.header}>
         <BackButton />
-        <Text style={styles.mainTitle}>{data.EditAccount.EditProfile}</Text>
+        <Text style={styles.mainTitle}>{translationObject.editProfile}</Text>
         <TouchableOpacity>
           <CorrectButton onPress={handleSaveProfile} />
         </TouchableOpacity>
@@ -39,20 +36,20 @@ const EditAccount = ({ navigation }) => {
           style={styles.profileImage}
         />
         <FormInput
-          label={data.EditAccount.FullName}
-          placeholder={data.EditAccount.FName}
+          label={translationObject.fullName}
+          placeholder="Jose Gordillo"
           value={name}
           onChangeText={onChangeName}
         />
         <FormInput
-          label={data.EditAccount.Phone}
-          placeholder={data.EditAccount.NPhone}
+          label={translationObject.phone}
+          placeholder="+521234567890"
           value={phone}
           onChangeText={onChangePhone}
         />
         <FormInput
-          label={data.EditAccount.EmailID}
-          placeholder={data.EditAccount.Email}
+          label={translationObject.email}
+          placeholder="Something@email.com"
           value={email}
           onChangeText={onChangeEmail}
         />

@@ -1,60 +1,47 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { ImageBackground } from "react-native";
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-} from "@react-navigation/drawer";
+import React, {useContext} from "react";
+import { createDrawerNavigator, DrawerContentScrollView } from "@react-navigation/drawer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  NativeBaseProvider,
-  Button,
-  Box,
-  HamburgerIcon,
-  Pressable,
-  Heading,
-  VStack,
-  Text,
-  Center,
-  HStack,
-  Divider,
-  Icon,
-  Image,
-} from "native-base";
+import { Box, Pressable, VStack, Text, Center, HStack, Divider, Icon, Image } from "native-base";
 import Principal from "../screens/Principal";
 import Account from "../screens/Account";
 import Notification from "../screens/Notification";
 import Lenguage from "../screens/Lenguage";
-import TermsAndConditions from "../screens/TermsAndConditionsTxt";
+import TermsAndConditions from "../screens/TermnsAndConditionsCheckbox";
 import Exit from "../screens/Exit";
+
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 global.__reanimatedWorkletInit = () => {};
 
 const Drawer = createDrawerNavigator();
 
-function Component(props) {
-  return (
-    <Center>
-      <Text mt="12" fontSize="18">
-        This is {props.route.name} page.
-      </Text>
-    </Center>
-  );
-}
 
 const getIcon = (screenName) => {
   switch (screenName) {
+    case "Perfil":
+      return "account";
     case "Account":
       return "account";
-    case "Notification":
+    case "Notificaciones":
       return "bell";
+    case "Notificactions":
+      return "bell";
+    case "Idioma":
+      return "google-translate";
     case "Language":
       return "google-translate";
-    case "Logout":
+    case "Salir":
       return "logout";
-    case "Home":
+    case "Exit":
+      return "logout";
+    case "Inicio":
       return "home";
-    case "Terms and Conditions":
+    case "Principal":
+      return "home";
+    case "Terminos y Condiciones":
+      return "text-box";
+    case "Terms & Conditions":
       return "text-box";
     default:
       return undefined;
@@ -124,20 +111,20 @@ function CustomDrawerContent(props) {
 }
 
 function MyDrawer() {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <Box safeArea flex={1}>
       <Drawer.Navigator
         drawerContent={(props) => <CustomDrawerContent {...props} />}
       >
-        <Drawer.Screen name="Home" component={Principal} />
-        <Drawer.Screen name="Account" component={Account} />
-        <Drawer.Screen name="Notification" component={Notification} />
-        <Drawer.Screen name="Language" component={Lenguage} />
-        <Drawer.Screen name="Logout" component={Exit} />
-        <Drawer.Screen
-          name="Terms and Conditions"
-          component={TermsAndConditions}
-        />
+        <Drawer.Screen name={translationObject.PrincipalScreen} component={Principal} />
+        <Drawer.Screen name={translationObject.AccountScreen} component={Account} />
+        <Drawer.Screen name={translationObject.NotificationScreen} component={Notification} />
+        <Drawer.Screen name={translationObject.LanguageScreen} component={Lenguage} />
+        <Drawer.Screen name={translationObject.ExitScreen} component={Exit} />
+        <Drawer.Screen name={translationObject.TermnsAndConditionsCheckBoxScreen} component={TermsAndConditions}/>
       </Drawer.Navigator>
     </Box>
   );

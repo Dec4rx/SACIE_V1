@@ -1,35 +1,23 @@
-import {
-  NativeBaseProvider,
-  Image,
-  Box,
-  Center,
-  Heading,
-  FormControl,
-  Input,
-  Button,
-  Link,
-  Text,
-  HStack,
-  VStack,
-  Row,
-} from "native-base";
-import React from "react";
-import BackButton from "../utils/components/BackButton";
+import { Box, Center, Heading, Link, Text, HStack } from "native-base";
+import React, {useContext} from "react";
 import BlueButton from "../utils/components/BlueButton";
 import NumericInput from "../utils/components/NumericInput";
 
 import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
-
-import data from "../utils/Strings/StringsEng.json"
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const OTPVerification = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <MainContainer>
         <Center safeArea pt="8">
           <Heading style={{ fontSize: 32 }} fontWeight="semibold" >
-            {data.OTPVerification.OTPV}
+            {translationObject.otp}
           </Heading>
           <Center w={'full'} pt="8">
             <Heading
@@ -42,7 +30,7 @@ const OTPVerification = ({ navigation }) => {
               fontWeight="medium"
               size="s"
             >
-             {data.OTPVerification.EnterCode}
+             {translationObject.enterCode}
             </Heading>
           </Center>
           <HStack justifyContent={'center'} w={'full'} pt="8">
@@ -53,8 +41,8 @@ const OTPVerification = ({ navigation }) => {
           </HStack>
           <Box w={'full'} pt="16">
             <BlueButton
-              title={data.OTPVerification.Verify}
-              onPress={() => navigation.navigate(ScreenNames.PasswordChangedScreen)}
+              title={translationObject.verify}
+              onPress={() => navigation.navigate(translationObject.PasswordChangedScreen)}
             ></BlueButton>
           </Box>
           <Box safeArea mt={"full"} w={'full'}>
@@ -68,7 +56,7 @@ const OTPVerification = ({ navigation }) => {
                 fontWeight="medium"
                 size="s"
               >
-                {data.OTPVerification.DidntCode} <Link
+                {translationObject.noCode} <Link
                 _text={{
                   fontSize: "m",
                   fontWeight: "500",
@@ -76,9 +64,8 @@ const OTPVerification = ({ navigation }) => {
                   textDecoration: 'none'
                 }}
                 alignSelf="flex-end"
-                mt="1"
-              >
-                {data.OTPVerification.Resend}
+                mt="1" >
+                {translationObject.resend}
               </Link>
               </Text>
             </Center>

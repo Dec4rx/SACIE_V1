@@ -1,17 +1,5 @@
-import React from "react";
-import {
-  TextArea,
-  Box,
-  Center,
-  NativeBaseProvider,
-  Text,
-  Divider,
-  View,
-  IconButton,
-  HStack,
-  Bottom,
-  Checkbox,
-} from "native-base";
+import React, { useContext } from "react";
+import { Box, Center, Text, Divider, HStack, Checkbox } from "native-base";
 import { useState } from "react";
 
 import BackButton from "../utils/components/BackButton";
@@ -20,10 +8,15 @@ import BlueButton from "../utils/components/BlueButton";
 import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
-import data from "../utils/Strings/StringsEng.json"
+import data from "../utils/Strings/StringsEsp.json"
 
 const TermsAndConditions = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   const [state, setState] = useState(false);
   return (
     <MainContainer>
@@ -39,7 +32,7 @@ const TermsAndConditions = ({ navigation }) => {
           </Box>
           <Box>
             <Text textAlign={"center"} fontSize={30}>
-              {data.TandC.TandC}
+              {translationObject.tAndC}
             </Text>
           </Box>
           <Box
@@ -52,17 +45,17 @@ const TermsAndConditions = ({ navigation }) => {
         <Divider my="2" />
         <Box p={2} my={3}>
           <Text textAlign={"center"} fontSize={"15"}>
-            {data.TandC.TextTandC}
+            {translationObject.txtTandC}
           </Text>
           <Center my={2}>
             <Checkbox _checked={state} onChange={(e) => setState(!state)}>
-              {data.TandC.Agree}
+              {translationObject.agree}
             </Checkbox>
           </Center>
         </Box>
         <BlueButton
-          title={data.TandC.Continue}
-          onPress={() => navigation.navigate(ScreenNames.SignUpScreen)}
+          title={translationObject.continue}
+          onPress={() => navigation.navigate(translationObject.SignUpScreen)}
           disabled={!state}
         />
       </Box>

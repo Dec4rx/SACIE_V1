@@ -1,20 +1,5 @@
-import {
-  NativeBaseProvider,
-  Image,
-  Box,
-  Center,
-  Heading,
-  FormControl,
-  Input,
-  Button,
-  Link,
-  Text,
-  HStack,
-  VStack,
-  Row,
-  Checkbox,
-} from "native-base";
-import React from "react";
+import { Image, Box, Center, Heading, Link, Text, VStack, Checkbox,} from "native-base";
+import React, { useContext } from "react";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 import Enf_2 from "../MarcoImages/Enf_2.png";
@@ -23,10 +8,15 @@ import FormInputPass from "../utils/components/FormInputPass";
 
 import ScreenNames from "../utils/ScreenNames";
 import MainContainer from "../utils/components/MainContainer";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
-import data from "../utils/Strings/StringsEng.json"
+import data from "../utils/Strings/StringsEsp.json"
 
 const Signup = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <MainContainer>
       <Center>
@@ -42,40 +32,29 @@ const Signup = ({ navigation }) => {
           size="xl"
         />
         <Heading style={{ fontSize: 32 }} fontWeight="semibold">
-          {data.SignUp.Welcome}
-        </Heading>
-        <Heading
-          mt="1"
-          color="coolGray.600"
-          _dark={{
-            color: "warmGray.200",
-          }}
-          fontWeight="medium"
-          size="xs"
-        >
-          {data.SignUp.SignUpCon}
+          {translationObject.signup}
         </Heading>
         <Box safeArea py="8" w={"full"}>
           <VStack space={3} mt="5">
-            <FormInput label={data.SignUp.Name}></FormInput>
-            <FormInput label={data.SignUp.LastName}></FormInput>
-            <FormInput label={data.SignUp.Email}></FormInput>
+            <FormInput label={translationObject.name}></FormInput>
+            <FormInput label={translationObject.lastName}></FormInput>
+            <FormInput label={translationObject.email}></FormInput>
             <FormInputPass
-              label={data.SignUp.Password}
-              placeholder={data.SignUp.MinPass}
+              label={translationObject.password}
+              placeholder={translationObject.minPass}
             ></FormInputPass>
             <FormInputPass
-              label={data.SignUp.ConfPass}
-              placeholder={data.SignUp.IdentPass}
+              label={translationObject.confirmPass}
+              placeholder={translationObject.identPass}
             ></FormInputPass>
 
             <BlueButton
-              title={data.SignUp.SignUp}
-              onPress={() => alert("No hay Home")}
+              title={translationObject.signup}
+              onPress={() => navigation.navigate(translationObject.MenuScreen)}
             ></BlueButton>
             <Center>
               <Text>
-                {data.SignUp.AlreadyAccount}
+                {translationObject.yesAccount}
                 <Link
                   _text={{
                     fontSize: "m",
@@ -85,25 +64,25 @@ const Signup = ({ navigation }) => {
                   }}
                   alignSelf="flex-end"
                   mt="1"
-                  onPress={() => navigation.navigate(screen.LoginScreen)}
+                  onPress={() => navigation.navigate(translationObject.LoginScreen)}
                 >
-                  {data.SignUp.Login}
+                  {translationObject.login}
                 </Link>
               </Text>
             </Center>
             <Center>
               <Checkbox fontSize={"md"}>
-                {data.SignUp.Policy}
+                {translationObject.policy}
                 <Link
                   onPress={() =>
                     navigation.navigate(
-                      ScreenNames.TermnsAndConditionsCheckBoxScreen
+                      translationObject.TermnsAndConditionsCheckBoxScreen
                     )
                   }
                   my={"auto"}
                   _text={{ fontSize: "m", color: "indigo.500", fontWeight: '500', textDecoration: 'none' }}
                 >
-                  {data.SignUp.TAndC}
+                  {translationObject.tAndC}
                 </Link>
               </Checkbox>
             </Center>

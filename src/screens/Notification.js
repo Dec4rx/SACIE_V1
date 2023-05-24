@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, StyleSheet, SafeAreaView, FlatList} from 'react-native';
 import BackButton from '../utils/components/BackButton';
 
 import MainContainer from '../utils/components/MainContainer';
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const Notification = ({navigation}) => {
     //#region Info
@@ -10,24 +12,26 @@ const Notification = ({navigation}) => {
         {
           id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba7',
           color: '#7043CF',
-          title: 'Taking temperature',
-          info: "Takes the patient's temperature in bed 10."
+          title: 'Tomar temperatura',
+          info: "Toma la temperatura del paciente en cama 10."
         },
         {
           id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
           color: '#FEC62F',
-          title: 'Medication time',
-          info: "It's time for the patient in bed 19 to take his medicine."
+          title: 'Da medicina',
+          info: "E tiempo para que el paciente de la cama 19 tome su medicina."
         },
         {
           id: '58694a0f-3da1-471f-bd96-145571e29d72',
           color: '#29C9FB',
-          title: 'Shift change',
-          info: "Your turn has ended."
+          title: 'Cambio de turno',
+          info: "Tu turno ha terminado."
         },
       ];
     //#endregion
-      
+    const { currentLanguage } = useContext(I18nContext);
+    const translationObject = translations[currentLanguage];
+
     const Item = ({title, color, info}) => (
       <View style={styles.item}>
         <View style={{ flexDirection: 'row', alignItems: 'center'}}>
@@ -42,7 +46,7 @@ const Notification = ({navigation}) => {
     <MainContainer>
       <View style={styles.header}>
         <BackButton/>
-        <Text style={styles.mainTitle}>Notifications</Text>
+        <Text style={styles.mainTitle}>{translationObject.noti}</Text>
       </View>
       <View style={styles.profileContainer}>
         <FlatList

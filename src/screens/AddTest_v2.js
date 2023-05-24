@@ -1,23 +1,5 @@
-import React from "react";
-import {
-  TextArea,
-  Box,
-  Center,
-  NativeBaseProvider,
-  Text,
-  Divider,
-  View,
-  Flex,
-  HStack,
-  FormControl,
-  Input,
-  VStack,
-} from "native-base";
-
-import Icon from "react-native-vector-icons/AntDesign";
-
-import { StretchInX } from "react-native-reanimated";
-
+import React, { useContext } from "react";
+import { Box, Center, Text, Divider, HStack, FormControl, Input, VStack } from "native-base";
 import color from "../utils/Colors";
 
 import BackButton from "../utils/components/BackButton";
@@ -28,7 +10,13 @@ import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
 
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
+
 const NotesScreen = ({navigation}) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <MainContainer
       m="4"
@@ -37,7 +25,6 @@ const NotesScreen = ({navigation}) => {
       height={"95%"}
       flex={1}
       backgroundColor={color.BackgroundApp}
-      //backgroundColor={'red.100'}
     >
       <Center width={"100%"}>
         <HStack width={"100%"}>
@@ -45,7 +32,7 @@ const NotesScreen = ({navigation}) => {
             <BackButton />
           </Center>
           <Text textAlign={"center"} mx={"auto"} fontSize={40}>
-            Add Test
+            {translationObject.addTest}
           </Text>
           <Box mx={"auto"} >
             <CorrectButton />
@@ -63,22 +50,22 @@ const NotesScreen = ({navigation}) => {
                 bold: true,
               }}
             >
-              Done by
+              {translationObject.doneBy}
             </FormControl.Label>
-            <Input placeholder="Doctor Name" />
+            <Input placeholder={translationObject.docName} />
             <FormControl.HelperText
               _text={{
                 fontSize: "xs",
               }}
             >
-              Name should contain atleast 3 character.
+              {translationObject.errorMsg}
             </FormControl.HelperText>
             <FormControl.ErrorMessage
               _text={{
                 fontSize: "xs",
               }}
             >
-              Error Name
+              Error
             </FormControl.ErrorMessage>
           </FormControl>
         </Center>
@@ -94,29 +81,29 @@ const NotesScreen = ({navigation}) => {
                 bold: true,
               }}
             >
-              Date
+              {translationObject.date}
             </FormControl.Label>
-            <Input placeholder="Pick a Date " type="" />
+            <Input placeholder={translationObject.pickDatePH} type="" />
             <FormControl.HelperText
               _text={{
                 fontSize: "xs",
               }}
             >
-              Name should contain atleast 3 character.
+              {translationObject.errorMsg}
             </FormControl.HelperText>
             <FormControl.ErrorMessage
               _text={{
                 fontSize: "xs",
               }}
             >
-              Error Name
+              Error
             </FormControl.ErrorMessage>
           </FormControl>
         </Center>
       </VStack>
       <Center>
         <Box width={"100%"} my={3}>
-          <MyButton icon={"add-circle-outline"} title={"Set Document"} onPress={()=>navigation.navigate(ScreenNames.DetailsScreen)}/>
+          <MyButton icon={"add-circle-outline"} title={translationObject.setDocument} onPress={()=>navigation.navigate(translationObject.DetailsScreen)}/>
         </Box>
       </Center>
     </MainContainer>

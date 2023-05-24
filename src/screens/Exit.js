@@ -1,31 +1,19 @@
-import React from "react";
-import {
-  TextArea,
-  Box,
-  Center,
-  NativeBaseProvider,
-  Text,
-  Divider,
-  View,
-  IconButton,
-  HStack,
-  Bottom,
-  Checkbox,
-  Image,
-} from "native-base";
+import React, { useContext } from "react";
+import { Box, Center, Text, HStack, Image } from "native-base";
 import { useState } from "react";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
-import BackButton from "../utils/components/BackButton";
-import BlueButton from "../utils/components/BlueButton";
 import CorrectButton from "../utils/components/CorrectButton";
 import ErrorButton from '../utils/components/ErrorButton';
 
 import ScreenNames from "../utils/ScreenNames";
 
-import data from "../utils/Strings/StringsEng.json"
-
 const Exit = ({navigation}) => {
+  const { currentLanguage } = useContext(I18nContext);
+    const translationObject = translations[currentLanguage];
   const [state, setState] = useState(false);
+
   return (
     <Box
       p="3"
@@ -37,7 +25,7 @@ const Exit = ({navigation}) => {
     >
       <Center mt={'30'}>
         <Text textAlign={"center"} fontSize={30}>
-          {data.Exit.Quitting}
+          {translationObject.quitting}
         </Text>
       </Center>
       <Center mb={10}>
@@ -47,9 +35,9 @@ const Exit = ({navigation}) => {
           w={"400"}
           h={"400"}
         ></Image>
-        <Text fontSize={30}>{data.Exit.RSure}</Text>
+        <Text fontSize={30}>{translationObject.rUSure}</Text>
         <HStack space={10} mt={5}>
-            <CorrectButton onPress={()=>navigation.navigate(ScreenNames.LoginScreen)}/>
+            <CorrectButton onPress={()=>navigation.navigate(translationObject.LoginScreen)}/>
             <ErrorButton onPress={()=>navigation.goBack()}/>
         </HStack>
       </Center>

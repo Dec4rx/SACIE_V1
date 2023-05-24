@@ -1,19 +1,24 @@
-import React, { useState } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, TextInput, Switch, Modal, Alert, Button } from 'react-native';
+import React, { useState, useContext } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import FormInput from '../utils/components/FormInput';
 import BackButton from '../utils/components/BackButton';
 import { AntDesign } from '@expo/vector-icons';
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 import ScreenNames from '../utils/ScreenNames';
 
 const RegisterP1 = ({navigation}) => {
+    const { currentLanguage } = useContext(I18nContext);
+    const translationObject = translations[currentLanguage];
+
     return (
         <View style={styles.container}>
             <View style={{ marginStart: 12, marginTop: 12 }}>
                 <BackButton />
             </View>
 
-            <Text style={styles.mainTitle}>Register</Text>
+            <Text style={styles.mainTitle}>{translationObject.register}</Text>
             <View
                 style={{
                     borderBottomColor: '#F5F5F5',
@@ -23,25 +28,25 @@ const RegisterP1 = ({navigation}) => {
             />
 
             <View style={{ marginTop: 15, padding: 10 }}>
-                <FormInput label={'Full Name'} placeholder={'Mark Ramos'} />
+                <FormInput label={translationObject.fullName} placeholder={'Mark Ramos'} />
 
                 <View style={{
                     flexDirection: 'row',
                 }}>
                     <View>
                         <Text>
-                            <Text style={styles.text}>Gender</Text>
+                            <Text style={styles.text}>{translationObject.gender}</Text>
                             <Text style={styles.redText}> *</Text>
                         </Text>
                         <TextInput style={styles.inputG}
-                            placeholder={'Male'}
+                            placeholder={'Hombre'}
                         />
 
                     </View>
 
                     <View>
                         <Text>
-                            <Text style={styles.text}>Age</Text>
+                            <Text style={styles.text}>{translationObject.age}</Text>
                             <Text style={styles.redText}> *</Text>
                         </Text>
                         <TextInput style={styles.inputA}
@@ -53,20 +58,17 @@ const RegisterP1 = ({navigation}) => {
                 </View>
                 <View style={styles.line} />
 
-                <FormInput label={'Date of Birth'} placeholder={'July 14, 2001'} />
-                <FormInput label={'Healt Condition'} placeholder={'Good'} />
+                <FormInput label={translationObject.birthday} placeholder={'Julio 14, 2001'} />
+                <FormInput label={translationObject.healtCond} placeholder={'1'} />
                 <View style={{ flexDirection: 'row-reverse' }}>
-                    <TouchableOpacity style={styles.buttonNext} onPress={()=> navigation.navigate(ScreenNames.ManualRegisterPt2Screen)}>
-                        <Text style={{fontSize: 20 }}>Next</Text>
+                    <TouchableOpacity style={styles.buttonNext} onPress={()=> navigation.navigate(translationObject.ManualRegisterPt2Screen)}>
+                        <Text style={{fontSize: 20 }}>{translationObject.next}</Text>
                         <AntDesign name="right" size={20} color="black" />
                     </TouchableOpacity>
                 </View>
-
             </View>
         </View>
     );
-
-
 }
 
 const styles = StyleSheet.create({

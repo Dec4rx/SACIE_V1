@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import screen from "../utils/ScreenNames";
 // Screens imports
 import Splash from "../screens/Splash";
 import Login from "../screens/Login";
@@ -39,141 +38,156 @@ import AddMedicine from "../screens/AddMedicine";
 import TnC_Txt from "../screens/TermsAndConditionsTxt";
 import TnC_CB from "../screens/TermnsAndConditionsCheckbox";
 import Exit from "../screens/Exit";
+import QRScanner from "../screens/QRScanner";
 import TermsAndConditions from "../screens/TermsAndConditionsTxt";
+
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
+
 
 import color from "../utils/Colors";
 
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+  
   return (
     <Stack.Navigator initialRouteName="Splash"
       screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
     >
-      <Stack.Screen name={'Splash'} component={Splash} />
-      <Stack.Screen name={screen.LoginScreen} component={Login} />
-      <Stack.Screen name={screen.SignUpScreen} component={Signup} />
+      <Stack.Screen name={translationObject.SplashScreen} component={Splash} />
+      <Stack.Screen name={translationObject.LoginScreen} component={Login} />
+      <Stack.Screen name={translationObject.SignUpScreen} component={Signup} />
       <Stack.Screen
-        name={screen.ForgotPasswordScreen}
+        name={translationObject.ForgotPasswordScreen}
         component={ForgotPass}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.OTPVerificationScreen}
+        name={translationObject.OTPVerificationScreen}
         component={OTPVerification}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.ResetPasswordScreen}
+        name={translationObject.ResetPasswordScreen}
         component={ResetPassword}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.PasswordChangedScreen}
+        name={translationObject.PasswordChangedScreen}
         component={PasswordChanged}
       ></Stack.Screen>
 
-      <Stack.Screen name={"Principal"} component={Principal} />
+      <Stack.Screen 
+        name={translationObject.PrincipalScreen} 
+        component={Principal} />
 
       <Stack.Screen
-        name={screen.RegisterMedicineScreen}
+        name={translationObject.RegisterMedicineScreen}
         component={AddMedicine}
       />
 
-      <Stack.Screen name={"Account"} component={Account} />
-      <Stack.Screen name={"Edit"} component={EditAccount} />
-      <Stack.Screen name={"Language"} component={Lenguage}></Stack.Screen>
+      <Stack.Screen name={translationObject.AccountScreen} component={Account} />
+      <Stack.Screen name={translationObject.EditAccountScreen} component={EditAccount} />
+      <Stack.Screen name={translationObject.LanguageScreen} component={Lenguage}></Stack.Screen>
 
       <Stack.Screen
-        name={"Notification"}
+        name={translationObject.NotificationScreen}
         component={Notification}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.DetailsScreen}
+        name={translationObject.DetailsScreen}
         component={Details}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.RegisterMedicineNPScreen}
+        name={translationObject.RegisterMedicineNPScreen}
         component={AddMedicineNP}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.RegisterMedicalTest}
+        name={translationObject.RegisterMedicalTest}
         component={AddTest}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.RegisterMedicalTestNP}
+        name={translationObject.RegisterMedicalTest2}
         component={AddTest_v2}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.SugarBloodScreen}
+        name={translationObject.SugarBloodScreen}
         component={SugarBlood}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.TemperatureScreen}
+        name={translationObject.TemperatureScreen}
         component={Temperature}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.HeartRateScreen}
+        name={translationObject.HeartRateScreen}
         component={HearthRate}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.BloodPressureScreen}
+        name={translationObject.BloodPressureScreen}
         component={BloodPressure}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.BreathingFrequencyScreen}
+        name={translationObject.BreathingFrequencyScreen}
         component={BreathFrequency}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.OxigenScreen}
+        name={translationObject.OxigenScreen}
         component={Oxygenation}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.HealthConditionScreen}
+        name={translationObject.HealthConditionScreen}
         component={HealthCondition}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.ManualRegisterPt1Screen}
+        name={translationObject.ManualRegisterPt1Screen}
         component={RegisterP1}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.ManualRegisterPt2Screen}
+        name={translationObject.ManualRegisterPt2Screen}
         component={RegisterP2}
       ></Stack.Screen>
 
       <Stack.Screen
-        name={screen.ManualRegisterPt3Screen}
+        name={translationObject.ManualRegisterPt3Screen}
         component={RegisterP3}
       ></Stack.Screen>
 
-      <Stack.Screen name={"Drawer"} component={Drawer}></Stack.Screen>
+      <Stack.Screen name={translationObject.MenuScreen} component={Drawer}></Stack.Screen>
 
       <Stack.Screen
-        name={screen.TermnsAndConditionsCheckBoxScreen}
+        name={translationObject.TermnsAndConditionsCheckBoxScreen}
         component={TnC_CB}
       ></Stack.Screen>
 
 <Stack.Screen
-        name={screen.TermnsAndConditionsTxtScreen}
+        name={translationObject.TermnsAndConditionsTxtScreen}
         component={TnC_Txt}
       ></Stack.Screen>
 
 <Stack.Screen
-        name={screen.ExitScreen}
+        name={translationObject.ExitScreen}
         component={Exit}
+      ></Stack.Screen>
+
+<Stack.Screen
+        name={translationObject.QRScanScreen}
+        component={QRScanner}
       ></Stack.Screen>
     </Stack.Navigator>
 

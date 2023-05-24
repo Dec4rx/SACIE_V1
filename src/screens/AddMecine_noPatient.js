@@ -1,14 +1,5 @@
-import React from "react";
-import {
-  Box,
-  Text,
-  HStack,
-  Center,
-  Divider,
-  Input,
-  FormControl,
-  VStack,
-} from "native-base";
+import React, { useContext } from "react";
+import { Box, Text, HStack, Center, Divider, Input, FormControl, VStack } from "native-base";
 
 import BackButton from "../utils/components/BackButton";
 import MyButton from "../utils/components/MyButton";
@@ -16,7 +7,14 @@ import MyButton from "../utils/components/MyButton";
 import MainContainer from "../utils/components/MainContainer";
 import ScreenNames from "../utils/ScreenNames";
 
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
+
 const AddMedicine = ({ navigation }) => {
+
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <MainContainer>
       <Box>
@@ -31,7 +29,7 @@ const AddMedicine = ({ navigation }) => {
               fontSize={"30"}
               fontWeight={"bold"}
             >
-              {"Add\nMedicine"}
+              {translationObject.addMed}
             </Text>
           </Center>
           <Box width={"20%"}></Box>
@@ -40,9 +38,9 @@ const AddMedicine = ({ navigation }) => {
 
       <Box>
         <Center >
-          <Divider  />
+          <Divider />
 
-          <Box my={2}  w={'full'} >
+          <Box my={2} w={'full'} >
             <Center >
               <VStack w={'full'} >
                 <FormControl isRequired w={'full'}>
@@ -51,11 +49,11 @@ const AddMedicine = ({ navigation }) => {
                       bold: true,
                     }}
                   >
-                    Medicine Name
+                    {translationObject.medName}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
-                    placeholder="Penisiline"
+                    placeholder={translationObject.medNamePH}
                     onChangeText={(value) =>
                       setData({ ...formData, name: value })
                     }
@@ -65,14 +63,14 @@ const AddMedicine = ({ navigation }) => {
                       fontSize: "xs",
                     }}
                   >
-                    Name should contain atleast 3 character.
+                    {translationObject.errorMsg}
                   </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
                     }}
                   >
-                    Error Name
+                    Error
                   </FormControl.ErrorMessage>
                 </FormControl>
 
@@ -82,7 +80,7 @@ const AddMedicine = ({ navigation }) => {
                       bold: true,
                     }}
                   >
-                    Dosage
+                    {translationObject.dosage}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
@@ -96,14 +94,14 @@ const AddMedicine = ({ navigation }) => {
                       fontSize: "xs",
                     }}
                   >
-                    Name should contain atleast 3 character.
+                    {translationObject.errorMsg}
                   </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
                     }}
                   >
-                    Error Name
+                    Error
                   </FormControl.ErrorMessage>
                 </FormControl>
 
@@ -113,7 +111,7 @@ const AddMedicine = ({ navigation }) => {
                       bold: true,
                     }}
                   >
-                    Intervals between
+                    {translationObject.intervals}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
@@ -127,14 +125,14 @@ const AddMedicine = ({ navigation }) => {
                       fontSize: "xs",
                     }}
                   >
-                    Name should contain atleast 3 character.
+                    {translationObject.errorMsg}
                   </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
                     }}
                   >
-                    Error Name
+                    Error
                   </FormControl.ErrorMessage>
                 </FormControl>
 
@@ -144,7 +142,7 @@ const AddMedicine = ({ navigation }) => {
                       bold: true,
                     }}
                   >
-                    VIA
+                    {translationObject.via}
                   </FormControl.Label>
                   <Input
                     borderRadius={"15"}
@@ -158,27 +156,27 @@ const AddMedicine = ({ navigation }) => {
                       fontSize: "xs",
                     }}
                   >
-                    Name should contain atleast 3 character.
+                    {translationObject.errorMsg}
                   </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
                     }}
                   >
-                    Error Name
+                    Error
                   </FormControl.ErrorMessage>
                 </FormControl>
               </VStack>
             </Center>
           </Box>
-          
+
         </Center>
       </Box>
       <Center>
         <Box w={"full"}>
           <MyButton
-            title={"Add"}
-            onPress={() => navigation.navigate(ScreenNames.DetailsScreen)}
+            title={translationObject.add}
+            onPress={() => navigation.navigate(translationObject.DetailsScreen)}
           />
         </Box>
       </Center>

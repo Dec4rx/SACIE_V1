@@ -1,29 +1,16 @@
-import {
-  NativeBaseProvider,
-  Image,
-  Box,
-  Center,
-  Heading,
-  FormControl,
-  Input,
-  Button,
-  Link,
-  Text,
-  HStack,
-  VStack,
-  Row,
-} from "native-base";
-import React from "react";
-import BackButton from "../utils/components/BackButton";
+import { Image, Box, Center, Heading } from "native-base";
+import React, { useContext } from "react";
 import BlueButton from "../utils/components/BlueButton";
-import FormInputPass from "../utils/components/FormInputPass";
 import Likeimage from "../MarcoImages/Likeimage.png";
 
 import MainContainer from "../utils/components/MainContainer";
-
-import data from "../utils/Strings/StringsEng.json";
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider';
 
 const ResetPassword = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
   return (
     <MainContainer>
         <Center safeArea   w={'full'}>
@@ -37,7 +24,7 @@ const ResetPassword = ({ navigation }) => {
             size="xl"
           />
           <Heading style={{ fontSize: 28 }} fontWeight="semibold">
-            {data.ResetPassword.PasswordChan}
+            {translationObject.passChange}
           </Heading>
           <Box safeArea p="1" py="4" w="90%" maxW="300">
             <Heading
@@ -50,13 +37,13 @@ const ResetPassword = ({ navigation }) => {
               fontSize={16}
               textAlign={"center"}
             >
-              {data.ResetPassword.PassSuc}
+              {translationObject.passSuccess}
             </Heading>
           </Box>
           <Box safeArea  p="2" py="8" w="90%" maxW="300">
             <BlueButton
-              title={data.ResetPassword.BackLogin}
-              onPress={() => navigation.navigate(screen.LoginScreen)}
+              title={translationObject.back2Login}
+              onPress={() => navigation.navigate(translationObject.LoginScreen)}
             ></BlueButton>
           </Box>
         </Center>
