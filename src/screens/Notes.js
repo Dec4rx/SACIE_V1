@@ -9,51 +9,61 @@ import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage";
 import { I18nContext } from "../utils/components/I18nProvider";
 
-import { ref, update, onValue } from "firebase/database";
+import { ref, update, onValue, get, child } from "firebase/database";
 
 import { db } from "../Database";
 
+
+
 const NotesScreen = () => {
-  const [noteText, setNoteText] = useState("");
 
-  const Notes = () => {
-    useEffect(() => {
-      var starCountRef = ref(db, "Pacient/" + "patient/" + "notes");
-      onValue(starCountRef, (snapshot) => {
-        const data = snapshot.val();
-        console.log("Mensaje: ", data);
-        setNoteText(data);
+  const [textArea, setAreaText] = useState();
+
+  useEffect(() => {
+    get(child(ref(db), "Pacient/" + "patient/" + "notes"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+
+          setNoteText(snapshot.val());
+          console.log('Inicio: ',snapshot.val());
+          setAreaText(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    }, [""]);
+  }, [""]);
 
-    const { currentLanguage } = useContext(I18nContext);
-    const translationObject = translations[currentLanguage];
+  const [noteText, setNoteText] = useState("");
+  
 
-    return (
-      <Box alignItems="center" flex={1}>
+  const updateNotes = () => {
+    update(ref(db, "Pacient/" + "patient/"), {
+      notes: textArea,
+    });
+  };
+  
+  const Notes = () => {
+      return(
+        <Box alignItems="center" flex={1}>
         <TextArea
-        value="besos"
-        fontSize={20}
-        onChange={(e)=>setNoteText(e.target.valueOf())}
+          fontSize={20}
+          defaultValue={textArea}
           h={"full"}
+          onChangeText={(e)=>setAreaText(e.valueOf())}
           borderRadius={20}
           placeholder={translationObject.notes}
           backgroundColor={"#E6EBEE"}
           w={"full"}
         />
       </Box>
-    );
+      );
   };
 
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
-
-  const updateNotes = () => {
-    
-    update(ref(db, "Pacient/" + "patient/"), {
-      notes: noteText,
-    });
-  };
 
   return (
     <Box
@@ -89,6 +99,8 @@ const NotesScreen = () => {
       <Divider my="2" />
 
       <Notes />
+
+
     </Box>
   );
 };
