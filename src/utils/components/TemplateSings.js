@@ -53,7 +53,6 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
       setRealSigns(values);
       
       setIsLoading(false); // Marcar que los datos se han cargado correctamente
-      
     });
   }, []);
 
