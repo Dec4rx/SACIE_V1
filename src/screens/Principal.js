@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, {useState} from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, FlatList, Alert, Modal, Pressable} from 'react-native';
 import ImageButton from '../utils/components/ImageButton'
@@ -57,14 +58,128 @@ const Principal = () => {
               <Text style={{ color: '#62635C', fontSize: 12}}>Age: {age}</Text>
               <Text style={{ marginLeft: 20, color: '#62635C', fontSize: 12}}>Bed: {bed}</Text>
             </View>
+=======
+import React, { useState, useContext, useEffect } from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, Alert, Modal, Pressable, TouchableHighlight } from "react-native";
+import ImageButton from "../utils/components/ImageButton";
+
+import { HStack } from "native-base";
+import MainContainer from "../utils/components/MainContainer";
+import { FontAwesome } from '@expo/vector-icons';
+
+import { translations } from "../utils/Strings/Lenguage"
+import { I18nContext } from '../utils/components/I18nProvider'; 
+
+import { onValue, ref } from "firebase/database";
+import { auth } from'firebase/auth';
+import { firebaseConfig } from "../config";
+import {initializeApp } from "firebase/app";
+import { db } from "../Database";
+
+const Principal = ({ navigation }) => {
+  const { currentLanguage } = useContext(I18nContext);
+  const translationObject = translations[currentLanguage];
+
+  const [patients, setPatients]= useState([]);//donde se almacena la info del array
+
+  useEffect(() => {
+    const starCountRef = ref(db, "Pacient/"); //Ruta que uses
+    onValue(starCountRef, (snapshot) => {
+      var update = []; //Arreglo para la flatlist
+      snapshot.forEach((child)=>{ //child es el nodo donde te encuentras
+        update.push({
+          key: child.key, //usa key para acceder al nombre donde estas
+          patient: child.val(),
+          //name: snapshot.val(), // .val() sirve para traer la info dentro del nodo, usa un '.' para viajar a un hijo en especifico
+        })
+        console.log('Hijos: ', child.val()) //Pruebas
+      })
+      setPatients(update); //setea medicamentos con el array
+      const data = snapshot.val();
+      const auxiliar=data;
+    });
+  }, [""]);
+
+  //#region Data
+  const DATA = [
+    {
+      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba5",
+      color: "#D22525",
+      name: "Mihaela Díaz",
+      age: "51",
+      bed: "19",
+      image: '../resources/pictures/Mihaelaa.png'
+    },
+    {
+      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba2",
+      color: "#8CCF4D",
+      name: "Marco Ornelas",
+      age: "83",
+      bed: "4",
+      image: '../resources/pictures/Marcoo.png'
+    },
+    {
+      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba4",
+      color: "#D22525",
+      name: "Leyre Ramiro",
+      age: "48",
+      bed: "16",
+      image: '../resources/pictures/Leyree.png'
+    },
+    {
+      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bal",
+      color: "#DFC01D",
+      name: "Mireya Poveda",
+      age: "35",
+      bed: "8",
+      image: '../resources/pictures/Mireyaa.png'
+    },
+  ];
+//#endregion
+  
+const onPressHandler = () => {
+    setModalVisible(!modalVisible)
+    navigation.navigate(translationObject.ManualRegisterPt1Screen)
+  };
+
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const Item = ({ name, color, age, bed, image }) => (
+    <TouchableHighlight  onPress={() => navigation.navigate(translationObject.DetailsScreen)}>
+      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        {/* Card info */}
+        <View style={styles.item}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Image source={require("../resources/pictures/Leyree.png")} style={styles.otherImg} />
+            <Text style={styles.cardTitle}>{name}</Text>
+>>>>>>> Stashed changes
           </View>
           {/* Color */}
           <View>
           <View style={{ width: 60, height: 100, borderRadius: 16,backgroundColor: color, marginVertical: 5, }}/>
           </View>
         </View>
+<<<<<<< Updated upstream
         </TouchableHighlight>
       );
+=======
+        {/* Color */}
+        <View>
+          <View
+            style={{
+              width: 60,
+              height: 100,
+              borderRadius: 16,
+              backgroundColor: "#D22525",
+              marginVertical: 5,
+            }}
+          />
+        </View>
+      </View>
+    </TouchableHighlight>
+  );
+>>>>>>> Stashed changes
 
   return (
     <SafeAreaView style={styles.container}>
@@ -114,6 +229,31 @@ const Principal = () => {
         </View>
       </Modal>
 
+<<<<<<< Updated upstream
+=======
+      <View>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: "bold",
+            marginHorizontal: 0,
+            marginVertical: 10,
+          }}
+        >
+          {translationObject.patients}
+        </Text>
+        <FlatList
+          data={patients} //array de arriba
+          renderItem={({ item }) => (
+            <Item
+              name={item.key}
+              bed={item.patient.bed}
+              age={item.patient.age}  
+            />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+>>>>>>> Stashed changes
       </View>
 
     <View>

@@ -23,6 +23,7 @@ function Component(props) {
       </Center>
     );
   }
+<<<<<<< Updated upstream
   
   const getIcon = (screenName) => {
     switch (screenName) {
@@ -50,6 +51,26 @@ function Component(props) {
           height={"100px"} alignContent={"center"} resizeMode="contain" />  
             <Text bold color="#000000"> Jose Gordillo</Text>
           </Box>
+=======
+};
+
+
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props} safeArea>
+      <VStack space="6" my="2" mx="1" backgroundColor={"#ffffff"}>
+        <Box px="5">
+          <Image
+            source={require("../resources/pictures/nurseProfile.png")}
+            alt="Profile img"
+            size={"200px"}
+            width={"100px"}
+            height={"100px"}
+            alignContent={"center"}
+            resizeMode="contain"
+          />
+        </Box>
+>>>>>>> Stashed changes
 
           <VStack divider={<Divider />} space="4">
             <VStack space="3">
