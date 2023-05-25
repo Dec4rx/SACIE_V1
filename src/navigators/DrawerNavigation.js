@@ -48,6 +48,7 @@ import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { async } from "@firebase/util";
 
 global.__reanimatedWorkletInit = () => {};
 
@@ -87,8 +88,9 @@ const getIcon = (screenName) => {
 function CustomDrawerContent(props) {
   const [nameNurse, setName] = useState();
 
-  useEffect(() => {
-    const starCountRef = ref(db, "Nurses/" + "907dJoflccWzOxENhx0rOyZxc2H3");
+  useEffect(async() => {
+    const value = await AsyncStorage.getItem('id')
+    const starCountRef = ref(db, "Nurses/" + value);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       const nombre = data.name;
