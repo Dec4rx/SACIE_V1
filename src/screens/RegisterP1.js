@@ -8,9 +8,15 @@ import { I18nContext } from '../utils/components/I18nProvider';
 
 import ScreenNames from '../utils/ScreenNames';
 
-const RegisterP1 = ({navigation}) => {
+const RegisterP1 = ({ navigation }) => {
     const { currentLanguage } = useContext(I18nContext);
     const translationObject = translations[currentLanguage];
+
+    const [fullName, setFullName] = useState("")
+    const [gender, setGender] = useState("")
+    const [age, setAge] = useState("")
+    const [birthday, setBirthday] = useState("")
+    const [healtCond, setHealtCond] = useState(0)
 
     return (
         <View style={styles.container}>
@@ -28,7 +34,8 @@ const RegisterP1 = ({navigation}) => {
             />
 
             <View style={{ marginTop: 15, padding: 10 }}>
-                <FormInput label={translationObject.fullName} placeholder={'Mark Ramos'} />
+                <FormInput label={translationObject.fullName}
+                    value={fullName} onChangeText={(fullName) => { setFullName(fullName) }} />
 
                 <View style={{
                     flexDirection: 'row',
@@ -39,7 +46,7 @@ const RegisterP1 = ({navigation}) => {
                             <Text style={styles.redText}> *</Text>
                         </Text>
                         <TextInput style={styles.inputG}
-                            placeholder={'Hombre'}
+                            value={gender} onChangeText={(gender) => { setGender(gender) }}
                         />
 
                     </View>
@@ -50,7 +57,7 @@ const RegisterP1 = ({navigation}) => {
                             <Text style={styles.redText}> *</Text>
                         </Text>
                         <TextInput style={styles.inputA}
-                            placeholder={21}
+                            value={age} onChangeText={(age) => { setAge(age) }}
                         />
 
                     </View>
@@ -58,11 +65,19 @@ const RegisterP1 = ({navigation}) => {
                 </View>
                 <View style={styles.line} />
 
-                <FormInput label={translationObject.birthday} placeholder={'Julio 14, 2001'} />
-                <FormInput label={translationObject.healtCond} placeholder={'1'} />
+                <FormInput label={translationObject.birthday}
+                    value={birthday} onChangeText={(birthday) => { setBirthday(birthday) }}
+                />
+
+                <FormInput label={translationObject.healtCond}
+                    value={healtCond} onChangeText={(healtCond) => { setHealtCond(healtCond) }}
+                />
+
                 <View style={{ flexDirection: 'row-reverse' }}>
-                    <TouchableOpacity style={styles.buttonNext} onPress={()=> navigation.navigate(translationObject.ManualRegisterPt2Screen)}>
-                        <Text style={{fontSize: 20 }}>{translationObject.next}</Text>
+                    <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate(translationObject.ManualRegisterPt2Screen,
+                        { fullName: fullName, gender: gender, age: age, birthday: birthday, healtCond: healtCond})}>
+
+                        <Text style={{ fontSize: 20 }}>{translationObject.next}</Text>
                         <AntDesign name="right" size={20} color="black" />
                     </TouchableOpacity>
                 </View>
