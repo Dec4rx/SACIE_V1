@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import { Box,Center, Text, HStack, VStack, Switch, Modal, IconButton } from "native-base";
 
 import BackButton from "../utils/components/BackButton_Especial";
@@ -11,6 +11,15 @@ import MainContainer from "../utils/components/MainContainer";
 
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
+
+//import { firebase } from '@firebase'
+
+import {
+  ref,
+  onValue,
+} from "firebase/database";
+
+import { db } from "../Database";
 
 import { FlatList } from "react-native";
 
@@ -141,6 +150,43 @@ const Medicines = ({ MedicineName, dosage, intervals, time, via }) => {
 };
 
 const Medicine = ({ navigation }) => {
+
+  const [medicineInfo, setMedicineInfo]=useState({
+    MedicineName: '',
+    dosage: '',
+    intervals: '',
+    time: '',
+    via: '',
+  })
+
+  const [medicamentos, setMedicamentos] = useState([])//donde se almacena la info del array
+
+  useEffect(() => {
+    const starCountRef = ref(db, "Pacient/" + "patient"+'/medicine'); //Ruta que uses
+    onValue(starCountRef, (snapshot) => {
+
+      var update = []; //Arreglo para la flatlist
+
+      snapshot.forEach((child)=>{ //child es el nodo donde te encuentras
+        update.push({
+          key: child.key, //usa key para acceder al nombre donde estas
+          dosage: child.val().dosage,
+          time: child.val().time,
+          via: child.val().via,
+          intervals:  child.val().intervals,
+          //name: snapshot.val(), // .val() sirve para traer la info dentro del nodo, usa un '.' para viajar a un hijo en especifico
+
+        })
+        console.log('Hijos: ', child.val().dosage) //Pruebas
+      })
+      setMedicamentos(update); //setea medicamentos con el array
+
+      const data = snapshot.val();
+      
+      auxiliar=data;
+    });
+  }, [""]);
+
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
@@ -158,16 +204,18 @@ const Medicine = ({ navigation }) => {
       </Box>
       <Box p={2} backgroundColor={color.Gray} my={3} borderRadius={10}>
         <FlatList
-          data={DATA}
+          data={medicamentos} //array de arriba
           renderItem={({ item }) => (
+            
             <Medicines
-              MedicineName={item.MedicineName}
+              MedicineName={item.key} //aqui todo funciona como un flatlist cualquiera
               dosage={item.dosage}
               via={item.via}
               intervals={item.intervals}
               time={item.time}
 
             />
+            
           )}
           keyExtractor={(item) => item.id}
         />
