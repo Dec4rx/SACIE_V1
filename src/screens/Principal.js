@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, Alert, Modal, Pressable, TouchableHighlight } from "react-native";
 import ImageButton from "../utils/components/ImageButton";
 
@@ -11,9 +11,36 @@ import { FontAwesome } from '@expo/vector-icons';
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider'; 
 
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { firebaseConfig } from "../config";
+import {initializeApp} from "firebase/app";
+import { db } from "../Database";
+import {set , ref, push, onValue} from "firebase/database";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Principal = ({ navigation }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+
+  const [patients, setPatients]= useState([]);//donde se almacena la info del array
+
+  useEffect(() => {
+    const starCountRef = ref(db, "Pacient/"); //Ruta que uses
+    onValue(starCountRef, (snapshot) => {
+      var update = []; //Arreglo para la flatlist
+      snapshot.forEach((child)=>{ //child es el nodo donde te encuentras
+        update.push({
+          key: child.key, //usa key para acceder al nombre donde estas
+          patient: child.val(),
+          //name: snapshot.val(), // .val() sirve para traer la info dentro del nodo, usa un '.' para viajar a un hijo en especifico
+        })
+        console.log('Hijos: ', child.val()) //Pruebas
+      })
+      setPatients(update); //setea medicamentos con el array
+      const data = snapshot.val();
+      const auxiliar=data;
+    });
+  }, [""]);
 
   //#region Data
   const DATA = [
@@ -83,7 +110,7 @@ const Principal = ({ navigation }) => {
               width: 60,
               height: 100,
               borderRadius: 16,
-              backgroundColor: color,
+              backgroundColor: "#D22525",
               marginVertical: 5,
             }}
           />
@@ -183,13 +210,12 @@ const Principal = ({ navigation }) => {
           {translationObject.patients}
         </Text>
         <FlatList
-          data={DATA}
+          data={patients}
           renderItem={({ item }) => (
             <Item
-              name={item.name}
-              color={item.color}
-              bed={item.bed}
-              age={item.age}
+              name={item.patient.name}
+              bed={item.patient.bed}
+              age={item.patient.age}
             />
           )}
           keyExtractor={(item) => item.id}

@@ -18,6 +18,8 @@ import {initializeApp} from "firebase/app";
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
 import { firebaseConfig } from "../config";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Login = ({ navigation }) => {
   const [fontsLoaded] = useFonts({Lato_400Regular});
 
@@ -33,8 +35,17 @@ const Login = ({ navigation }) => {
       
     signInWithEmailAndPassword(auth,email, password).then((userCredential)=>{
       console.log('usuarioLogeado')
+      const userId = userCredential.user.uid;
+      const storeData = async (userId) => {
+        try {
+          await AsyncStorage.setItem('id', userId)
+        } catch (e) {
+          console.log(e)
+        }
+      }
+      console.log(userId)
     })
-    navigation.navigate("Drawer")
+    navigation.navigate(translationObject.MenuScreen)
   }
   return (
     <MainContainer>

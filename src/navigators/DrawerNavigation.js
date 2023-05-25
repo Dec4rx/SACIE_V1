@@ -12,6 +12,8 @@ import Exit from "../screens/Exit";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 global.__reanimatedWorkletInit = () => {};
 
 const Drawer = createDrawerNavigator();
@@ -62,10 +64,6 @@ function CustomDrawerContent(props) {
             alignContent={"center"}
             resizeMode="contain"
           />
-          <Text bold color="#000000">
-            {" "}
-            Jose Gordillo
-          </Text>
         </Box>
 
         <VStack divider={<Divider />} space="4">
