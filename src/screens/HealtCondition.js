@@ -8,7 +8,10 @@ const HealtCondition = () => {
     const translationObject = translations[currentLanguage];
 
     return(
-        <Signs title={translationObject.healtCondSpace} data={'4'}/>
+        <Signs title={translationObject.healtCondSpace} 
+            dbSing={'healt_condition'}
+            strokeColor={'#563994'}
+            gradientColor={'#B8CAE3'}/>
     )
 }
 

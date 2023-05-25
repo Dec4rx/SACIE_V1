@@ -8,7 +8,10 @@ const Oxygenation = () => {
     const translationObject = translations[currentLanguage];
 
     return(
-        <Signs title={translationObject.oxygen} data={'98 SpO2'}/>
+        <Signs title={translationObject.oxygen}
+            dbSing={'oxygenation'}
+            strokeColor={'#563994'}
+            gradientColor={'#B8CAE3'}/>
     )
 }
 

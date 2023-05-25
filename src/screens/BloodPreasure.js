@@ -8,7 +8,11 @@ const BloodPressure = () => {
     const translationObject = translations[currentLanguage];
 
     return(
-        <Signs title={translationObject.pressure} data={'12 rmp'}/>
+        <Signs 
+        title={translationObject.pressure}
+        dbSing={'blood_presure'}
+        strokeColor={'#163296'}
+        gradientColor={'#798AC3'}/>
     )
 }
 

@@ -8,7 +8,10 @@ const BreathingFrequency = () => {
     const translationObject = translations[currentLanguage];
 
     return(
-        <Signs title={translationObject.breFrequency} data={'12 rmp'}/>
+        <Signs title={translationObject.breFrequency}
+            dbSing={'breathing_frecuency'}
+            strokeColor={'#2E3AA7'}
+            gradientColor={'#B8CAE3'}/>
     )
 }
 

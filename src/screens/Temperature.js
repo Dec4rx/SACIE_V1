@@ -8,7 +8,10 @@ const Temperature = () => {
     const translationObject = translations[currentLanguage];
 
     return(
-        <Signs title={translationObject.temperature} data={'37 °C'}/>
+        <Signs title={translationObject.temperature} 
+            dbSing={'temperature'}
+            strokeColor={'#800B0B'}
+            gradientColor={'#B8CAE3'}/>
     )
 }
 

@@ -8,7 +8,12 @@ const HeartRate = () => {
     const translationObject = translations[currentLanguage];
 
     return(
-        <Signs title={translationObject.heartRate} data={'127 bpm'}/>
+        <Signs 
+            title={translationObject.heartRate}
+            dbSing={'heart_rate'}
+            strokeColor={'#1D5FBD'}
+            gradientColor={'#B8CAE3'}
+        />
     )
 }
 
