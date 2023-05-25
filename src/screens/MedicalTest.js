@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Box, Center, Text, HStack, IconButton, Modal} from "native-base";
 
 import { FlatList } from "react-native";
@@ -12,6 +12,13 @@ import color from "../utils/Colors";
 import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
+
+import { db } from "../Database";
+
+import {
+  ref,
+  onValue,
+} from "firebase/database";
 
 const DATA = [
   {
@@ -33,12 +40,6 @@ const DATA = [
     date: "hoy",
   },
 ];
-
-const Item = ({ title }) => (
-  <Box>
-    <Text>{title}</Text>
-  </Box>
-);
 
 const Test = ({ testName, doctorName, date }) => {
   const { currentLanguage } = useContext(I18nContext);
@@ -115,6 +116,29 @@ const Test = ({ testName, doctorName, date }) => {
 };
 
 const MedicalTest = ({ navigation }) => {
+
+  const [medicalTest, setMedicalTest] = useState([])//donde se almacena la info del array
+
+  useEffect(() => {
+    const starCountRef = ref(db, "Pacient/" + "patient"+'/medicalTest'); //Ruta que uses
+    onValue(starCountRef, (snapshot) => {
+
+      var update = []; //Arreglo para la flatlist
+
+      snapshot.forEach((child)=>{ //child es el nodo donde te encuentras
+        update.push({
+          key: child.key, //usa key para acceder al nombre donde estas
+          date: child.val().Fecha,
+          doctorName: child.val().DoneBy,
+          //name: snapshot.val(), // .val() sirve para traer la info dentro del nodo, usa un '.' para viajar a un hijo en especifico
+
+        })
+        console.log('Hijos: ', child.val()) //Pruebas
+      })
+      setMedicalTest(update); //setea medicalTest con el array
+    });
+  }, [""]);
+
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
@@ -133,10 +157,10 @@ const MedicalTest = ({ navigation }) => {
 
       <Box p={2} backgroundColor={color.Gray} my={3} borderRadius={10}>
         <FlatList
-          data={DATA}
+          data={medicalTest}
           renderItem={({ item }) => (
             <Test
-              testName={item.testName}
+              testName={item.key}
               doctorName={item.doctorName}
               date={item.date}
             />

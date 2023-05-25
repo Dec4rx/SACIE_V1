@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Text, ScrollView } from "react-native";
 import { Box, Center, HStack, VStack, Image } from "native-base";
 
@@ -14,8 +14,20 @@ import Medicine from "./Medicine";
 import Notes from "./Notes";
 import VitalSigns from "./VitalSigns";
 
-import { translations } from "../utils/Strings/Lenguage"
-import { I18nContext } from '../utils/components/I18nProvider';
+import { translations } from "../utils/Strings/Lenguage";
+import { I18nContext } from "../utils/components/I18nProvider";
+
+import {
+  ref,
+  set,
+  get,
+  update,
+  remove,
+  child,
+  onValue,
+} from "firebase/database";
+
+import { db } from "../Database";
 
 const Days = (props) => {
   return (
@@ -63,16 +75,16 @@ const QR = () => {
   );
 };
 
-const DataResume = (props) => {
+const DataResume = ({data, type}) => {
   return (
     <Box mt={2}>
-      <Text style={{ fontWeight: "bold" }}>{props.data} </Text>
-      <Text style={{ color: "gray" }}>{props.type} </Text>
+      <Text style={{ fontWeight: "bold" }}>{data} </Text>
+      <Text style={{ color: "gray" }}>{type} </Text>
     </Box>
   );
 };
 
-const Profile = () => {
+const Profile = ({ name, img }) => {
   return (
     <Center>
       <Box backgroundColor={"white"} shadow={"5"} borderRadius={20}>
@@ -81,86 +93,111 @@ const Profile = () => {
           style={{ width: 100, height: 100, margin: 10 }}
         />
       </Box>
-      <Text style={{marginVertical: 10}}>Marco Antonio</Text>
+      <Text style={{ marginVertical: 10 }}>{name}</Text>
     </Center>
   );
 };
 
 const MainRoute = () => {
+  const [patientData, setPatientData] = useState({
+    name: "",
+    age: "",
+    bed: "",
+    blood: "",
+    condition: "",
+    temperature: "",
+    Pressure: "",
+    glucose: "",
+  });
+
+  useEffect(() => {
+    const starCountRef = ref(db, "Pacient/" + "patient");
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setPatientData({ name: data.name, age: data.age, bed : data.bed, condition: data.condition, blood: data.blood });
+
+      console.log("Usuario: ", data.name);
+    });
+  }, [""]);
+
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
-  return(
-  <ScrollView>
-    <Center backgroundColor={"white"} style={{ padding: "5%" }}>
-      <Box w={"full"} mb={3}>
-        <BackButton />
-      </Box>
-      <Box>
-        <Center>
-          <Profile />
-        </Center>
-
-        <Box
-          backgroundColor={"white"}
-          mt={3}
-          borderRadius={10}
-          mx={10}
-          p={2}
-          shadow={"5"}
-        >
+  return (
+    <ScrollView>
+      <Center backgroundColor={"white"} style={{ padding: "5%" }}>
+        <Box w={"full"} mb={3}>
+          <BackButton />
+        </Box>
+        <Box>
           <Center>
-            <HStack space={2}>
-              <VStack justifyContent={"space-between"}>
-                <DataResume data="21" type={translationObject.age} />
-                <DataResume data="O+" type={translationObject.bloodTypeSpace} />
-              </VStack>
+            <Profile name={patientData.name} />
+          </Center>
 
-              <VStack justifyContent={"space-between"}>
-                <DataResume data="38°" type={translationObject.temperature} />
-                <DataResume data="140" type={translationObject.glucose} />
-              </VStack>
+          <Box
+            backgroundColor={"white"}
+            mt={3}
+            borderRadius={10}
+            mx={10}
+            p={2}
+            shadow={"5"}
+          >
+            <Center>
+              <HStack space={2}>
+                <VStack justifyContent={"space-between"}>
+                  <DataResume data={patientData.age} type={translationObject.age} />
+                  <DataResume
+                    data={patientData.blood}
+                    type={translationObject.bloodTypeSpace}
+                  />
+                </VStack>
 
-              <VStack justifyContent={"space-between"}>
-                <DataResume data="120/80" type={translationObject.pressure}/>
-                <DataResume data="3" type={translationObject.bed} />
-              </VStack>
-            </HStack>
+                <VStack justifyContent={"space-between"}>
+                  <DataResume data="38°" type={translationObject.temperature} />
+                  <DataResume data="140" type={translationObject.glucose} />
+                </VStack>
+
+                <VStack justifyContent={"space-between"}>
+                  <DataResume data="120/80" type={translationObject.pressure} />
+                  <DataResume data={patientData.bed} type={translationObject.bed} />
+                </VStack>
+              </HStack>
+            </Center>
+          </Box>
+          <Center w={"100%"}>
+            <Week />
+          </Center>
+          <Center>
+            <QR />
+          </Center>
+          <Center mt={5} justifyContent={"space-around"}>
+            <VStack w={"60%"} space={2}>
+              <ImageButton
+                image={require("../resources/pictures/Qr_icon.png")}
+                title={translationObject.printQr}
+              />
+              <ImageButton
+                image={require("../resources/pictures/Impression.png")}
+                title={translationObject.printFull}
+              />
+            </VStack>
           </Center>
         </Box>
-        <Center w={"100%"}>
-          <Week />
-        </Center>
-        <Center>
-          <QR />
-        </Center>
-        <Center mt={5} justifyContent={"space-around"}>
-          <VStack w={"60%"} space={2}>
-            <ImageButton
-              image={require("../resources/pictures/Qr_icon.png")}
-              title={translationObject.printQr}
-            />
-            <ImageButton
-              image={require("../resources/pictures/Impression.png")}
-              title={translationObject.printFull}
-            />
-          </VStack>
-        </Center>
-      </Box>
-    </Center>
-  </ScrollView>
-);}
+      </Center>
+    </ScrollView>
+  );
+};
 
 const Tab = createMaterialBottomTabNavigator();
 
 const MyTabs = () => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
-  
+
   return (
     <Tab.Navigator
       labeled={false}
-      initialRouteName="MedicalTest"
+      initialRouteName="Home"
       activeColor="#67A4F7"
       style={{ padding: 0 }}
     >
