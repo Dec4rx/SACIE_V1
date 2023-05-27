@@ -7,8 +7,11 @@ const HealtCondition = () => {
     const { currentLanguage } = useContext(I18nContext);
     const translationObject = translations[currentLanguage];
 
-    return(
-        <Signs title={translationObject.healtCondSpace} data={'4'}/>
+    return (
+        <Signs title={translationObject.healtCondSpace}
+            dbSing={'healt_condition'}
+            strokeColor={'#EC2306'}
+            gradientColor={'#FB3013'} />
     )
 }
 

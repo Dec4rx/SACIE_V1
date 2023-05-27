@@ -66,6 +66,7 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
     return <div>Cargado...</div>;
   }
   else{
+      
       lastValue = realSings[realSings.length - 1].y;
       firstValue =  realSings[0].y;
       lastTime = realSings[realSings.length - 1].x;
