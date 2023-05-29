@@ -13,19 +13,15 @@ import { ref, update, onValue, get, child } from "firebase/database";
 
 import { db } from "../Database";
 
-
-
 const NotesScreen = () => {
-
   const [textArea, setAreaText] = useState();
 
   useEffect(() => {
     get(child(ref(db), "Pacient/" + "patient/" + "notes"))
       .then((snapshot) => {
         if (snapshot.exists()) {
-
           setNoteText(snapshot.val());
-          console.log('Inicio: ',snapshot.val());
+          console.log("Inicio: ", snapshot.val());
           setAreaText(snapshot.val());
         } else {
           console.log("No data available");
@@ -37,29 +33,11 @@ const NotesScreen = () => {
   }, [""]);
 
   const [noteText, setNoteText] = useState("");
-  
 
   const updateNotes = () => {
     update(ref(db, "Pacient/" + "patient/"), {
       notes: textArea,
     });
-  };
-  
-  const Notes = () => {
-      return(
-        <Box alignItems="center" flex={1}>
-        <TextArea
-          fontSize={20}
-          defaultValue={textArea}
-          h={"full"}
-          onChangeText={(e)=>setAreaText(e.valueOf())}
-          borderRadius={20}
-          placeholder={translationObject.notes}
-          backgroundColor={"#E6EBEE"}
-          w={"full"}
-        />
-      </Box>
-      );
   };
 
   const { currentLanguage } = useContext(I18nContext);
@@ -98,9 +76,18 @@ const NotesScreen = () => {
 
       <Divider my="2" />
 
-      <Notes />
-
-
+      <Box alignItems="center" flex={1}>
+        <TextArea
+          fontSize={20}
+          defaultValue={textArea}
+          h={"full"}
+          onChangeText={(e) => setAreaText(e.valueOf())}
+          borderRadius={20}
+          placeholder={translationObject.notes}
+          backgroundColor={"#E6EBEE"}
+          w={"full"}
+        />
+      </Box>
     </Box>
   );
 };
