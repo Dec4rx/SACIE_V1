@@ -87,10 +87,16 @@ const getIcon = (screenName) => {
 
 function CustomDrawerContent(props) {
   const [nameNurse, setName] = useState();
+  const [id, setId] = useState();
 
-  useEffect(async() => {
+  const getUserID = async() => {
     const value = await AsyncStorage.getItem('id')
-    const starCountRef = ref(db, "Nurses/" + value);
+    setId(value);
+  }
+
+  useEffect(() => {
+    getUserID();
+    const starCountRef = ref(db, "Nurses/" + id);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       const nombre = data.name;
