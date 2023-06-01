@@ -183,7 +183,7 @@ const Medicine = ({ navigation }) => {
 
       const data = snapshot.val();
       
-      auxiliar=data;
+      //auxiliar=data;
     });
   }, [""]);
 

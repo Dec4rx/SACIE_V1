@@ -3,14 +3,12 @@ import React, { useContext, useState } from "react";
 import { Image } from "native-base";
 import Enf_1 from "../MarcoImages/Enf_1.png";
 import BlueButton from "../utils/components/BlueButton";
-import BackButton from "../utils/components/BackButton";
 import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
 import MainContainer from "../utils/components/MainContainer";
 
 import { translations } from "../utils/Strings/Lenguage";
 import { I18nContext } from "../utils/components/I18nProvider";
-//import { firebase } from "../config.js";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 

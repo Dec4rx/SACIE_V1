@@ -1,5 +1,5 @@
 import { Image, Box, Center, Heading, Link, Text, VStack, Checkbox,} from "native-base";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 import Enf_2 from "../MarcoImages/Enf_2.png";

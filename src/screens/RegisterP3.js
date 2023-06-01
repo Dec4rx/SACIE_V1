@@ -94,10 +94,9 @@ const RegisterP3 = ({ navigation }) => {
             </View>
         </View>
     );
-
-
 }
 
+//#region Styles
 const styles = StyleSheet.create({
     mainTitle: {
         textAlign: 'center',
@@ -160,6 +159,6 @@ const styles = StyleSheet.create({
 
     }
 })
-
+//#endregion
 
 export default RegisterP3;
