@@ -1,7 +1,7 @@
 import { Image, Box, Center, Heading } from "native-base";
 import React, { useContext } from "react";
 import BlueButton from "../utils/components/BlueButton";
-import Likeimage from "../MarcoImages/Likeimage.png";
+import Likeimage from "../resources/pictures/Likeimage.png";
 
 import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"

@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 import FormInput from "../utils/components/FormInput";
-import PasswordImage from "../MarcoImages/PasswordImage.png";
+import PasswordImage from "../resources/pictures/PasswordImage.png";
 
 import MainContainer from "../utils/components/MainContainer";
 

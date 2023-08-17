@@ -1,46 +1,16 @@
+//#region Imports
 import React, { useContext, useState, useEffect } from "react";
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-} from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerContentScrollView } from "@react-navigation/drawer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  Box,
-  Pressable,
-  VStack,
-  Text,
-  Center,
-  HStack,
-  Divider,
-  Icon,
-  Image,
-} from "native-base";
+import { Box, Pressable, VStack, Text, Center, HStack, Divider, Icon, Image } from "native-base";
 import Principal from "../screens/Principal";
 import Account from "../screens/Account";
 import Notification from "../screens/Notification";
 import Lenguage from "../screens/Lenguage";
 import TermsAndConditions from "../screens/TermnsAndConditionsCheckbox";
 import Exit from "../screens/Exit";
-
-import {
-  collection,
-  doc,
-  setDoc,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
-import {
-  ref,
-  set,
-  get,
-  update,
-  remove,
-  child,
-  onValue,
-} from "firebase/database";
+import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, getDocs } from "firebase/firestore";
+import { ref, set, get, update, remove, child, onValue } from "firebase/database";
 
 import { db } from "../Database";
 
@@ -49,6 +19,7 @@ import { I18nContext } from '../utils/components/I18nProvider';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { async } from "@firebase/util";
+//#endregion
 
 global.__reanimatedWorkletInit = () => {};
 

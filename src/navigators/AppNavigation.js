@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import screen from "../utils/ScreenNames";
 
-//Firebase imports
+//#region Firebase imports
 import firebaseConfig from "../config";
 import { FirebaseApp } from "firebase/app";
 import { Auth } from "firebase/auth";
+//#endregion
 
-// Screens imports
+//#region Screens imports
 import Splash from "../screens/Splash";
 import Login from "../screens/login";
 import Signup from "../screens/Signup";
@@ -47,12 +47,12 @@ import TnC_CB from "../screens/TermnsAndConditionsCheckbox";
 import Exit from "../screens/Exit";
 import QRScanner from "../screens/QRScanner";
 import TermsAndConditions from "../screens/TermsAndConditionsTxt";
+//#endregion
 
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
-
-import color from "../utils/Colors";
+import color from "../utils/Strings/Colors";
 
 const Stack = createNativeStackNavigator();
 

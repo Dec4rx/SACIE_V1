@@ -5,8 +5,6 @@ import BackButton from '../utils/components/BackButton';
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
-import ScreenNames from '../utils/ScreenNames';
-
 import { getDatabase, ref, set, push, onValue } from "firebase/database";
 import { db } from '../Database';
 import { useRoute } from '@react-navigation/native';

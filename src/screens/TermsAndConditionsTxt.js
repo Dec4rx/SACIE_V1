@@ -18,10 +18,6 @@ import Icon from "react-native-vector-icons/AntDesign";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 
-import data from "../utils/Strings/StringsEsp.json";
-
-
-
 const TermsAndConditionsTxt = () => {
   return (
     <Box
@@ -38,7 +34,7 @@ const TermsAndConditionsTxt = () => {
         </Box>
         <Box>
           <Text textAlign={"center"} fontSize={30}>
-            {data.TandC.TandC}
+            "."
           </Text>
         </Box>
         <Box
@@ -51,10 +47,10 @@ const TermsAndConditionsTxt = () => {
       <Divider my="2" />
       <Box p={2} my={3}>
         <Text textAlign={'center'} fontSize={'15'}>
-          {data.TandC.TandC}
+          "."
         </Text>
       </Box>
-      <BlueButton title={data.TandC.Continue} />
+      <BlueButton title="Continue" />
     </Box>
   );
 };

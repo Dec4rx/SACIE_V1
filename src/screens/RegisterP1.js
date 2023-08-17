@@ -6,8 +6,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
-import ScreenNames from '../utils/ScreenNames';
-
 const RegisterP1 = ({ navigation }) => {
     const { currentLanguage } = useContext(I18nContext);
     const translationObject = translations[currentLanguage];

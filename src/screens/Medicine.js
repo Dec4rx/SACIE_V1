@@ -2,11 +2,10 @@ import React, {useContext, useState, useEffect} from "react";
 import { Box,Center, Text, HStack, VStack, Switch, Modal, IconButton } from "native-base";
 
 import BackButton from "../utils/components/BackButton_Especial";
-import color from "../utils/Colors";
+import color from "../utils/Strings/Colors";
 import MyButton from "../utils/components/MyButton";
 
 import Icon from "react-native-vector-icons/AntDesign";
-import ScreenNames from "../utils/ScreenNames";
 import MainContainer from "../utils/components/MainContainer";
 
 import { translations } from "../utils/Strings/Lenguage"
