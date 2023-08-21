@@ -1,4 +1,4 @@
-
+ 
 import Signs from "../utils/components/TemplateSings"
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';

@@ -1,18 +1,36 @@
 import {Image, Box, Center, Heading, Link, Text} from "native-base";
-import React, { useContext } from "react";
+import React, { useContext, useState} from "react";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 import FormInput from "../utils/components/FormInput";
 import PasswordImage from "../MarcoImages/PasswordImage.png";
 
+
 import MainContainer from "../utils/components/MainContainer";
 
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
+import {firebaseConfig } from "../config";
+import {initializeApp} from "firebase/app";
+import {sendPasswordResetEmail, getAuth} from "firebase/auth";
 
 const ForgotPass = ({ navigation }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+  const [email, setEmail]= useState('');
+  const app = initializeApp(firebaseConfig)
+  const auth = getAuth(app)
+ 
+  const ResetPassword = ()=>{
+    sendPasswordResetEmail(auth, email)
+  .then(() => {
+   alert("Password reset email sent!") })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+  }
 
   return (
     <MainContainer>
@@ -42,10 +60,12 @@ const ForgotPass = ({ navigation }) => {
           >
             {translationObject.dontWorry}
           </Heading>
-          <FormInput  label={translationObject.passRecovery} placeholder={translationObject.enterEmail}></FormInput>
+          <FormInput  label={translationObject.passRecovery} 
+          placeholder={translationObject.enterphonenum} 
+          onChangeText={(email)=> setEmail(email)}></FormInput>
           <BlueButton
             title={translationObject.sendCode} 
-            onPress={() => navigation.navigate(translationObject.OTPVerificationScreen)}
+            onPress={() => {ResetPassword()} }//navigation.navigate(translationObject.OTPVerificationScreen)//}
           ></BlueButton>
         </Box>
         <Box safeArea w={"full"} py="2">

@@ -17,7 +17,7 @@ import { firebaseConfig } from "../config";
 import {initializeApp} from "firebase/app";
 import { db } from "../Database";
 import {set , ref, push} from "firebase/database";
-
+  
 const Signup = ({ navigation }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
