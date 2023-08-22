@@ -31,7 +31,7 @@ const translations = {
         createPass: "Create new password",
         newPass: "Your new password must be unique from those previously used.",
         newPassPH: "Enter new Password",
-        enterphonenum:"Enter phone number",
+        enterphonenum:"Enter your email",
         resetPass: "Reset password",
         passChange: "Password Changed!",
         passSuccess: "Your password has been changed successfully.",

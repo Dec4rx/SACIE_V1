@@ -61,7 +61,7 @@ const ForgotPass = ({ navigation }) => {
             {translationObject.dontWorry}
           </Heading>
           <FormInput  label={translationObject.passRecovery} 
-          placeholder={translationObject.enterphonenum} 
+          placeholder={translationObject.enterEmail} 
           onChangeText={(email)=> setEmail(email)}></FormInput>
           <BlueButton
             title={translationObject.sendCode} 

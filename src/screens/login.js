@@ -40,9 +40,9 @@ const Login = ({ navigation }) => {
           console.log(e)
         }
       }
+      navigation.navigate(translationObject.MenuScreen)
       console.log(userId)
     })
-    navigation.navigate(translationObject.MenuScreen)
   }
   return (
     <MainContainer>
