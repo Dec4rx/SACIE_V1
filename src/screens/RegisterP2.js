@@ -4,7 +4,6 @@ import FormInput from '../utils/components/FormInput';
 import BackButton from '../utils/components/BackButton';
 import { AntDesign } from '@expo/vector-icons';
 
-import ScreenNames from '../utils/ScreenNames';
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 import { useRoute } from '@react-navigation/native';

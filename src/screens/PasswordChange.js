@@ -3,13 +3,9 @@ import React, {useContext} from "react";
 import BlueButton from "../utils/components/BlueButton";
 import FormInputPass from "../utils/components/FormInputPass";
 
-import ScreenNames from "../utils/ScreenNames";
-
 import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
-
-import data from "../utils/Strings/StringsEsp.json";
 
 const PasswordChanged = ({ navigation }) => {
   const { currentLanguage } = useContext(I18nContext);

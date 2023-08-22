@@ -1,7 +1,8 @@
+//#region Imports
 import { Box, Center, Heading, Link, Text, HStack, VStack, Input } from "native-base";
 import React, { useContext, useState } from "react";
 import { Image } from "native-base";
-import Enf_1 from "../MarcoImages/Enf_1.png";
+import Enf_1 from "../resources/pictures/Enf_1.png";
 import BlueButton from "../utils/components/BlueButton";
 import FormInput from "../utils/components/FormInput";
 import FormInputPass from "../utils/components/FormInputPass";
@@ -16,6 +17,7 @@ import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
 import { firebaseConfig } from "../config";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+//#endregion
 
 const Login = ({ navigation }) => {
   const [fontsLoaded] = useFonts({ Lato_400Regular });

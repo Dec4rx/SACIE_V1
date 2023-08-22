@@ -4,8 +4,6 @@ import ImageButton from "../utils/components/ImageButton";
 
 import { HStack } from "native-base";
 import MainContainer from "../utils/components/MainContainer";
-import ScreenNames from "../utils/ScreenNames";
-import data from "../utils/Strings/StringsEsp.json";
 import { FontAwesome } from '@expo/vector-icons';
 
 import { translations } from "../utils/Strings/Lenguage"

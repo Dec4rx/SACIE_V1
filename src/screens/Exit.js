@@ -7,8 +7,6 @@ import { I18nContext } from '../utils/components/I18nProvider';
 import CorrectButton from "../utils/components/CorrectButton";
 import ErrorButton from '../utils/components/ErrorButton';
 
-import ScreenNames from "../utils/ScreenNames";
-
 const Exit = ({navigation}) => {
   const { currentLanguage } = useContext(I18nContext);
     const translationObject = translations[currentLanguage];

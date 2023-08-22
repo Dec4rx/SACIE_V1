@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 
-import color from "../Colors";
+import color from "../Strings/Colors";
 
 const MainContainer = ({ children, height }) => {
   return (
