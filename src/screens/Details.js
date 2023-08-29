@@ -29,6 +29,8 @@ import {
 
 import { db } from "../Database";
 
+
+
 const Days = (props) => {
   return (
     <Center
@@ -100,7 +102,7 @@ const Profile = ({ name, img }) => {
 
 const MainRoute = () => {
   const [patientData, setPatientData] = useState({
-    name: "",
+    name: "Holaaaa",
     age: "",
     bed: "",
     blood: "",
@@ -190,11 +192,25 @@ const MainRoute = () => {
 
 const Tab = createMaterialBottomTabNavigator();
 
-const MyTabs = () => {
+
+
+const MyTabs = ({route}) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+  const { itemId, ruta } = route.params;
 
+  const nurse = JSON.stringify(ruta);
+  const patient = JSON.stringify(itemId);
+
+  
+
+
+  console.log('Fue recibido esto: ',  itemId);
+  console.log('Y esto: ',  ruta); 
+  //const starCountRef = ref(db, "Nurses/" + '907dJoflccWzOxENhx0rOyZxc2H3' + "/Paciente/" + 'PruebaPaciente_1'); //Ruta que uses
+  const starCountRef = ref(db, "Nurses/" + nurse+ "/Paciente/" + patient);
   return (
+    
     <Tab.Navigator
       labeled={false}
       initialRouteName="Home"
