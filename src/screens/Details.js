@@ -100,9 +100,13 @@ const Profile = ({ name, img }) => {
   );
 };
 
-const MainRoute = () => {
+const MainRoute = (props) => {
+
+  console.log('Esto es una prueba, enfermera->', props.nurse)
+  
+
   const [patientData, setPatientData] = useState({
-    name: "Holaaaa",
+    name: "",
     age: "",
     bed: "",
     blood: "",
@@ -113,9 +117,16 @@ const MainRoute = () => {
   });
 
   useEffect(() => {
-    const starCountRef = ref(db, "Pacient/" + "patient");
+    const ruta = "Nurses/" + props.nurse.user + "/Paciente/" + props.patient.id;
+
+    console.log('Esta es la ruta asignada: ',  ruta)
+
+    const starCountRef = ref(db, ruta);
+    console.log('Referencia: ' , starCountRef)
     onValue(starCountRef, (snapshot) => {
+      console.log('Valor', snapshot)
       const data = snapshot.val();
+      console.log('Valor del nombre' , data)
       setPatientData({ name: data.name, age: data.age, bed : data.bed, condition: data.condition, blood: data.blood });
 
       console.log("Usuario: ", data.name);
@@ -202,13 +213,9 @@ const MyTabs = ({route}) => {
   const nurse = JSON.stringify(ruta);
   const patient = JSON.stringify(itemId);
 
-  
-
-
-  console.log('Fue recibido esto: ',  itemId);
-  console.log('Y esto: ',  ruta); 
-  //const starCountRef = ref(db, "Nurses/" + '907dJoflccWzOxENhx0rOyZxc2H3' + "/Paciente/" + 'PruebaPaciente_1'); //Ruta que uses
-  const starCountRef = ref(db, "Nurses/" + nurse+ "/Paciente/" + patient);
+  console.log('Fue recibido esto: ',  nurse);
+  console.log('Y esto: ',  patient); 
+  //const starCountRef = ref(db, "Nurses/" + nurse+ "/Paciente/" + patient);
   return (
     
     <Tab.Navigator
@@ -241,7 +248,7 @@ const MyTabs = ({route}) => {
       />
       <Tab.Screen
         name="Home"
-        component={MainRoute}
+        children={()=><MainRoute nurse={ruta} patient={itemId}/>} 
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />

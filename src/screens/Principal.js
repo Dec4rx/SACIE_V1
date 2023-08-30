@@ -87,7 +87,7 @@ const Principal = ({ navigation, route }) => {
 
   //Pruebas
   const auth = getAuth();
-  const user = auth.currentUser.uid.toString();
+  const user = auth.currentUser.uid;
 
   console.log('Quien esta loggeada? ', user)
 
@@ -105,7 +105,6 @@ const Principal = ({ navigation, route }) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image source={require("../resources/pictures/Leyree.png")} style={styles.otherImg} />
             <Text style={styles.cardTitle}>{name}</Text>
-            <Text style={styles.cardTitle}>ID: {id}</Text>
           </View>
           <View style={{ flexDirection: "row", marginVertical: 5 }}>
             <Text style={{ color: "#62635C", fontSize: 12 }}>{translationObject.age}: {age}</Text>
