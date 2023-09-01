@@ -16,6 +16,8 @@ const RegisterP1 = ({ navigation }) => {
     const [birthday, setBirthday] = useState("")
     const [healtCond, setHealtCond] = useState(0)
 
+
+
     return (
         <View style={styles.container}>
             <View style={{ marginStart: 12, marginTop: 12 }}>

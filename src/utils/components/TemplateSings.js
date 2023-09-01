@@ -17,7 +17,7 @@ import { Dimensions } from 'react-native';
 import { getDatabase, ref, set, push, onValue} from "firebase/database";
 import { db } from "../../Database";
 
-
+  
 const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);

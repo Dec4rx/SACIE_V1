@@ -16,7 +16,17 @@ import { db } from "../Database";
 import {set , ref, push, onValue} from "firebase/database";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const Principal = ({ navigation }) => {
+  const getUser = async () => {
+    try {
+      const userid = await AsyncStorage.getItem("id");
+      const currentUser = JSON.parse(userid);
+      console.log(currentUser);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
