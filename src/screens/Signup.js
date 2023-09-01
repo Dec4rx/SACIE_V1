@@ -32,116 +32,15 @@ const Signup = ({ navigation }) => {
     
       createUserWithEmailAndPassword(auth,email, password).then((userCredential)=>{
         console.log('usuario creado')
-        const user= userCredential.user;
         const id= userCredential.user.uid;
-        
-        
         set(ref(db, 'Nurses/'+id),{
           username: name,
           lastname: lastname,
           email: Email,
           password: Password
         });
-        set(ref(db, 'Pacient/'+id),{
-          patient: {
-            name: "",
-            age: "",
-            bed: "",
-            birthday: "",
-            blood: "",
-            check_in: "",
-            condition: "",
-            date: "",
-            days: "",
-            diagnostic: "",
-            gender: "",
-            medicine: [
-                {
-                    name: "",
-                    dosis: "",
-                    intervals: "",
-                    time: "",
-                    route: ""
-                }
-            ],
-            stauts: "",
-            vitalSigns: [
-                {
-                    blood_presure: [
-                        {
-                            x: "",
-                            y: ""
-                        },
-                        {
-                            x: "",
-                            y: ""
-                        }
-                    ],
-                    breathing_frecuency: [
-                        {
-                            x: "",
-                            y: ""
-                        },
-                        {
-                            x: "",
-                            y: ""
-                        }
-                    ],
-                    healt_condition: [
-                        {
-                            x: "",
-                            y: ""
-                        },
-                        {
-                            x: "",
-                            y: ""
-                        }
-                    ],
-                    heart_rate: [
-                        {
-                            x: "",
-                            y: ""
-                        },
-                        {
-                            x: "",
-                            y: ""
-                        }
-                    ],
-                    oxygenation: [
-                        {
-                            x: "",
-                            y: ""
-                        },
-                        {
-                            x: "",
-                            y: ""
-                        }
-                    ],
-                    sugar_blood: [
-                        {
-                            x: "",
-                            y: ""
-                        },
-                        {
-                            x: "",
-                            y: ""
-                        }
-                    ],
-                    temperature: [
-                        {
-                            x: "",
-                            y: ""
-                        },
-                        {
-                            x: "",
-                            y: ""
-                        }
-                    ]
-                }
-            ]
-        }
+        navigation.navigate(translationObject.LoginScreen)
         });
-      })
   }   
   return (
     <MainContainer>
@@ -163,7 +62,7 @@ const Signup = ({ navigation }) => {
         <Box safeArea py="8" w={"full"}>
           <VStack space={3} mt="5">
             <FormInput label={translationObject.name} onChangeText={(name)=>setName(name)}></FormInput>
-            <FormInput label={translationObject.lastName} onChangeText={(lastname)=>setLastName(name)}></FormInput>
+            <FormInput label={translationObject.lastName} onChangeText={(lastname)=>setLastName(lastname)}></FormInput>
             <FormInput label={translationObject.email}  onChangeText={(Email)=> setEmail(Email)}></FormInput>
             <FormInputPass
               label={translationObject.password}
@@ -202,9 +101,7 @@ const Signup = ({ navigation }) => {
                 <Link
                   onPress={() =>
                     navigation.navigate(
-                      translationObject.TermnsAndConditionsCheckBoxScreen
-                    )
-                  }
+                      translationObject.TermnsAndConditionsCheckBoxScreen)}
                   my={"auto"}
                   _text={{ fontSize: "m", color: "indigo.500", fontWeight: '500', textDecoration: 'none' }}
                 >
