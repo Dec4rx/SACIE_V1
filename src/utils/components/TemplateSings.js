@@ -17,9 +17,12 @@ import { Dimensions } from 'react-native';
 import { getDatabase, ref, set, push, onValue } from "firebase/database";
 import { db } from "../../Database";
 
-import BackgroundTimer from "react-native-background-timer";//Timer
+//import BackgroundTimer from "react-native-background-timer";//Timer
   
-const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
+const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
+
+  console.log('Donde estamos actualmente? ', dbSing)
+  console.log('Dentro de la matriz, llego esta ruta:' , ruta)
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -48,23 +51,23 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
   const toggleSwitch = () => {
     if (!isEnabled) {
       postSeconds();
-      console.log("siii")
+      
     }
     setIsEnabled((previousState) => !previousState);
   }
 
   useEffect(() => {
-    const getSigns = ref(db, 'Pacient/lECXp5SVW3bQ1R2aXEQOOUnxeIT2/patient/vitalSigns/0/' + dbSing);
+    const getSigns = ref(db, ruta+dbSing);
     onValue(getSigns, (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
+      
 
       let values = [];
       for (let key in data) {
         let value = data[key];
         values.push(value);
       }
-      console.log(values);
+      
       setRealSigns(values);
 
       setIsLoading(false); // Marcar que los datos se han cargado correctamente
@@ -72,7 +75,7 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
   }, []);
 
   useEffect(() => {
-    console.log("real", realSings);
+    
 
   }, [realSings]);
 
@@ -88,38 +91,23 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
   }
 
 
-
-
-
-
-
   const postSign = () => {
     const db = getDatabase();
-    const postListRef = ref(db, 'Pacient/lECXp5SVW3bQ1R2aXEQOOUnxeIT2/patient/vitalSigns/0/' + dbSing)
+    const postListRef = ref(db, ruta+dbSing)
     const newPostRef = push(postListRef);
     set(newPostRef, {
       "x": parseInt(time),
       "y": parseInt(value)
     }).then(
-      console.log('si')
+      
     )
   }
-
-
-
   const postSeconds = () => {
     const sec = hours * 3600 + mins * 60 + seconds
     setSecondsLeft(sec)
-    console.log("sec:"+ sec)
-    console.log("Segundos:"+secondsLeft)
+    
 
   }
-
-
-
-
-
-
   return (
 
     <MainContainer>
