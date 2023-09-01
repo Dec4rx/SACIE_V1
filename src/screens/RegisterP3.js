@@ -5,14 +5,16 @@ import BackButton from '../utils/components/BackButton';
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
+
 import { getDatabase, ref, set, push, onValue } from "firebase/database";
 import { db } from '../Database';
 import { useRoute } from '@react-navigation/native';
 
+
 const RegisterP3 = ({ navigation }) => {
     const { currentLanguage } = useContext(I18nContext);
     const translationObject = translations[currentLanguage];
-
+   
 
     const route = useRoute();
     const { fullName, gender, age, birthday, healtCond,
@@ -43,7 +45,7 @@ const RegisterP3 = ({ navigation }) => {
             "blood": bloodType,//
             "incomeOr": incomeOr,
             "medRecNum": medRecNum,
-            "medDiag": medDiag
+            "medDiag": medDiag, 
         }).then(() => {
             console.log('si')
             navigation.navigate(translationObject.MenuScreen, {name: fullName})
