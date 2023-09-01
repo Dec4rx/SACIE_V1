@@ -14,13 +14,13 @@ import { I18nContext } from '../components/I18nProvider';
 import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
 import { Dimensions } from 'react-native';
 
-import { getDatabase, ref, set, push, onValue} from "firebase/database";
+import { getDatabase, ref, set, push, onValue } from "firebase/database";
 import { db } from "../../Database";
 
+import BackgroundTimer from "react-native-background-timer";//Timer
   
 const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const { currentLanguage } = useContext(I18nContext);
@@ -38,12 +38,27 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
   let firstValue = 0
   let lastTime = 0
   let firstTime = 0
+
+  const [secondsLeft, setSecondsLeft] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [mins, setMins] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => {
+    if (!isEnabled) {
+      postSeconds();
+      console.log("siii")
+    }
+    setIsEnabled((previousState) => !previousState);
+  }
+
   useEffect(() => {
-    const getSigns = ref(db, 'Pacient/patient/vitalSigns/0/' + dbSing);
+    const getSigns = ref(db, 'Pacient/lECXp5SVW3bQ1R2aXEQOOUnxeIT2/patient/vitalSigns/0/' + dbSing);
     onValue(getSigns, (snapshot) => {
       const data = snapshot.val();
       console.log(data);
-  
+
       let values = [];
       for (let key in data) {
         let value = data[key];
@@ -51,28 +66,28 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
       }
       console.log(values);
       setRealSigns(values);
-      
+
       setIsLoading(false); // Marcar que los datos se han cargado correctamente
     });
   }, []);
 
   useEffect(() => {
     console.log("real", realSings);
-    
+
   }, [realSings]);
 
   if (isLoading) {
     // Muestra un indicador de carga mientras los datos se están obteniendo
     return <div>Cargado...</div>;
   }
-  else{
-      lastValue = realSings[realSings.length - 1].y;
-      firstValue =  realSings[0].y;
-      lastTime = realSings[realSings.length - 1].x;
-      firstTime =  realSings[0].x;
+  else {
+    lastValue = realSings[realSings.length - 1].y;
+    firstValue = realSings[0].y;
+    lastTime = realSings[realSings.length - 1].x;
+    firstTime = realSings[0].x;
   }
 
- 
+
 
 
 
@@ -80,7 +95,7 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
 
   const postSign = () => {
     const db = getDatabase();
-    const postListRef = ref(db, 'Pacient/patient/vitalSigns/0/' + dbSing)
+    const postListRef = ref(db, 'Pacient/lECXp5SVW3bQ1R2aXEQOOUnxeIT2/patient/vitalSigns/0/' + dbSing)
     const newPostRef = push(postListRef);
     set(newPostRef, {
       "x": parseInt(time),
@@ -88,6 +103,16 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
     }).then(
       console.log('si')
     )
+  }
+
+
+
+  const postSeconds = () => {
+    const sec = hours * 3600 + mins * 60 + seconds
+    setSecondsLeft(sec)
+    console.log("sec:"+ sec)
+    console.log("Segundos:"+secondsLeft)
+
   }
 
 
@@ -155,8 +180,30 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
               value={isEnabled}
             />
           </HStack>
-          <TextInput style={styles.input} />
+
+          <HStack justifyContent="center">
+
+            <TextInput style={[styles.input, { width: 100, textAlign: 'center' }]}
+              placeholder="Horas"
+              keyboardType="numeric"
+              value={hours} onChangeText={(hours) => { setHours(hours) }} />
+
+            <TextInput style={[styles.input, { width: 100, textAlign: 'center', marginLeft: 8 }]}
+              placeholder="Minutos"
+              keyboardType="numeric"
+              value={mins} onChangeText={(mins) => { setMins(mins) }}
+            />
+
+            <TextInput style={[styles.input, { width: 100, textAlign: 'center', marginLeft: 8 }]}
+              placeholder="Segundos"
+              keyboardType="numeric"
+              value={seconds} onChangeText={(seconds) => { setSeconds(seconds) }}
+            />
+
+          </HStack>
+
           <View style={styles.line} />
+
         </VStack>
 
         <Modal
@@ -262,7 +309,24 @@ const styles = StyleSheet.create({
     borderColor: "#EDECF4",
     borderRadius: 22,
     padding: 10,
+    fontSize: 18,
+    color: "#000",
+  },
+  input2: {
+    backgroundColor: "#F4F4F5",
+    borderWidth: 1.2,
+    borderColor: "Blue",
+    padding: 10,
     fontSize: 20,
+    color: "#000",
+  },
+  cont: {
+    marginTop: 8,
+    backgroundColor: "#F4F4F5",
+    borderWidth: 1.2,
+    borderColor: "#EDECF4",
+    borderRadius: 22,
+    padding: 10,
     color: "#000",
   },
   text: {
