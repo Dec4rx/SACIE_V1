@@ -5,12 +5,17 @@ import { Center, HStack } from "native-base";
 import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
+import { useNavigation } from "@react-navigation/native";
 
 import BackButton from "../utils/components/BackButton_Especial";
 
-const VitalSigns = ({ navigation }) => {
+const VitalSigns = ({ruta}) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+
+  const navigation=useNavigation();
+
+  console.log('Mensaje de confirmacion:', ruta)
 
   return (
     <MainContainer>
@@ -32,7 +37,8 @@ const VitalSigns = ({ navigation }) => {
         <View style={styles.imageRow}>
           <TouchableOpacity
             style={styles.icons}
-            onPress={() => navigation.navigate(translationObject.SugarBloodScreen)}
+            //onPress={() => navigation.navigate(translationObject.SugarBloodScreen)}
+            onPress={() => navigation.navigate(translationObject.SugarBloodScreen, {ruta: {ruta}})}
           >
             <Image
               source={require("../resources/pictures/SugarBlood.png")}

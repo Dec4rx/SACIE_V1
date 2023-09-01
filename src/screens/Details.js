@@ -77,7 +77,7 @@ const QR = () => {
   );
 };
 
-const DataResume = ({data, type}) => {
+const DataResume = ({ data, type }) => {
   return (
     <Box mt={2}>
       <Text style={{ fontWeight: "bold" }}>{data} </Text>
@@ -101,10 +101,6 @@ const Profile = ({ name, img }) => {
 };
 
 const MainRoute = (props) => {
-
-  console.log('Esto es una prueba, enfermera->', props.nurse)
-  
-
   const [patientData, setPatientData] = useState({
     name: "",
     age: "",
@@ -117,19 +113,16 @@ const MainRoute = (props) => {
   });
 
   useEffect(() => {
-    const ruta = "Nurses/" + props.nurse.user + "/Paciente/" + props.patient.id;
 
-    console.log('Esta es la ruta asignada: ',  ruta)
+    const starCountRef = ref(db, props.ruta);
 
-    const starCountRef = ref(db, ruta);
-    console.log('Referencia: ' , starCountRef)
     onValue(starCountRef, (snapshot) => {
-      console.log('Valor', snapshot)
-      const data = snapshot.val();
-      console.log('Valor del nombre' , data)
-      setPatientData({ name: data.name, age: data.age, bed : data.bed, condition: data.condition, blood: data.blood });
 
-      console.log("Usuario: ", data.name);
+      const data = snapshot.val();
+
+      setPatientData({ name: data.name, age: data.age, bed: data.bed, condition: data.condition, blood: data.blood });
+
+
     });
   }, [""]);
 
@@ -203,21 +196,29 @@ const MainRoute = (props) => {
 
 const Tab = createMaterialBottomTabNavigator();
 
+const VS = (props) =>{
+  console.log('Ruta recibida: ', props.ruta)
+  return(
+    <VitalSigns ruta={props.ruta}/>
+  );
+}
 
 
-const MyTabs = ({route}) => {
+const MyTabs = ({ route }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
   const { itemId, ruta } = route.params;
 
-  const nurse = JSON.stringify(ruta);
-  const patient = JSON.stringify(itemId);
+  const nurse = ruta;
+  const patient = itemId;
 
-  console.log('Fue recibido esto: ',  nurse);
-  console.log('Y esto: ',  patient); 
+  console.log('Enfermera: ', nurse);
+  console.log('Paciente: ', patient);
+  const rutaCompleta = "Nurses/" + nurse.user + "/Paciente/" + patient.id;
+  console.log('Ruta asignada: ', rutaCompleta)
   //const starCountRef = ref(db, "Nurses/" + nurse+ "/Paciente/" + patient);
   return (
-    
+
     <Tab.Navigator
       labeled={false}
       initialRouteName="Home"
@@ -235,7 +236,7 @@ const MyTabs = ({route}) => {
       />
       <Tab.Screen
         name={translationObject.VitalSignsScreen}
-        component={VitalSigns}
+        children={()=> <VS ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -248,7 +249,7 @@ const MyTabs = ({route}) => {
       />
       <Tab.Screen
         name="Home"
-        children={()=><MainRoute nurse={ruta} patient={itemId}/>} 
+        children={() => <MainRoute ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />

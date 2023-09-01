@@ -14,21 +14,20 @@ import { I18nContext } from '../components/I18nProvider';
 import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
 import { Dimensions } from 'react-native';
 
-import { getDatabase, ref, set, push, onValue} from "firebase/database";
+import { getDatabase, ref, set, push, onValue, connectDatabaseEmulator } from "firebase/database";
 import { db } from "../../Database";
 
 
-const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
+const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta }) => {
+
+  console.log('Dentro de la matriz, llego esta ruta: ', ruta)
+
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const [modalVisible, setModalVisible] = useState(false);
 
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
-
-
-
-
   const [time, setTime] = useState(0)
   const [value, setValue] = useState(0)
 
@@ -39,11 +38,11 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
   let lastTime = 0
   let firstTime = 0
   useEffect(() => {
-    const getSigns = ref(db, 'Pacient/patient/vitalSigns/0/' + dbSing);
+    const getSigns = ref(db, ruta);
     onValue(getSigns, (snapshot) => {
       const data = snapshot.val();
       console.log(data);
-  
+
       let values = [];
       for (let key in data) {
         let value = data[key];
@@ -51,36 +50,29 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
       }
       console.log(values);
       setRealSigns(values);
-      
+
       setIsLoading(false); // Marcar que los datos se han cargado correctamente
     });
   }, []);
 
   useEffect(() => {
     console.log("real", realSings);
-    
+
   }, [realSings]);
 
   if (isLoading) {
     // Muestra un indicador de carga mientras los datos se están obteniendo
     return <div>Cargado...</div>;
   }
-  else{
-      lastValue = realSings[realSings.length - 1].y;
-      firstValue =  realSings[0].y;
-      lastTime = realSings[realSings.length - 1].x;
-      firstTime =  realSings[0].x;
+  else {
+    lastValue = realSings[realSings.length - 1].y;
+    firstValue = realSings[0].y;
+    lastTime = realSings[realSings.length - 1].x;
+    firstTime = realSings[0].x;
   }
-
- 
-
-
-
-
-
   const postSign = () => {
     const db = getDatabase();
-    const postListRef = ref(db, 'Pacient/patient/vitalSigns/0/' + dbSing)
+    const postListRef = ref(db, ruta)
     const newPostRef = push(postListRef);
     set(newPostRef, {
       "x": parseInt(time),
@@ -89,12 +81,6 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor }) => {
       console.log('si')
     )
   }
-
-
-
-
-
-
   return (
 
     <MainContainer>
