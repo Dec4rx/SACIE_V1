@@ -227,7 +227,7 @@ const MyTabs = ({ route }) => {
     >
       <Tab.Screen
         name={translationObject.RegisterMedicalTest}
-        component={MedicalTest}
+        children={()=><MedicalTest ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="test-tube" color={color} size={26} />
@@ -258,7 +258,7 @@ const MyTabs = ({ route }) => {
       />
       <Tab.Screen
         name={translationObject.MedicineScreen}
-        component={Medicine}
+        children={()=><Medicine ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="pill" color={color} size={26} />
@@ -267,7 +267,7 @@ const MyTabs = ({ route }) => {
       />
       <Tab.Screen
         name={translationObject.NotesScreen}
-        component={Notes}
+        children={()=> <Notes ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="text" color={color} size={26} />

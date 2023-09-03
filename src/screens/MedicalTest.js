@@ -3,7 +3,7 @@ import { Box, Center, Text, HStack, IconButton, Modal} from "native-base";
 
 import { FlatList } from "react-native";
 import Icon_2 from "react-native-vector-icons/MaterialIcons";
-import BackButton from "../utils/components/BackButton_Especial";
+import BackButton from "../utils/components/BackButton_Especial"; 
 import MyButton from "../utils/components/MyButton";
 
 import color from "../utils/Strings/Colors";
@@ -91,7 +91,7 @@ const Test = ({ testName, doctorName, date }) => {
         borderRadius={10}
         p={3}
         shadow={"5"}
-        mt={2}
+        mt={2}  
       >
         <HStack>
           <Box justifyContent={"center"}>
@@ -114,25 +114,23 @@ const Test = ({ testName, doctorName, date }) => {
   );
 };
 
-const MedicalTest = ({ navigation }) => {
+const MedicalTest = ({ ruta }) => {
 
+  const { rutaC }= ruta;
   const [medicalTest, setMedicalTest] = useState([])//donde se almacena la info del array
 
+  console.log('Ruta recibida en test medicos: ', ruta);
   useEffect(() => {
-    const starCountRef = ref(db, "Pacient/" + "patient"+'/medicalTest'); //Ruta que uses
+    const starCountRef = ref(db, ruta+'/medicalTest'); //Ruta que uses
     onValue(starCountRef, (snapshot) => {
-
       var update = []; //Arreglo para la flatlist
-
       snapshot.forEach((child)=>{ //child es el nodo donde te encuentras
         update.push({
           key: child.key, //usa key para acceder al nombre donde estas
-          date: child.val().Fecha,
-          doctorName: child.val().DoneBy,
+          testInfo: child.val()
           //name: snapshot.val(), // .val() sirve para traer la info dentro del nodo, usa un '.' para viajar a un hijo en especifico
 
         })
-        console.log('Hijos: ', child.val()) //Pruebas
       })
       setMedicalTest(update); //setea medicalTest con el array
     });
@@ -159,9 +157,9 @@ const MedicalTest = ({ navigation }) => {
           data={medicalTest}
           renderItem={({ item }) => (
             <Test
-              testName={item.key}
-              doctorName={item.doctorName}
-              date={item.date}
+              testName={item.testInfo.name}
+              doctorName={item.testInfo.doneBy}
+              date={item.testInfo.date}
             />
           )}
           keyExtractor={(item) => item.id}

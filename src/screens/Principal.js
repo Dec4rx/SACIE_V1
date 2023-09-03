@@ -32,7 +32,7 @@ const Principal = ({ navigation, route }) => {
       var update = []; //Arreglo para la flatlist
       snapshot.forEach((child) => { //child es el nodo donde te encuentras
         update.push({
-          key: child.key, //usa key para acceder al nombre donde estas
+          key: child.key, //usa key para acceder al nombre donde estas 
           patient: child.val(),
           //name: snapshot.val(), // .val() sirve para traer la info dentro del nodo, usa un '.' para viajar a un hijo en especifico
         })

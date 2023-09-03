@@ -13,11 +13,11 @@ import { ref, update, onValue, get, child } from "firebase/database";
 
 import { db } from "../Database";
 
-const NotesScreen = () => {
+const NotesScreen = ({ruta}) => {
   const [textArea, setAreaText] = useState();
 
   useEffect(() => {
-    get(child(ref(db), "Pacient/" + "patient/" + "notes"))
+    get(child(ref(db), ruta+"/notes"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setNoteText(snapshot.val());
@@ -35,7 +35,7 @@ const NotesScreen = () => {
   const [noteText, setNoteText] = useState("");
 
   const updateNotes = () => {
-    update(ref(db, "Pacient/" + "patient/"), {
+    update(ref(db, ruta + '/'), {
       notes: textArea,
     });
   };
