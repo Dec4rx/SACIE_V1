@@ -16,6 +16,8 @@ import { I18nContext } from '../utils/components/I18nProvider';
 import {
   ref,
   onValue,
+  remove,
+  update,
 } from "firebase/database";
 
 import { db } from "../Database";
@@ -50,13 +52,47 @@ const DATA = [
   },
 ];
 
-const Medicines = ({ MedicineName, dosage,dosage_unit, intervals, time, via, ruta, id }) => {
+const Medicines = ({ MedicineName, dosage, dosage_unit, intervals, time, via, ruta, id }) => {
 
   const [modalVisible, setModalVisible] = React.useState(false);
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
-  const navigation=useNavigation();
+  const [fecha, setFecha] = useState("");
+
+  const handleDelete = () => {
+    const rutaRemove = ref(db, ruta + '/medicine/' + id);
+    console.log('ruta para borrar: ', rutaRemove);
+    remove(rutaRemove);
+    setModalVisible(!modalVisible);
+  }
+
+  const handleHour = () => {
+    const fechaHoraActual = new Date();
+
+    const dia = fechaHoraActual.getDate();
+    const mes = fechaHoraActual.getMonth() + 1;
+    const anio = fechaHoraActual.getFullYear();
+    const fechaFormateada = `${dia}/${mes}/${anio}`;
+
+    const hora = fechaHoraActual.getHours();
+    const minutos = fechaHoraActual.getMinutes();
+    const horaFormateada = `${hora}:${minutos}`;
+
+    const fechaYHora = `${fechaFormateada} ${horaFormateada}`;
+
+    console.log('Fecha y Hora actual:', fechaYHora);
+
+    setFecha(fechaYHora);
+
+    const rutaUpdate = ref(db, ruta + '/medicine/' + id);
+    update(rutaUpdate, {
+      time: fechaYHora
+    })
+
+  }
+
+  const navigation = useNavigation();
   return (
     <>
       <Center>
@@ -74,11 +110,10 @@ const Medicines = ({ MedicineName, dosage,dosage_unit, intervals, time, via, rut
             <Modal.Body>
               <Text>
                 <b>{translationObject.dosage}: </b>
-                {dosage+dosage_unit}
+                {dosage + dosage_unit}
               </Text>
               <Text>
-                <b>{translationObject.time}: </b>
-                {time}
+                <b>Last dosage: {time} </b>
               </Text>
               <Text>
                 <b>{translationObject.intervals}: </b>
@@ -97,9 +132,19 @@ const Medicines = ({ MedicineName, dosage,dosage_unit, intervals, time, via, rut
                   p={2}
                   borderRadius={"full"}
                   onPress={() => {
-                    setModalVisible(!modalVisible);
+                    handleDelete()
                   }}
                   icon={<Icon name="delete" size={20} />}
+                />
+
+                <IconButton
+                  backgroundColor={"red.400"}
+                  p={2}
+                  borderRadius={"full"}
+                  onPress={() => {
+                    handleHour()
+                  }}
+                  icon={<Icon name="plus" size={20} />}
                 />
 
                 <IconButton
@@ -108,7 +153,7 @@ const Medicines = ({ MedicineName, dosage,dosage_unit, intervals, time, via, rut
                   borderRadius={"full"}
                   onPress={() => {
                     setModalVisible(!modalVisible);
-                    navigation.navigate('ModifyMedicine',{MedicineName: {MedicineName}, dosage: {dosage}, dosage_unit: {dosage_unit}, intervals: {intervals}, time: {time}, via: {via}, ruta: {ruta}, id: {id}});
+                    navigation.navigate('ModifyMedicine', { MedicineName: { MedicineName }, dosage: { dosage }, dosage_unit: { dosage_unit }, intervals: { intervals }, time: { time }, via: { via }, ruta: { ruta }, id: { id } });
                   }}
                   icon={<Icon name="edit" size={20} />}
                 />
@@ -132,7 +177,9 @@ const Medicines = ({ MedicineName, dosage,dosage_unit, intervals, time, via, rut
               {MedicineName}
             </Text>
             <Text fontSize={"11"} color={"gray.500"}>
-              {dosage+dosage_unit}
+              Last dosage: {time}</Text>
+            <Text fontSize={"11"} color={"gray.500"}>
+              {dosage + dosage_unit}
             </Text>
           </VStack>
           <VStack marginLeft={"auto"} justifyContent={"center"}>
@@ -213,12 +260,12 @@ const Medicine = ({ ruta }) => {
           keyExtractor={(item) => item.id}
         />
 
-        <Box w={"full"} my={3}> 
+        <Box w={"full"} my={3}>
           <MyButton
             icon={"add-circle-outline"}
             title={translationObject.addMed}
             onPress={() =>
-              navigation.navigate(translationObject.RegisterMedicineNPScreen, {ruta: {ruta}})
+              navigation.navigate(translationObject.RegisterMedicineNPScreen, { ruta: { ruta } })
             }
           />
         </Box>

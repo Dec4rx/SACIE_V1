@@ -67,6 +67,8 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
         let value = data[key];
         values.push(value);
       }
+
+      values.pop();
       
       setRealSigns(values);
 
