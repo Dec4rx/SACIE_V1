@@ -29,6 +29,8 @@ import {
 
 import { db } from "../Database";
 
+
+
 const Days = (props) => {
   return (
     <Center
@@ -75,7 +77,7 @@ const QR = () => {
   );
 };
 
-const DataResume = ({data, type}) => {
+const DataResume = ({ data, type }) => {
   return (
     <Box mt={2}>
       <Text style={{ fontWeight: "bold" }}>{data} </Text>
@@ -98,7 +100,7 @@ const Profile = ({ name, img }) => {
   );
 };
 
-const MainRoute = () => {
+const MainRoute = (props) => {
   const [patientData, setPatientData] = useState({
     name: "",
     age: "",
@@ -111,12 +113,16 @@ const MainRoute = () => {
   });
 
   useEffect(() => {
-    const starCountRef = ref(db, "Pacient/" + "patient");
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      setPatientData({ name: data.name, age: data.age, bed : data.bed, condition: data.condition, blood: data.blood });
 
-      console.log("Usuario: ", data.name);
+    const starCountRef = ref(db, props.ruta);
+
+    onValue(starCountRef, (snapshot) => {
+
+      const data = snapshot.val();
+
+      setPatientData({ name: data.name, age: data.age, bed: data.bed, condition: data.condition, blood: data.blood });
+
+
     });
   }, [""]);
 
@@ -190,11 +196,29 @@ const MainRoute = () => {
 
 const Tab = createMaterialBottomTabNavigator();
 
-const MyTabs = () => {
+const VS = (props) =>{
+  console.log('Ruta recibida: ', props.ruta)
+  return(
+    <VitalSigns ruta={props.ruta}/>
+  );
+}
+
+
+const MyTabs = ({ route }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+  const { itemId, ruta } = route.params;
 
+  const nurse = ruta;
+  const patient = itemId;
+
+  console.log('Enfermera: ', nurse);
+  console.log('Paciente: ', patient);
+  const rutaCompleta = "Nurses/" + nurse.user + "/Paciente/" + patient.id;
+  console.log('Ruta asignada: ', rutaCompleta)
+  //const starCountRef = ref(db, "Nurses/" + nurse+ "/Paciente/" + patient);
   return (
+
     <Tab.Navigator
       labeled={false}
       initialRouteName="Home"
@@ -203,7 +227,7 @@ const MyTabs = () => {
     >
       <Tab.Screen
         name={translationObject.RegisterMedicalTest}
-        component={MedicalTest}
+        children={()=><MedicalTest ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="test-tube" color={color} size={26} />
@@ -212,7 +236,7 @@ const MyTabs = () => {
       />
       <Tab.Screen
         name={translationObject.VitalSignsScreen}
-        component={VitalSigns}
+        children={()=> <VS ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -225,7 +249,7 @@ const MyTabs = () => {
       />
       <Tab.Screen
         name="Home"
-        component={MainRoute}
+        children={() => <MainRoute ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
@@ -234,7 +258,7 @@ const MyTabs = () => {
       />
       <Tab.Screen
         name={translationObject.MedicineScreen}
-        component={Medicine}
+        children={()=><Medicine ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="pill" color={color} size={26} />
@@ -243,7 +267,7 @@ const MyTabs = () => {
       />
       <Tab.Screen
         name={translationObject.NotesScreen}
-        component={Notes}
+        children={()=> <Notes ruta={rutaCompleta}/>}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="text" color={color} size={26} />

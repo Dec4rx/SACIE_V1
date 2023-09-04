@@ -7,46 +7,40 @@ import MainContainer from "../utils/components/MainContainer";
 import { FontAwesome } from '@expo/vector-icons';
 
 import { translations } from "../utils/Strings/Lenguage"
-import { I18nContext } from '../utils/components/I18nProvider'; 
+import { I18nContext } from '../utils/components/I18nProvider';
 
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { firebaseConfig } from "../config";
-import {initializeApp} from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { db } from "../Database";
-import {set , ref, push, onValue} from "firebase/database";
+import { set, ref, push, onValue } from "firebase/database";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import firebase from 'firebase/app';
+import auth from 'firebase/auth';
 
-const Principal = ({ navigation }) => {
-  const getUser = async () => {
-    try {
-      const userid = await AsyncStorage.getItem("id");
-      const currentUser = JSON.parse(userid);
-      console.log(currentUser);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+const Principal = ({ navigation, route }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
-  const [patients, setPatients]= useState([]);//donde se almacena la info del array
+  const [patients, setPatients] = useState([]);//donde se almacena la info del array
 
   useEffect(() => {
-    const starCountRef = ref(db, "Pacient/"); //Ruta que uses
+    const starCountRef = ref(db, "Nurses/" + user + "/Paciente"); //Ruta que uses
     onValue(starCountRef, (snapshot) => {
       var update = []; //Arreglo para la flatlist
-      snapshot.forEach((child)=>{ //child es el nodo donde te encuentras
+      snapshot.forEach((child) => { //child es el nodo donde te encuentras
         update.push({
-          key: child.key, //usa key para acceder al nombre donde estas
+          key: child.key, //usa key para acceder al nombre donde estas 
           patient: child.val(),
           //name: snapshot.val(), // .val() sirve para traer la info dentro del nodo, usa un '.' para viajar a un hijo en especifico
         })
-        console.log('Hijos: ', child.val()) //Pruebas
+        
       })
       setPatients(update); //setea medicamentos con el array
       const data = snapshot.val();
-      const auxiliar=data;
+      const auxiliar = data;
     });
   }, [""]);
 
@@ -91,17 +85,25 @@ const Principal = ({ navigation }) => {
     navigation.navigate(translationObject.ManualRegisterPt1Screen)
   };
 
+  //Pruebas
+  const auth = getAuth();
+  const user = auth.currentUser.uid;
+
+  console.log('Quien esta loggeada? ', user)
+
   //#endregion
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const Item = ({ name, color, age, bed, image }) => (
-    <TouchableHighlight  onPress={() => navigation.navigate(translationObject.DetailsScreen)}>
+
+  const Item = ({ name, color, age, bed, image, id }) => (
+    //<TouchableHighlight onPress={() => navigation.navigate(translationObject.DetailsScreen)}>
+    <TouchableHighlight onPress={() => navigation.navigate(translationObject.DetailsScreen, {itemId: {id}, ruta:{user}})}>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {/* Card info */}
         <View style={styles.item}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image source={require("../resources/pictures/Leyree.png")} style={styles.otherImg} />
+            <Image source={require("../resources/pictures/Leyree.png")} style={styles.otherImg} />
             <Text style={styles.cardTitle}>{name}</Text>
           </View>
           <View style={{ flexDirection: "row", marginVertical: 5 }}>
@@ -196,7 +198,7 @@ const Principal = ({ navigation }) => {
                   title={translationObject.scan}
                 />
                 <ImageButton
-                  onPress={() =>onPressHandler()}
+                  onPress={() => onPressHandler()}
                   image={require("../resources/pictures/manual.png")}
                   title={translationObject.manually}
                 />
@@ -224,6 +226,7 @@ const Principal = ({ navigation }) => {
               name={item.patient.name}
               bed={item.patient.bed}
               age={item.patient.age}
+              id={item.key}
             />
           )}
           keyExtractor={(item) => item.id}
@@ -330,7 +333,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     wordSpacing: -1,
   },
-  centeredView:{
+  centeredView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

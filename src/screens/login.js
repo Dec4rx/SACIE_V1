@@ -74,12 +74,13 @@ const Login = ({ navigation }) => {
           <VStack space={4} mt="5">
             <Box>
               <FormInput
+                //value={'1234@gmail.com'}
                 label={translationObject.email}
                 placeholder="Something@email.com"
                 onChangeText={(email) => setEmail(email)}
               ></FormInput>
               <FormInputPass
-                
+                //value={'123456789'}
                 label={translationObject.password}
                 placeholder={translationObject.password}
                 onChangeText={(password) => setPassword(password)}

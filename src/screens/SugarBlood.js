@@ -6,26 +6,29 @@ import React, { useState, useContext, useEffect } from "react";
 import { getDatabase, ref, set, push, update, onValue, get } from "firebase/database";
 import { db } from "../Database";
 
-const SugarBlood = () => {
+const SugarBlood = ({route}) => {
+    const { ruta } = route.params;
+
     const { currentLanguage } = useContext(I18nContext);
     const translationObject = translations[currentLanguage];
 
     const [realSings, setRealSigns] = useState([])
+    const rutaCompleta=ruta;
 
-    let values = []
-    let data = null
+    // let values = []
+    // let data = null
     // useEffect(() => {
-    // const getSigns = ref(db, 'Pacient/patient/vitalSigns/0/' + 'sugar_blood');
+    // const getSigns = ref(db, rutaCompleta.ruta+'/vitalSigns/0/sugar_blood');
     // onValue(getSigns, (snapshot) => {
     //     data = snapshot.val();
     //     console.log(data)
 
-    //     // for (let key in data) {
-    //     //     let value = data[key]
-    //     //     values.push(value)
-    //     // }
+    //     for (let key in data) {
+    //         let value = data[key]
+    //         values.push(value)
+    //     }
     //     setRealSigns(data)
-    // });
+    // }); 
 
     // }, []);
     // useEffect(() => {
@@ -40,6 +43,7 @@ const SugarBlood = () => {
     return (
         <div>
             <Signs
+                ruta={rutaCompleta.ruta+'/vitalSigns/0/'}
                 title={translationObject.glucose}
                 dbSing={'sugar_blood'}
                 strokeColor={'#395F94'}

@@ -41,6 +41,7 @@ import BreathFrequency from "../screens/BreathingFrecuency";
 import Oxygenation from "../screens/Oxygenation";
 import HealthCondition from "../screens/HealtCondition";
 import AddMedicine from "../screens/AddMedicine";
+import ModifyMedicine from "../screens/ModifyMedicine";
 
 import TnC_Txt from "../screens/TermsAndConditionsTxt";
 import TnC_CB from "../screens/TermnsAndConditionsCheckbox";
@@ -59,11 +60,11 @@ const Stack = createNativeStackNavigator();
 const AppStack = () => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
-  
-  const [initializing, setInitializing]= useState(true);
-  const [user, setUser]=useState();
-  function onAuthStateChanged(user){
-  if (initializing) setInitializing(false);
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  function onAuthStateChanged(user) {
+    if (initializing) setInitializing(false);
   }
   // useEffect(()=>{
   //   const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
@@ -82,7 +83,7 @@ const AppStack = () => {
   // else if(user){
   return (
     <Stack.Navigator initialRouteName="home"
-      screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
+      screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: { backgroundColor: color.BackgroundApp } }}
     >
       <Stack.Screen name={translationObject.SplashScreen} component={Splash} />
       <Stack.Screen name={translationObject.LoginScreen} component={Login} />
@@ -107,8 +108,8 @@ const AppStack = () => {
         component={PasswordChanged}
       ></Stack.Screen>
 
-      <Stack.Screen 
-        name={translationObject.PrincipalScreen} 
+      <Stack.Screen
+        name={translationObject.PrincipalScreen}
         component={Principal} />
 
       <Stack.Screen
@@ -133,6 +134,11 @@ const AppStack = () => {
       <Stack.Screen
         name={translationObject.RegisterMedicineNPScreen}
         component={AddMedicineNP}
+      ></Stack.Screen>
+
+      <Stack.Screen
+        name={"ModifyMedicine"}
+        component={ModifyMedicine}
       ></Stack.Screen>
 
       <Stack.Screen
@@ -202,24 +208,24 @@ const AppStack = () => {
         component={TnC_CB}
       ></Stack.Screen>
 
-<Stack.Screen
+      <Stack.Screen
         name={translationObject.TermnsAndConditionsTxtScreen}
         component={TnC_Txt}
       ></Stack.Screen>
 
-<Stack.Screen
+      <Stack.Screen
         name={translationObject.ExitScreen}
         component={Exit}
       ></Stack.Screen>
 
-<Stack.Screen
+      <Stack.Screen
         name={translationObject.QRScanScreen}
         component={QRScanner}
       ></Stack.Screen>
     </Stack.Navigator>
 
   );
-  }
+}
 //};
 
 export default AppStack;
