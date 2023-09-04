@@ -205,7 +205,7 @@ const Medicine = ({ ruta }) => {
           renderItem={({ item }) => (
             <Medicines
               MedicineName={item.medicine.name} //aqui todo funciona como un flatlist cualquiera
-              dosage={item.medicine.dosaje + item.medicine.dosage_unit}
+              dosage={item.medicine.dosage + item.medicine.dosage_unit}
               via={item.medicine.route}
               intervals={item.medicine.intervals}
               time={item.medicine.time}
@@ -215,12 +215,12 @@ const Medicine = ({ ruta }) => {
           keyExtractor={(item) => item.id}
         />
 
-        <Box w={"full"} my={3}>
+        <Box w={"full"} my={3}> 
           <MyButton
             icon={"add-circle-outline"}
             title={translationObject.addMed}
             onPress={() =>
-              navigation.navigate(translationObject.RegisterMedicineNPScreen)
+              navigation.navigate(translationObject.RegisterMedicineNPScreen, {ruta: {ruta}})
             }
           />
         </Box>
