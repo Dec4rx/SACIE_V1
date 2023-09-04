@@ -10,7 +10,6 @@ import MainContainer from "../utils/components/MainContainer";
 
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
-import { useNavigation } from "@react-navigation/core";
 
 //import { firebase } from '@firebase'
 
@@ -22,6 +21,7 @@ import {
 import { db } from "../Database";
 
 import { FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const DATA = [
   {
@@ -50,11 +50,13 @@ const DATA = [
   },
 ];
 
-const Medicines = ({ MedicineName, dosage, intervals, time, via, route }) => {
+const Medicines = ({ MedicineName, dosage,dosage_unit, intervals, time, via, ruta, id }) => {
 
   const [modalVisible, setModalVisible] = React.useState(false);
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+
+  const navigation=useNavigation();
   return (
     <>
       <Center>
@@ -72,7 +74,7 @@ const Medicines = ({ MedicineName, dosage, intervals, time, via, route }) => {
             <Modal.Body>
               <Text>
                 <b>{translationObject.dosage}: </b>
-                {dosage}
+                {dosage+dosage_unit}
               </Text>
               <Text>
                 <b>{translationObject.time}: </b>
@@ -106,6 +108,7 @@ const Medicines = ({ MedicineName, dosage, intervals, time, via, route }) => {
                   borderRadius={"full"}
                   onPress={() => {
                     setModalVisible(!modalVisible);
+                    navigation.navigate('ModifyMedicine',{MedicineName: {MedicineName}, dosage: {dosage}, dosage_unit: {dosage_unit}, intervals: {intervals}, time: {time}, via: {via}, ruta: {ruta}, id: {id}});
                   }}
                   icon={<Icon name="edit" size={20} />}
                 />
@@ -129,7 +132,7 @@ const Medicines = ({ MedicineName, dosage, intervals, time, via, route }) => {
               {MedicineName}
             </Text>
             <Text fontSize={"11"} color={"gray.500"}>
-              {dosage}
+              {dosage+dosage_unit}
             </Text>
           </VStack>
           <VStack marginLeft={"auto"} justifyContent={"center"}>
@@ -150,14 +153,6 @@ const Medicines = ({ MedicineName, dosage, intervals, time, via, route }) => {
 };
 
 const Medicine = ({ ruta }) => {
-
-  const [medicineInfo, setMedicineInfo] = useState({
-    MedicineName: '',
-    dosage: '',
-    intervals: '',
-    time: '',
-    via: '',
-  })
 
   navigation = useNavigation();
 
@@ -205,10 +200,13 @@ const Medicine = ({ ruta }) => {
           renderItem={({ item }) => (
             <Medicines
               MedicineName={item.medicine.name} //aqui todo funciona como un flatlist cualquiera
-              dosage={item.medicine.dosage + item.medicine.dosage_unit}
+              dosage={item.medicine.dosage}
+              dosage_unit={item.medicine.dosage_unit}
               via={item.medicine.route}
               intervals={item.medicine.intervals}
               time={item.medicine.time}
+              ruta={ruta}
+              id={item.key}
             />
 
           )}

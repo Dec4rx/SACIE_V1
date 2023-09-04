@@ -25,7 +25,7 @@ const AddMedicine = ({ navigation, route }) => {
     {
       dosage_unit: '',
       dosage: 0,
-      intervalas: 0,
+      intervals: 0,
       name: '',
       route: '',
       time: ''
@@ -75,9 +75,6 @@ const AddMedicine = ({ navigation, route }) => {
     const starCountRef = ref(db, ruta.ruta + '/medicine'); //Ruta que uses
     const newPost  = push(starCountRef);
     set(newPost, formData);
-
-    console, log('Datos insertados!!', formData);
-
     navigation.goBack();
   }
 
@@ -97,7 +94,7 @@ const AddMedicine = ({ navigation, route }) => {
               fontSize={"30"}
               fontWeight={"bold"}
             >
-              {translationObject.addMed} XD
+              {translationObject.addMed}
             </Text>
           </Center>
           <Box width={"20%"}></Box>
@@ -126,13 +123,7 @@ const AddMedicine = ({ navigation, route }) => {
                       setData({ ...formData, name: value })
                     }
                   />
-                  <FormControl.HelperText
-                    _text={{
-                      fontSize: "xs",
-                    }}
-                  >
-                    {translationObject.errorMsg}
-                  </FormControl.HelperText>
+                  
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
@@ -159,13 +150,6 @@ const AddMedicine = ({ navigation, route }) => {
                         setData({ ...formData, dosage: value })
                       }
                     />
-                    <FormControl.HelperText
-                      _text={{
-                        fontSize: "xs",
-                      }}
-                    >
-                      {translationObject.errorMsg}
-                    </FormControl.HelperText>
                     <FormControl.ErrorMessage
                       _text={{
                         fontSize: "xs",
@@ -206,16 +190,10 @@ const AddMedicine = ({ navigation, route }) => {
                     borderRadius={"15"}
                     placeholder="6hrs"
                     onChangeText={(value) =>
-                      setData({ ...formData, intervalas: value })
+                      setData({ ...formData, intervals: value })
                     }
                   />
-                  <FormControl.HelperText
-                    _text={{
-                      fontSize: "xs",
-                    }}
-                  >
-                    {translationObject.errorMsg}
-                  </FormControl.HelperText>
+                 
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
@@ -242,13 +220,6 @@ const AddMedicine = ({ navigation, route }) => {
                     )}
 
                   </Select>
-                  <FormControl.HelperText
-                    _text={{
-                      fontSize: "xs",
-                    }}
-                  >
-                    {translationObject.errorMsg}
-                  </FormControl.HelperText>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",

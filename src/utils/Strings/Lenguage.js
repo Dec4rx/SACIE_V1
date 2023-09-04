@@ -163,6 +163,7 @@ const translations = {
         ManualRegisterPt2Screen: "Manual register pt2",
         ManualRegisterPt3Screen: "Manual register pt3",
         QRScanScreen: "QR Scanner",
+        ModifyMedicineScreen: 'Modify Medicine'
     },
     esp: {
         welcome: "Bienvenido",
@@ -286,7 +287,9 @@ const translations = {
         camPermission:"Solicitando permiso de cámara...",
         noPermission:"No se ha otorgado permiso para la cámara",
         scanned: "Escaneado",
+
         //Screen name
+
         SplashScreen: "Splash",
         LoginScreen: "Inicio de sesión",
         SignUpScreen: "Registrarse",
@@ -326,6 +329,7 @@ const translations = {
         ManualRegisterPt2Screen: "Registro manual pt2",
         ManualRegisterPt3Screen: "Registro manual pt3",
         QRScanScreen: "Escaner QR",
+        ModifyMedicineScreen: 'Modificar Medicina'
     }
 };
 
