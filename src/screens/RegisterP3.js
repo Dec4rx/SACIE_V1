@@ -5,11 +5,53 @@ import BackButton from '../utils/components/BackButton';
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
-import ScreenNames from '../utils/ScreenNames';
 
-const RegisterP3 = ({navigation}) => {
+import { getDatabase, ref, set, push, onValue } from "firebase/database";
+import { db } from '../Database';
+import { useRoute } from '@react-navigation/native';
+
+
+const RegisterP3 = ({ navigation }) => {
     const { currentLanguage } = useContext(I18nContext);
     const translationObject = translations[currentLanguage];
+   
+
+    const route = useRoute();
+    const { fullName, gender, age, birthday, healtCond,
+        maritalStatus, checkIn, bed, daysStay, service } = route.params;
+
+    console.log(maritalStatus)
+
+    const [bloodType, setBloodType] = useState("")
+    const [incomeOr, setIncomeOr] = useState("")
+    const [medRecNum, setMedRecNum] = useState("")
+    const [medDiag, setmMedDiag] = useState("")
+
+    const postPatient = async () => {
+        const db = getDatabase();
+        const postListRef = ref(db, 'Pacient/')
+        const newPostRef = push(postListRef);
+        set(newPostRef, {
+            "name": fullName,//
+            "gender": gender,//
+            "age": age,//
+            "birthday": birthday,//
+            "condition": healtCond,//
+            "status": maritalStatus,//
+            "check_in": checkIn,
+            "bed": bed,//
+            "days": daysStay,//
+            "service": service,
+            "blood": bloodType,//
+            "incomeOr": incomeOr,
+            "medRecNum": medRecNum,
+            "medDiag": medDiag, 
+        }).then(() => {
+            console.log('si')
+            navigation.navigate(translationObject.MenuScreen, {name: fullName})
+        }
+        )
+    }
 
     return (
         <View style={styles.container}>
@@ -27,18 +69,24 @@ const RegisterP3 = ({navigation}) => {
             />
 
             <View style={{ marginTop: 15, padding: 10 }}>
-                <FormInput label={translationObject.bloodType} placeholder={'O+'} />
+                <FormInput label={translationObject.bloodType}
+                    value={bloodType} onChangeText={(bloodType) => { setBloodType(bloodType) }} />
 
-                <FormInput label={translationObject.incomeOr} placeholder={'Si'} />
-
-
-                <FormInput label={translationObject.medRecNum} placeholder={'No-123456'} />
-
-                <FormInput label={translationObject.medDiag} placeholder={'Cáncer'} />
+                <FormInput label={translationObject.incomeOr}
+                    value={incomeOr} onChangeText={(incomeOr) => { setIncomeOr(incomeOr) }} />
 
 
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity style={styles.buttonRegister} onPress={()=>navigation.navigate(translationObject.MenuScreen)}>
+                <FormInput label={translationObject.medRecNum}
+                    value={medRecNum} onChangeText={(medRecNum) => { setMedRecNum(medRecNum) }} />
+
+                <FormInput label={translationObject.medDiag}
+                    value={medDiag} onChangeText={(medDiag) => { setmMedDiag(medDiag) }} />
+
+
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <TouchableOpacity style={styles.buttonRegister} onPress={
+                        postPatient
+                    }>
                         <Text style={{ fontSize: 20 }}>{translationObject.register}</Text>
                     </TouchableOpacity>
                 </View>
@@ -46,10 +94,9 @@ const RegisterP3 = ({navigation}) => {
             </View>
         </View>
     );
-
-
 }
 
+//#region Styles
 const styles = StyleSheet.create({
     mainTitle: {
         textAlign: 'center',
@@ -112,6 +159,6 @@ const styles = StyleSheet.create({
 
     }
 })
-
+//#endregion
 
 export default RegisterP3;

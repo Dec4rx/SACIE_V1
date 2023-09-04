@@ -3,8 +3,6 @@ import React, {useContext} from "react";
 import BlueButton from "../utils/components/BlueButton";
 import NumericInput from "../utils/components/NumericInput";
 
-import ScreenNames from "../utils/ScreenNames";
-
 import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';

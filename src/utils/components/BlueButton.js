@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
       },
       shadowOpacity: 0.25,
       shadowRadius: 4,
-      elevation: 5, //propiedad específica de Android, mayor que cero, se activa la sombra predeterminada de Android
+      elevation: 5, 
     },
     buttonText: {
       color: '#fff',

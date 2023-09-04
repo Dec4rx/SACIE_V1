@@ -31,6 +31,7 @@ const translations = {
         createPass: "Create new password",
         newPass: "Your new password must be unique from those previously used.",
         newPassPH: "Enter new Password",
+        enterphonenum:"Enter your email",
         resetPass: "Reset password",
         passChange: "Password Changed!",
         passSuccess: "Your password has been changed successfully.",
@@ -162,6 +163,7 @@ const translations = {
         ManualRegisterPt2Screen: "Manual register pt2",
         ManualRegisterPt3Screen: "Manual register pt3",
         QRScanScreen: "QR Scanner",
+        ModifyMedicineScreen: 'Modify Medicine'
     },
     esp: {
         welcome: "Bienvenido",
@@ -195,6 +197,7 @@ const translations = {
         createPass: "Crear nueva contraseña",
         newPass: "Su nueva contraseña debe ser diferente a la usada anteriormente.",
         newPassPH: "Nueva contraseña",
+        enterphonenum:"Ingresa tu numero telefonico",
         resetPass: "Restablecer contraseña",
         passChange: "¡Contraseña cambiada!",
         passSuccess: "Tu contraseña ha sido cambiada exitosamente.",
@@ -284,7 +287,9 @@ const translations = {
         camPermission:"Solicitando permiso de cámara...",
         noPermission:"No se ha otorgado permiso para la cámara",
         scanned: "Escaneado",
+
         //Screen name
+
         SplashScreen: "Splash",
         LoginScreen: "Inicio de sesión",
         SignUpScreen: "Registrarse",
@@ -324,6 +329,7 @@ const translations = {
         ManualRegisterPt2Screen: "Registro manual pt2",
         ManualRegisterPt3Screen: "Registro manual pt3",
         QRScanScreen: "Escaner QR",
+        ModifyMedicineScreen: 'Modificar Medicina'
     }
 };
 

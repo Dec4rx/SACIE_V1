@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
 import { Box, Center, Text, Divider, HStack, FormControl, Input, VStack } from "native-base";
-import color from "../utils/Colors";
+import color from "../utils/Strings/Colors";
 
 import BackButton from "../utils/components/BackButton";
 import CorrectButton from "../utils/components/CorrectButton";
 import MyButton from "../utils/components/MyButton";
-
-import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
 

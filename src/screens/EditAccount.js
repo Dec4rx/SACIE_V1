@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import FormInput from "../utils/components/FormInput";
 import BackButton from "../utils/components/BackButton";
@@ -9,17 +9,49 @@ import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
+import { onValue, ref, update } from "firebase/database";
+import { firebaseConfig } from "../config";
+import {initializeApp } from "firebase/app";
+import { db } from "../Database";
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const EditAccount = ({ navigation }) => {
-  const [name, onChangeName] = React.useState("");
-  const [phone, onChangePhone] = React.useState("");
-  const [email, onChangeEmail] = React.useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
 
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
-  const handleSaveProfile = () => {
-    navigation.navigate(translationObject.AccountScreen);
-  };
+  const actualizar= async() =>{
+    const value = await AsyncStorage.getItem('id')
+    update(ref(db, 'Nurses/' + value), {
+      name: name,
+      email: email,
+      username: phone
+    }).then(() => {
+      alert('data updated')
+      navigation.navigate(translationObject.AccountScreen)
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }
+
+  useEffect(()=>{
+    const ReadData = async()=>{
+      const value = await AsyncStorage.getItem('id')
+      const starCountRef = ref(db, 'Nurses/' + value);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        setName(data.name);
+        setEmail(data.email);
+        setPhone(data.username);
+      })
+    } 
+    ReadData();
+  }, []);
 
   return (
     <MainContainer>
@@ -27,7 +59,7 @@ const EditAccount = ({ navigation }) => {
         <BackButton />
         <Text style={styles.mainTitle}>{translationObject.editProfile}</Text>
         <TouchableOpacity>
-          <CorrectButton onPress={handleSaveProfile} />
+          <CorrectButton onPress={actualizar} />
         </TouchableOpacity>
       </View>
       <View style={styles.profileContainer}>
@@ -39,19 +71,19 @@ const EditAccount = ({ navigation }) => {
           label={translationObject.fullName}
           placeholder="Jose Gordillo"
           value={name}
-          onChangeText={onChangeName}
+          onChangeText={(name) => {setName(name)}}
         />
         <FormInput
           label={translationObject.phone}
           placeholder="+521234567890"
           value={phone}
-          onChangeText={onChangePhone}
+          onChangeText={(phone) => {setName(phone)}}
         />
         <FormInput
           label={translationObject.email}
           placeholder="Something@email.com"
           value={email}
-          onChangeText={onChangeEmail}
+          onChangeText={(email) => {setName(email)}}
         />
       </View>
     </MainContainer>

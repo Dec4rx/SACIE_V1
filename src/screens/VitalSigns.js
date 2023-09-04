@@ -1,17 +1,21 @@
 import React, { useContext } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Center, HStack } from "native-base";
-import ScreenNames from "../utils/ScreenNames";
 
 import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
+import { useNavigation } from "@react-navigation/native";
 
 import BackButton from "../utils/components/BackButton_Especial";
 
-const VitalSigns = ({ navigation }) => {
+const VitalSigns = ({ ruta }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+
+  const navigation = useNavigation();
+
+  console.log('Mensaje de confirmacion:', ruta)
 
   return (
     <MainContainer>
@@ -33,7 +37,8 @@ const VitalSigns = ({ navigation }) => {
         <View style={styles.imageRow}>
           <TouchableOpacity
             style={styles.icons}
-            onPress={() => navigation.navigate(translationObject.SugarBloodScreen)}
+            //onPress={() => navigation.navigate(translationObject.SugarBloodScreen)}
+            onPress={() => navigation.navigate(translationObject.SugarBloodScreen, { ruta: { ruta } })}
           >
             <Image
               source={require("../resources/pictures/SugarBlood.png")}
@@ -44,7 +49,7 @@ const VitalSigns = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.icons}
-            onPress={() => navigation.navigate(translationObject.TemperatureScreen)}
+            onPress={() => navigation.navigate(translationObject.TemperatureScreen, { ruta: { ruta } })}
           >
             <Image
               source={require("../resources/pictures/Temperature.png")}
@@ -55,7 +60,7 @@ const VitalSigns = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.icons}
-            onPress={() => navigation.navigate(translationObject.HeartRateScreen)}
+            onPress={() => navigation.navigate(translationObject.HeartRateScreen, { ruta: { ruta } })}
           >
             <Image
               source={require("../resources/pictures/HeartRate.png")}
@@ -66,7 +71,7 @@ const VitalSigns = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.icons}
-            onPress={() => navigation.navigate(translationObject.BloodPressureScreen)}
+            onPress={() => navigation.navigate(translationObject.BloodPressureScreen, { ruta: { ruta } })}
           >
             <Image
               source={require("../resources/pictures/BloodPreasure.png")}
@@ -78,7 +83,7 @@ const VitalSigns = ({ navigation }) => {
           <TouchableOpacity
             style={styles.icons}
             onPress={() =>
-              navigation.navigate(translationObject.BreathingFrequencyScreen)
+              navigation.navigate(translationObject.BreathingFrequencyScreen, { ruta: { ruta } })
             }
           >
             <Image
@@ -90,7 +95,7 @@ const VitalSigns = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.icons}
-            onPress={() => navigation.navigate(translationObject.OxigenScreen)}
+            onPress={() => navigation.navigate(translationObject.OxigenScreen, { ruta: { ruta } })}
           >
             <Image
               source={require("../resources/pictures/Oxygenation.png")}
@@ -102,7 +107,7 @@ const VitalSigns = ({ navigation }) => {
           <TouchableOpacity
             style={styles.icons}
             onPress={() =>
-              navigation.navigate(translationObject.HealthConditionScreen)
+              navigation.navigate(translationObject.HealthConditionScreen, { ruta: { ruta } })
             }
           >
             <Image

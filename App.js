@@ -9,6 +9,7 @@ import { I18nProvider } from './src/utils/components/I18nProvider'
 
 
 export default function App() {
+  
   return (
     <I18nProvider>
     <NavigationContainer >

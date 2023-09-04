@@ -1,19 +1,84 @@
-import React, { useContext } from "react";
-import { Box, Text, HStack, Center, Divider, Input, FormControl, VStack } from "native-base";
+import React, { useContext, useState } from "react";
+import { Box, Text, HStack, Center, Divider, Input, FormControl, VStack, Select } from "native-base";
 
 import BackButton from "../utils/components/BackButton";
 import MyButton from "../utils/components/MyButton";
 
 import MainContainer from "../utils/components/MainContainer";
-import ScreenNames from "../utils/ScreenNames";
 
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
+import { log } from "react-native-reanimated";
 
-const AddMedicine = ({ navigation }) => {
+import { db } from "../Database";
+import {
+  ref,
+  onValue,
+  push,
+  set,
+} from "firebase/database";
 
+
+const AddMedicine = ({ navigation, route }) => {
+
+  const [formData, setData] = useState(
+    {
+      dosage_unit: '',
+      dosage: 0,
+      intervals: 0,
+      name: '',
+      route: '',
+      time: ''
+    }
+  );
+
+  const Dosis = [
+    {
+      nom: 'Miligramos',
+      valor: 'mg'
+    },
+    {
+      nom: 'Microgramos',
+      valor: 'mcg'
+    }
+    , {
+      nom: 'Mililitros',
+      valor: 'ml'
+    }
+  ];
+
+  const VIAs = [
+    'Via oral',
+    'Via intravenosa',
+    'Via intramuscular',
+    'Via subcutanea',
+    'Via topica',
+    'Via inhalatoria',
+    'Via rectal',
+    'Via Oftálmolica',
+    'Via Ótica',
+    'Via Nasal',
+    'Via Trasndermica',
+    'Via Intracaneal',
+    'Via Intracardiaca',
+    'Via Intraocular',
+    'Via Infrauterina',
+    'Via Intrapulmonar',
+    'Via Intraperitoneal',
+  ];
+
+  const { ruta } = route.params;
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+
+  const handleSubmit = () => {
+    const starCountRef = ref(db, ruta.ruta + '/medicine'); //Ruta que uses
+    const newPost  = push(starCountRef);
+    set(newPost, formData);
+    navigation.goBack();
+  }
+
+  console.log('Añadiendo una medicina en: ', ruta)
 
   return (
     <MainContainer>
@@ -58,13 +123,7 @@ const AddMedicine = ({ navigation }) => {
                       setData({ ...formData, name: value })
                     }
                   />
-                  <FormControl.HelperText
-                    _text={{
-                      fontSize: "xs",
-                    }}
-                  >
-                    {translationObject.errorMsg}
-                  </FormControl.HelperText>
+                  
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
@@ -74,36 +133,50 @@ const AddMedicine = ({ navigation }) => {
                   </FormControl.ErrorMessage>
                 </FormControl>
 
-                <FormControl isRequired>
-                  <FormControl.Label
-                    _text={{
-                      bold: true,
-                    }}
-                  >
-                    {translationObject.dosage}
-                  </FormControl.Label>
-                  <Input
-                    borderRadius={"15"}
-                    placeholder="30gr   "
-                    onChangeText={(value) =>
-                      setData({ ...formData, name: value })
-                    }
-                  />
-                  <FormControl.HelperText
-                    _text={{
-                      fontSize: "xs",
-                    }}
-                  >
-                    {translationObject.errorMsg}
-                  </FormControl.HelperText>
-                  <FormControl.ErrorMessage
-                    _text={{
-                      fontSize: "xs",
-                    }}
-                  >
-                    Error
-                  </FormControl.ErrorMessage>
-                </FormControl>
+                <HStack space={3}>
+                  <FormControl isRequired w={'70%'}>
+                    <FormControl.Label
+                      _text={{
+                        bold: true,
+                      }}
+                    >
+                      {translationObject.dosage}
+                    </FormControl.Label>
+                    <Input
+
+                      borderRadius={"15"}
+                      placeholder="30"
+                      onChangeText={(value) =>
+                        setData({ ...formData, dosage: value })
+                      }
+                    />
+                    <FormControl.ErrorMessage
+                      _text={{
+                        fontSize: "xs",
+                      }}
+                    >
+                      Error
+                    </FormControl.ErrorMessage>
+                  </FormControl>
+
+                  <FormControl isRequired w={'20%'}>
+                    <FormControl.Label
+                      _text={{
+                        bold: true,
+                      }}
+                    >
+                      {'Unit'}
+                    </FormControl.Label>
+                    <Select w={'full'}  placeholder="unit" borderRadius={"15"} _selectedItem={{
+                      bg: "teal.600",
+                    }} mt={1} onValueChange={(value) => setData({ ...formData, dosage_unit: value })}>
+                      {Dosis.map((opcion, index) =>
+                        <Select.Item key={index} label={opcion.nom} value={opcion.valor} />
+                      )}
+
+                    </Select>
+                  </FormControl>
+                </HStack>
 
                 <FormControl isRequired>
                   <FormControl.Label
@@ -117,16 +190,10 @@ const AddMedicine = ({ navigation }) => {
                     borderRadius={"15"}
                     placeholder="6hrs"
                     onChangeText={(value) =>
-                      setData({ ...formData, name: value })
+                      setData({ ...formData, intervals: value })
                     }
                   />
-                  <FormControl.HelperText
-                    _text={{
-                      fontSize: "xs",
-                    }}
-                  >
-                    {translationObject.errorMsg}
-                  </FormControl.HelperText>
+                 
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
@@ -144,20 +211,15 @@ const AddMedicine = ({ navigation }) => {
                   >
                     {translationObject.via}
                   </FormControl.Label>
-                  <Input
-                    borderRadius={"15"}
-                    placeholder="IV "
-                    onChangeText={(value) =>
-                      setData({ ...formData, name: value })
-                    }
-                  />
-                  <FormControl.HelperText
-                    _text={{
-                      fontSize: "xs",
-                    }}
-                  >
-                    {translationObject.errorMsg}
-                  </FormControl.HelperText>
+                  <Select w={'full'}  placeholder="unit" borderRadius={"15"} _selectedItem={{
+                    bg: "teal.600",
+                    
+                  }} mt={1} onValueChange={(value) => setData({ ...formData, route: value })}>
+                    {VIAs.map((opcion, index) =>
+                      <Select.Item key={index} label={opcion} value={opcion} />
+                    )}
+
+                  </Select>
                   <FormControl.ErrorMessage
                     _text={{
                       fontSize: "xs",
@@ -176,7 +238,7 @@ const AddMedicine = ({ navigation }) => {
         <Box w={"full"}>
           <MyButton
             title={translationObject.add}
-            onPress={() => navigation.navigate(translationObject.DetailsScreen)}
+            onPress={() => handleSubmit()}
           />
         </Box>
       </Center>

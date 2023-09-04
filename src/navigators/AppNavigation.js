@@ -1,8 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// Screens imports
+
+//#region Firebase imports
+import firebaseConfig from "../config";
+import { FirebaseApp } from "firebase/app";
+import { Auth } from "firebase/auth";
+//#endregion
+
+//#region Screens imports
 import Splash from "../screens/Splash";
-import Login from "../screens/Login";
+import Login from "../screens/login";
 import Signup from "../screens/Signup";
 import ForgotPass from "../screens/ForgotPass";
 import OTPVerification from "../screens/OTPVerification";
@@ -34,28 +41,49 @@ import BreathFrequency from "../screens/BreathingFrecuency";
 import Oxygenation from "../screens/Oxygenation";
 import HealthCondition from "../screens/HealtCondition";
 import AddMedicine from "../screens/AddMedicine";
+import ModifyMedicine from "../screens/ModifyMedicine";
 
 import TnC_Txt from "../screens/TermsAndConditionsTxt";
 import TnC_CB from "../screens/TermnsAndConditionsCheckbox";
 import Exit from "../screens/Exit";
 import QRScanner from "../screens/QRScanner";
 import TermsAndConditions from "../screens/TermsAndConditionsTxt";
+//#endregion
 
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
-
-import color from "../utils/Colors";
+import color from "../utils/Strings/Colors";
 
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
-  
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  function onAuthStateChanged(user) {
+    if (initializing) setInitializing(false);
+  }
+  // useEffect(()=>{
+  //   const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber;
+  // }, []);
+
+  // if (initializing) return null;
+
+  // if (!user){
+  //   return(
+  //     <Stack.Navigator initialRouteName="Splash"
+  //     screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}>
+  //       </Stack.Navigator>
+  //   ) 
+  // }
+  // else if(user){
   return (
-    <Stack.Navigator initialRouteName="Splash"
-      screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: {backgroundColor: color.BackgroundApp}}}
+    <Stack.Navigator initialRouteName="home"
+      screenOptions={{ headerShown: false, gestureEnabled: true, contentStyle: { backgroundColor: color.BackgroundApp } }}
     >
       <Stack.Screen name={translationObject.SplashScreen} component={Splash} />
       <Stack.Screen name={translationObject.LoginScreen} component={Login} />
@@ -80,8 +108,8 @@ const AppStack = () => {
         component={PasswordChanged}
       ></Stack.Screen>
 
-      <Stack.Screen 
-        name={translationObject.PrincipalScreen} 
+      <Stack.Screen
+        name={translationObject.PrincipalScreen}
         component={Principal} />
 
       <Stack.Screen
@@ -106,6 +134,11 @@ const AppStack = () => {
       <Stack.Screen
         name={translationObject.RegisterMedicineNPScreen}
         component={AddMedicineNP}
+      ></Stack.Screen>
+
+      <Stack.Screen
+        name={"ModifyMedicine"}
+        component={ModifyMedicine}
       ></Stack.Screen>
 
       <Stack.Screen
@@ -175,23 +208,24 @@ const AppStack = () => {
         component={TnC_CB}
       ></Stack.Screen>
 
-<Stack.Screen
+      <Stack.Screen
         name={translationObject.TermnsAndConditionsTxtScreen}
         component={TnC_Txt}
       ></Stack.Screen>
 
-<Stack.Screen
+      <Stack.Screen
         name={translationObject.ExitScreen}
         component={Exit}
       ></Stack.Screen>
 
-<Stack.Screen
+      <Stack.Screen
         name={translationObject.QRScanScreen}
         component={QRScanner}
       ></Stack.Screen>
     </Stack.Navigator>
 
   );
-};
+}
+//};
 
 export default AppStack;

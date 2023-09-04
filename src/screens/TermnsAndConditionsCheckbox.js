@@ -5,13 +5,9 @@ import { useState } from "react";
 import BackButton from "../utils/components/BackButton";
 import BlueButton from "../utils/components/BlueButton";
 
-import ScreenNames from "../utils/ScreenNames";
-
 import MainContainer from "../utils/components/MainContainer";
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
-
-import data from "../utils/Strings/StringsEsp.json"
 
 const TermsAndConditions = ({ navigation }) => {
   const { currentLanguage } = useContext(I18nContext);

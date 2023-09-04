@@ -1,17 +1,28 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useParams } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import FormInput from '../utils/components/FormInput';
 import BackButton from '../utils/components/BackButton';
 import { AntDesign } from '@expo/vector-icons';
 
-import ScreenNames from '../utils/ScreenNames';
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
+import { useRoute } from '@react-navigation/native';
 
-const RegisterP2 = ({navigation}) => {
+const RegisterP2 = ({ navigation }) => {
     const { currentLanguage } = useContext(I18nContext);
     const translationObject = translations[currentLanguage];
 
+    
+    const route = useRoute();
+    const { fullName, gender, age, birthday, healtCond } = route.params;
+    const [maritalStatus, setMaritalStatus] = useState("")
+    const [checkIn, setCheckIn] = useState("")
+    const [bed, setBed] = useState("")
+    const [daysStay, setDaysStay] = useState("")
+    const [service, setService] = useState("")
+
+
+    console.log(fullName)
     return (
         <View style={styles.container}>
             <View style={{ marginStart: 12, marginTop: 12 }}>
@@ -28,9 +39,12 @@ const RegisterP2 = ({navigation}) => {
             />
 
             <View style={{ marginTop: 15, padding: 10 }}>
-                <FormInput label={translationObject.maritalStatus} placeholder={'Soltero'} />
+                <FormInput label={translationObject.maritalStatus}
+                    value={maritalStatus} onChangeText={(maritalStatus) => { setMaritalStatus(maritalStatus) }} />
 
-                <FormInput label={translationObject.checkIn} placeholder={'Junio 23, 7:00 AM'} />
+
+                <FormInput label={translationObject.checkIn}
+                    value={checkIn} onChangeText={(checkIn) => { setCheckIn(checkIn) }} />
 
                 <View style={{
                     flexDirection: 'row',
@@ -41,7 +55,8 @@ const RegisterP2 = ({navigation}) => {
                             <Text style={styles.redText}> *</Text>
                         </Text>
                         <TextInput style={styles.inputG}
-                            placeholder={'3'}
+                            value={bed}
+                            onChangeText={(bed) => { setBed(bed) }}
                         />
 
                     </View>
@@ -52,7 +67,8 @@ const RegisterP2 = ({navigation}) => {
                             <Text style={styles.redText}> *</Text>
                         </Text>
                         <TextInput style={styles.inputA}
-                            placeholder={4}
+                            value={daysStay}
+                            onChangeText={(daysStay) => { setDaysStay(daysStay) }}
                         />
 
                     </View>
@@ -60,9 +76,17 @@ const RegisterP2 = ({navigation}) => {
                 </View>
                 <View style={styles.line} />
 
-                <FormInput label={translationObject.service} placeholder={'Cirugía'} />
+                <FormInput label={translationObject.service}
+                    value={service}
+                    onChangeText={(service) => { setService(service) }} />
+
+
                 <View style={{ flexDirection: 'row-reverse' }}>
-                    <TouchableOpacity style={styles.buttonNext} onPress={()=> navigation.navigate(translationObject.ManualRegisterPt3Screen)}>
+                    <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate(translationObject.ManualRegisterPt3Screen,
+                        {
+                            fullName: fullName, gender: gender, age: age, birthday: birthday, healtCond: healtCond,
+                            maritalStatus: maritalStatus, checkIn: checkIn, bed: bed, daysStay: daysStay, service: service
+                        })}>
                         <Text style={{ fontSize: 20 }}>{translationObject.next}</Text>
                         <AntDesign name="right" size={20} color="black" />
                     </TouchableOpacity>

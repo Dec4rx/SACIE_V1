@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { TextArea, Box, Text, Divider, IconButton, HStack } from "native-base";
 
 import Icon from "react-native-vector-icons/AntDesign";
@@ -6,30 +6,43 @@ import Icon from "react-native-vector-icons/AntDesign";
 import BackButton from "../utils/components/BackButton_Especial";
 
 import MainContainer from "../utils/components/MainContainer";
-import { translations } from "../utils/Strings/Lenguage"
-import { I18nContext } from '../utils/components/I18nProvider';
+import { translations } from "../utils/Strings/Lenguage";
+import { I18nContext } from "../utils/components/I18nProvider";
 
-const Notes = () => {
+import { ref, update, onValue, get, child } from "firebase/database";
+
+import { db } from "../Database";
+
+const NotesScreen = ({ruta}) => {
+  const [textArea, setAreaText] = useState();
+
+  useEffect(() => {
+    get(child(ref(db), ruta+"/notes"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setNoteText(snapshot.val());
+          console.log("Inicio: ", snapshot.val());
+          setAreaText(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [""]);
+
+  const [noteText, setNoteText] = useState("");
+
+  const updateNotes = () => {
+    update(ref(db, ruta + '/'), {
+      notes: textArea,
+    });
+  };
+
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
-  return (
-    <Box alignItems="center" flex={1}>
-      <TextArea
-        h={"full"}
-        borderRadius={20}
-        placeholder={translationObject.notes}
-        backgroundColor={"#E6EBEE"}
-        w={"full"}
-      />
-    </Box>
-  );
-};
-
-const NotesScreen = () => {
-  const { currentLanguage } = useContext(I18nContext);
-  const translationObject = translations[currentLanguage];
-  
   return (
     <Box
       p="3"
@@ -45,16 +58,36 @@ const NotesScreen = () => {
         </Box>
         <Box>
           <Text textAlign={"center"} fontSize={40}>
-          {translationObject.notes}
+            {translationObject.notes}
           </Text>
         </Box>
-        <Box justifyContent={"center"} backgroundColor={'#2BF0D7'} borderRadius={'full'}>
-          <IconButton p={2} icon={<Icon name="save" size={40} />} />
+        <Box
+          justifyContent={"center"}
+          backgroundColor={"#2BF0D7"}
+          borderRadius={"full"}
+        >
+          <IconButton
+            p={2}
+            icon={<Icon name="save" size={40} />}
+            onPress={() => updateNotes()}
+          />
         </Box>
       </HStack>
 
       <Divider my="2" />
-      <Notes />
+
+      <Box alignItems="center" flex={1}>
+        <TextArea
+          fontSize={20}
+          defaultValue={textArea}
+          h={"full"}
+          onChangeText={(e) => setAreaText(e.valueOf())}
+          borderRadius={20}
+          placeholder={translationObject.notes}
+          backgroundColor={"#E6EBEE"}
+          w={"full"}
+        />
+      </Box>
     </Box>
   );
 };

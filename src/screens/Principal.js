@@ -1,19 +1,48 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, Alert, Modal, Pressable, TouchableHighlight } from "react-native";
 import ImageButton from "../utils/components/ImageButton";
 
 import { HStack } from "native-base";
 import MainContainer from "../utils/components/MainContainer";
-import ScreenNames from "../utils/ScreenNames";
-import data from "../utils/Strings/StringsEsp.json";
 import { FontAwesome } from '@expo/vector-icons';
 
 import { translations } from "../utils/Strings/Lenguage"
-import { I18nContext } from '../utils/components/I18nProvider'; 
+import { I18nContext } from '../utils/components/I18nProvider';
 
-const Principal = ({ navigation }) => {
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { firebaseConfig } from "../config";
+import { initializeApp } from "firebase/app";
+import { db } from "../Database";
+import { set, ref, push, onValue } from "firebase/database";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import firebase from 'firebase/app';
+import auth from 'firebase/auth';
+
+
+const Principal = ({ navigation, route }) => {
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
+
+  const [patients, setPatients] = useState([]);//donde se almacena la info del array
+
+  useEffect(() => {
+    const starCountRef = ref(db, "Nurses/" + user + "/Paciente"); //Ruta que uses
+    onValue(starCountRef, (snapshot) => {
+      var update = []; //Arreglo para la flatlist
+      snapshot.forEach((child) => { //child es el nodo donde te encuentras
+        update.push({
+          key: child.key, //usa key para acceder al nombre donde estas 
+          patient: child.val(),
+          //name: snapshot.val(), // .val() sirve para traer la info dentro del nodo, usa un '.' para viajar a un hijo en especifico
+        })
+        
+      })
+      setPatients(update); //setea medicamentos con el array
+      const data = snapshot.val();
+      const auxiliar = data;
+    });
+  }, [""]);
 
   //#region Data
   const DATA = [
@@ -56,17 +85,25 @@ const Principal = ({ navigation }) => {
     navigation.navigate(translationObject.ManualRegisterPt1Screen)
   };
 
+  //Pruebas
+  const auth = getAuth();
+  const user = auth.currentUser.uid;
+
+  console.log('Quien esta loggeada? ', user)
+
   //#endregion
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const Item = ({ name, color, age, bed, image }) => (
-    <TouchableHighlight  onPress={() => navigation.navigate(translationObject.DetailsScreen)}>
+
+  const Item = ({ name, color, age, bed, image, id }) => (
+    //<TouchableHighlight onPress={() => navigation.navigate(translationObject.DetailsScreen)}>
+    <TouchableHighlight onPress={() => navigation.navigate(translationObject.DetailsScreen, {itemId: {id}, ruta:{user}})}>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {/* Card info */}
         <View style={styles.item}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image source={require("../resources/pictures/Leyree.png")} style={styles.otherImg} />
+            <Image source={require("../resources/pictures/Leyree.png")} style={styles.otherImg} />
             <Text style={styles.cardTitle}>{name}</Text>
           </View>
           <View style={{ flexDirection: "row", marginVertical: 5 }}>
@@ -83,7 +120,7 @@ const Principal = ({ navigation }) => {
               width: 60,
               height: 100,
               borderRadius: 16,
-              backgroundColor: color,
+              backgroundColor: "#D22525",
               marginVertical: 5,
             }}
           />
@@ -161,7 +198,7 @@ const Principal = ({ navigation }) => {
                   title={translationObject.scan}
                 />
                 <ImageButton
-                  onPress={() =>onPressHandler()}
+                  onPress={() => onPressHandler()}
                   image={require("../resources/pictures/manual.png")}
                   title={translationObject.manually}
                 />
@@ -183,13 +220,13 @@ const Principal = ({ navigation }) => {
           {translationObject.patients}
         </Text>
         <FlatList
-          data={DATA}
+          data={patients}
           renderItem={({ item }) => (
             <Item
-              name={item.name}
-              color={item.color}
-              bed={item.bed}
-              age={item.age}
+              name={item.patient.name}
+              bed={item.patient.bed}
+              age={item.patient.age}
+              id={item.key}
             />
           )}
           keyExtractor={(item) => item.id}
@@ -296,7 +333,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     wordSpacing: -1,
   },
-  centeredView:{
+  centeredView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

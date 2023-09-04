@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput, Switch, Modal, Alert } from "react-native";
 import FormInput from "./FormInput";
 import BlueButton from "./BlueButton";
@@ -14,18 +14,104 @@ import { I18nContext } from '../components/I18nProvider';
 import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
 import { Dimensions } from 'react-native';
 
-const Signs = ({ title, data }) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+import { getDatabase, ref, set, push, onValue } from "firebase/database";
+import { db } from "../../Database";
+
+//import BackgroundTimer from "react-native-background-timer";//Timer
+  
+const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
+
+  console.log('Donde estamos actualmente? ', dbSing)
+  console.log('Dentro de la matriz, llego esta ruta:' , ruta)
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
-  const lastValue = dataC[dataC.length - 1].y;
-  const screenWidth = Dimensions.get('window').width;
 
+
+
+  const [time, setTime] = useState(0)
+  const [value, setValue] = useState(0)
+
+  const [realSings, setRealSigns] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  let lastValue = 0
+  let firstValue = 0
+  let lastTime = 0
+  let firstTime = 0
+
+  const [secondsLeft, setSecondsLeft] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [mins, setMins] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => {
+    if (!isEnabled) {
+      postSeconds();
+      
+    }
+    setIsEnabled((previousState) => !previousState);
+  }
+
+  useEffect(() => {
+    const getSigns = ref(db, ruta+dbSing);
+    onValue(getSigns, (snapshot) => {
+      const data = snapshot.val();
+      
+
+      let values = [];
+      for (let key in data) {
+        let value = data[key];
+        values.push(value);
+      }
+
+      values.pop();
+      
+      setRealSigns(values);
+
+      setIsLoading(false); // Marcar que los datos se han cargado correctamente
+    });
+  }, []);
+
+  useEffect(() => {
+    
+
+  }, [realSings]);
+
+  if (isLoading) {
+    // Muestra un indicador de carga mientras los datos se están obteniendo
+    return <div>Cargado...</div>;
+  }
+  else {
+    lastValue = realSings[realSings.length - 1].y;
+    firstValue = realSings[0].y;
+    lastTime = realSings[realSings.length - 1].x;
+    firstTime = realSings[0].x;
+  }
+
+
+  const postSign = () => {
+    const db = getDatabase();
+    const postListRef = ref(db, ruta+dbSing)
+    const newPostRef = push(postListRef);
+    set(newPostRef, {
+      "x": parseInt(time),
+      "y": parseInt(value)
+    }).then(
+      
+    )
+  }
+  const postSeconds = () => {
+    const sec = hours * 3600 + mins * 60 + seconds
+    setSecondsLeft(sec)
+    
+
+  }
   return (
+
     <MainContainer>
       <ScrollView>
         <HStack>
@@ -42,30 +128,35 @@ const Signs = ({ title, data }) => {
         />
         <Text style={styles.secondaryTitle}>{title}</Text>
         <Text style={styles.dataTitle}>{lastValue}</Text>
-        <View style={styles.centeredView}>
-          <Chart
-            style={{ height: 400, width: '100%'}}
-            data={dataC}
-            padding={{ left: 40, bottom: 20, right: 20, top: 20 }}
-            xDomain={{ min: -2, max: 10 }}
-            yDomain={{ min: 0, max: 20 }}
-          >
-            <VerticalAxis tickCount={11} theme={{ labels: { formatter: (v) => v.toFixed(2) } }} />
-            <HorizontalAxis tickCount={5} />
-            <Area theme={{ gradient: { from: { color: gradientColor }, to: { color: gradientColor, opacity: 0.4 } } }} />
-            <Line theme={{ stroke: { color: strokeColor, width: 5 }, scatter: { default: { width: 4, height: 4, rx: 2 } } }} />
-          </Chart>
-        </View>
+        {realSings !== undefined ? (
+          <View style={styles.centeredView}>
+            <Chart
+              style={{ height: 400, width: '100%' }}
+              data={realSings}
+              padding={{ left: 40, bottom: 20, right: 20, top: 20 }}
+              xDomain={{ min: firstTime, max: lastTime }}
+              yDomain={{ min: firstValue, max: lastValue }}
+            >
+              <VerticalAxis tickCount={11} theme={{ labels: { formatter: (v) => v.toFixed(2) } }} />
+              <HorizontalAxis tickCount={5} />
+              <Area theme={{ gradient: { from: { color: gradientColor }, to: { color: gradientColor, opacity: 0.4 } } }} />
+              <Line theme={{ stroke: { color: strokeColor, width: 5 }, scatter: { default: { width: 4, height: 4, rx: 2 } } }} />
+            </Chart>
+          </View>
+        ) : null}
 
 
+
+        {/*Para meter los datos */}
         <View style={styles.setvalues}>
           <FormInput
             label={translationObject.time}
-            placeholder={"7:00a.m."}
-            value={"7:00 a.m."}
-          ></FormInput>
-          <FormInput label={translationObject.value} placeholder={0} value={1} />
-          <BlueButton title={translationObject.add} onPress={() => setModalVisible(true)} />
+            value={time} onChangeText={(time) => { setTime(time) }}
+          />
+          <FormInput label={translationObject.value}
+            value={value} onChangeText={(value) => { setValue(value) }} />
+          {/* <BlueButton title={translationObject.add} onPress={() => setModalVisible(true)} /> */}
+          <BlueButton title={translationObject.add} onPress={postSign} />
         </View>
 
         <VStack mt={3} style={styles.inputContainer}>
@@ -79,8 +170,30 @@ const Signs = ({ title, data }) => {
               value={isEnabled}
             />
           </HStack>
-          <TextInput style={styles.input} />
+
+          <HStack justifyContent="center">
+
+            <TextInput style={[styles.input, { width: 100, textAlign: 'center' }]}
+              placeholder="Horas"
+              keyboardType="numeric"
+              value={hours} onChangeText={(hours) => { setHours(hours) }} />
+
+            <TextInput style={[styles.input, { width: 100, textAlign: 'center', marginLeft: 8 }]}
+              placeholder="Minutos"
+              keyboardType="numeric"
+              value={mins} onChangeText={(mins) => { setMins(mins) }}
+            />
+
+            <TextInput style={[styles.input, { width: 100, textAlign: 'center', marginLeft: 8 }]}
+              placeholder="Segundos"
+              keyboardType="numeric"
+              value={seconds} onChangeText={(seconds) => { setSeconds(seconds) }}
+            />
+
+          </HStack>
+
           <View style={styles.line} />
+
         </VStack>
 
         <Modal
@@ -105,14 +218,17 @@ const Signs = ({ title, data }) => {
                 {translationObject.rUSureData}
               </Text>
 
-              <Text style={styles.modalText}>
+              {/* <TextInput style={styles.modalText}
+                value={time} onChangeText={(time) => { setTime(time) }}>
                 {" "}
                 <b>{translationObject.time}:</b> <Text>7:00 a.m.</Text>
-              </Text>
-              <Text style={styles.modalText}>
+              </TextInput>
+
+              <TextInput style={styles.modalText}
+                value={value} onChangeText={(value) => { setValue(value) }}>
                 {" "}
                 <b>{translationObject.value}:</b> <Text>1</Text>
-              </Text>
+              </TextInput> */}
 
               <View
                 style={{
@@ -121,12 +237,12 @@ const Signs = ({ title, data }) => {
                   alignItems: "center",
                 }}
               >
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.okModal}
                   onPress={() => setModalVisible(!modalVisible)}
                 >
                   <Feather name="check" size={24} color="black" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <TouchableOpacity
                   style={styles.noModal}
@@ -183,7 +299,24 @@ const styles = StyleSheet.create({
     borderColor: "#EDECF4",
     borderRadius: 22,
     padding: 10,
+    fontSize: 18,
+    color: "#000",
+  },
+  input2: {
+    backgroundColor: "#F4F4F5",
+    borderWidth: 1.2,
+    borderColor: "Blue",
+    padding: 10,
     fontSize: 20,
+    color: "#000",
+  },
+  cont: {
+    marginTop: 8,
+    backgroundColor: "#F4F4F5",
+    borderWidth: 1.2,
+    borderColor: "#EDECF4",
+    borderRadius: 22,
+    padding: 10,
     color: "#000",
   },
   text: {

@@ -3,12 +3,11 @@ import { Box, Text, HStack, Center, Divider, Input, FormControl, VStack} from "n
 
 import BackButton from "../utils/components/BackButton";
 import MyButton from "../utils/components/MyButton";
-import ScreenNames from "../utils/ScreenNames";
 
 import { translations } from "../utils/Strings/Lenguage"
 import { I18nContext } from '../utils/components/I18nProvider';
 
-const AddMedicine = ({navigation}) => {
+const AddMedicine = ({navigation}) => { 
   const { currentLanguage } = useContext(I18nContext);
   const translationObject = translations[currentLanguage];
 
