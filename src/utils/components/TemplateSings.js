@@ -12,17 +12,18 @@ import MainContainer from "./MainContainer";
 import { translations } from "../Strings/Lenguage"
 import { I18nContext } from '../components/I18nProvider';
 import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
+
 import { Dimensions } from 'react-native';
 
 import { getDatabase, ref, set, push, onValue } from "firebase/database";
 import { db } from "../../Database";
 
-//import BackgroundTimer from "react-native-background-timer";//Timer
-  
-const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
+import BackgroundTimer from "react-native-background-timer";//Timer
+
+const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta }) => {
 
   console.log('Donde estamos actualmente? ', dbSing)
-  console.log('Dentro de la matriz, llego esta ruta:' , ruta)
+  console.log('Dentro de la matriz, llego esta ruta:', ruta)
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -32,52 +33,63 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
 
 
 
-  const [time, setTime] = useState(0)
-  const [value, setValue] = useState(0)
+  // const [time, setTime] = useState(0.0)
+  const [value, setValue] = useState(0.0)
 
   const [realSings, setRealSigns] = useState([])
+  const [tickValuesX, setTickValuesX] = useState([])
+  const [tickValuesY, setTickValuesY] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  let lastValue = 0
-  let firstValue = 0
-  let lastTime = 0
-  let firstTime = 0
 
   const [secondsLeft, setSecondsLeft] = useState(0);
   const [hours, setHours] = useState(0);
   const [mins, setMins] = useState(0);
-  const [seconds, setSeconds] = useState(0);
 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => {
-    if (!isEnabled) {
-      postSeconds();
-      
-    }
     setIsEnabled((previousState) => !previousState);
+    if (isEnabled) {
+      postSeconds();
+      startTimer();
+    }
+    else BackgroundTimer.stopBackgroundTimer();
+    return () => {
+      BackgroundTimer.stopBackgroundTimer();
+    };
   }
 
   useEffect(() => {
-    const getSigns = ref(db, ruta+dbSing);
+    const getSigns = ref(db, ruta + dbSing);
     onValue(getSigns, (snapshot) => {
       const data = snapshot.val();
-      
+
 
       let values = [];
       for (let key in data) {
+        console.log("key->", key);
         let value = data[key];
-        values.push(value);
+        if (key !== "intervals") {
+          values.push(value);
+        }
       }
 
-      values.pop();
-      
+      const y = [...new Set(values.map(val => val.y))]
+      console.log(y)
+      setTickValuesY(y)
+
+      const x = [...new Set(values.map(val => val.x))]
+      console.log(x)
+      setTickValuesX(x)
+
       setRealSigns(values);
 
       setIsLoading(false); // Marcar que los datos se han cargado correctamente
+      console.log(values)
     });
   }, []);
 
   useEffect(() => {
-    
+
 
   }, [realSings]);
 
@@ -85,31 +97,61 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
     // Muestra un indicador de carga mientras los datos se están obteniendo
     return <div>Cargado...</div>;
   }
-  else {
-    lastValue = realSings[realSings.length - 1].y;
-    firstValue = realSings[0].y;
-    lastTime = realSings[realSings.length - 1].x;
-    firstTime = realSings[0].x;
-  }
-
 
   const postSign = () => {
     const db = getDatabase();
-    const postListRef = ref(db, ruta+dbSing)
+    const postListRef = ref(db, ruta + dbSing)
     const newPostRef = push(postListRef);
+
+    const currentTime = new Date();
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+
+    const timeString = hours + "." + minutes;
+    console.log(timeString)
+    const timeFloat = parseFloat(timeString)
+    console.log(timeFloat)
+
+    // setTime(timeFloat)
     set(newPostRef, {
-      "x": parseInt(time),
-      "y": parseInt(value)
+      "x": timeFloat,
+      "y": parseFloat(value)
     }).then(
-      
+
     )
   }
-  const postSeconds = () => {
-    const sec = hours * 3600 + mins * 60 + seconds
-    setSecondsLeft(sec)
-    
-
+  const clockify = () => {
+    let hours = Math.floor(secondsLeft / 60 / 60)
+    let mins = Math.floor((secondsLeft / 60) % 60)
+    let seconds = Math.floor(secondsLeft % 60)
+    let displayHours = hours < 10 ? `0${hours}` : hours
+    let displayMins = mins < 10 ? `0${mins}` : mins
+    let displaySecs = seconds < 10 ? `0${seconds}` : seconds
+    return {
+      displayHours,
+      displayMins,
+      displaySecs,
+    }
   }
+
+  const postSeconds = () => {
+    const sec = hours * 3600 + mins * 60
+    setSecondsLeft(sec)
+  }
+
+  const startTimer = () => {
+    BackgroundTimer.runBackgroundTimer(() => {
+      setSecondsLeft(secs => {
+        if (secs > 0) return secs - 1
+        else return 0
+      })
+    }, 1000)
+  }
+
+  // useEffect(() => {
+
+  // }, [isEnabled]);
+
   return (
 
     <MainContainer>
@@ -127,18 +169,20 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
           }}
         />
         <Text style={styles.secondaryTitle}>{title}</Text>
-        <Text style={styles.dataTitle}>{lastValue}</Text>
+        <Text style={styles.dataTitle}>{realSings[realSings.length - 1].y}</Text>
         {realSings !== undefined ? (
+
           <View style={styles.centeredView}>
+
             <Chart
               style={{ height: 400, width: '100%' }}
               data={realSings}
               padding={{ left: 40, bottom: 20, right: 20, top: 20 }}
-              xDomain={{ min: firstTime, max: lastTime }}
-              yDomain={{ min: firstValue, max: lastValue }}
+              xDomain={{ min: tickValuesX ? Math.min(...tickValuesX) : 0, max: tickValuesX ? Math.max(...tickValuesX) : 0 }}
+              yDomain={{ min: tickValuesY ? Math.min(...tickValuesY) : 0, max: tickValuesY ? Math.max(...tickValuesY) : 0 }}
             >
-              <VerticalAxis tickCount={11} theme={{ labels: { formatter: (v) => v.toFixed(2) } }} />
-              <HorizontalAxis tickCount={5} />
+              <VerticalAxis tickCount={realSings.length} tickValues={tickValuesY} theme={{ labels: { formatter: (v) => v.toFixed(2), label: { fontSize: 12, fontWeight: "bold" } } }} />
+              <HorizontalAxis tickCount={realSings.length} tickValues={tickValuesX} theme={{ labels: { formatter: (v) => v.toFixed(2), label: { fontSize: 12, fontWeight: "bold" } } }} />
               <Area theme={{ gradient: { from: { color: gradientColor }, to: { color: gradientColor, opacity: 0.4 } } }} />
               <Line theme={{ stroke: { color: strokeColor, width: 5 }, scatter: { default: { width: 4, height: 4, rx: 2 } } }} />
             </Chart>
@@ -149,10 +193,10 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
 
         {/*Para meter los datos */}
         <View style={styles.setvalues}>
-          <FormInput
+          {/* <FormInput
             label={translationObject.time}
             value={time} onChangeText={(time) => { setTime(time) }}
-          />
+          /> */}
           <FormInput label={translationObject.value}
             value={value} onChangeText={(value) => { setValue(value) }} />
           {/* <BlueButton title={translationObject.add} onPress={() => setModalVisible(true)} /> */}
@@ -170,8 +214,17 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
               value={isEnabled}
             />
           </HStack>
+          <HStack justifyContent="center">
+            {isEnabled ? <Text style={styles.secondaryTitle}>
+              {clockify().displayHours} Hours {clockify().displayMins} Mins{" "}
+              {clockify().displaySecs } Secs
+            </Text>
+              : null
+            }
+          </HStack>
 
           <HStack justifyContent="center">
+
 
             <TextInput style={[styles.input, { width: 100, textAlign: 'center' }]}
               placeholder="Horas"
@@ -182,12 +235,6 @@ const Signs = ({ title, dbSing, strokeColor, gradientColor, ruta}) => {
               placeholder="Minutos"
               keyboardType="numeric"
               value={mins} onChangeText={(mins) => { setMins(mins) }}
-            />
-
-            <TextInput style={[styles.input, { width: 100, textAlign: 'center', marginLeft: 8 }]}
-              placeholder="Segundos"
-              keyboardType="numeric"
-              value={seconds} onChangeText={(seconds) => { setSeconds(seconds) }}
             />
 
           </HStack>
